@@ -1,0 +1,1332 @@
+// app global css in Sass form
+// breakpoint variable, from https://quasar.dev/style/breakpoints
+// Except the xs one because I think 600px is too small
+*
+  font-family: 'Nunito'
+$xs-breakpoint: 0px
+$sm-breakpoint: 600px
+$md-breakpoint: 1024px
+$lg-breakpoint: 1440px
+
+html
+  scroll-behavior: smooth
+
+
+body
+  overflow-x: hidden
+.q-card
+  box-shadow: 0 2px 6px rgb(100 100 100/ 25%)
+.container,
+.container-mini,
+.container-article,
+.container-sm,
+.container-md,
+.container-lg,
+.container-xl
+  width: 100%
+  margin-right: auto
+  margin-left: auto
+.q-drawer
+  max-width: 100%
+
+.container-article
+  max-width: 1000px
+.container-mini
+  max-width: 560px !important
+
+.flex-reverse-responsive
+  flex-direction: row
+  @media (min-width: $xs-breakpoint)
+    flex-direction: row-reverse
+
+@media (min-width: $xs-breakpoint)
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl
+    max-width: 540px
+
+@media (min-width: $sm-breakpoint)
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl
+    max-width: 1024px
+
+@media (min-width: $md-breakpoint)
+  .container,
+  .container-md,
+  .container-lg,
+  .container-xl
+    max-width: 1240px
+
+@media (min-width: $lg-breakpoint)
+  .container,
+  .container-lg,
+  .container-xl
+    max-width: 1440px
+
+.flex-1
+  flex-grow: 1
+
+.price
+  .--ori
+    color: #000
+    font-size: 18px
+    line-height: 19px
+    font-weight: 500
+  .--discount
+    color: #90A4AE
+    font-size: 16px
+    line-height: 19px
+    font-weight: 300
+    text-decoration: line-through
+    margin-left: 8px
+
+h2.text-primary
+  font-size: 24px
+  line-height: 28px
+  color: $primary
+  font-weight: bold
+.q-toolbar
+  min-height: 64px
+.home-banner
+  z-index: 0
+  // background-image: url(/header-photo.png)
+  z-index: 0
+  flex-wrap: wrap
+  background-repeat: no-repeat
+  background-position-x: right
+  background-position-y: bottom
+  padding: 0px 16px 16px 16px
+  @media (min-width: $sm-breakpoint)
+    flex-wrap: nowrap
+    padding-top: 16px
+  .q-carousel
+    background-color: transparent
+  h1
+    font-size: 54px
+    line-height: 70px
+  .banner-title
+    position: relative
+    z-index: 0
+  .banner-title:before
+    content: ''
+    z-index: -1
+    position: absolute
+    left: -32px
+    right: -32px
+    top: 0
+    bottom: 8px
+    background-color: $primary
+.section-banner
+  // background-image: url(/header-photo.png)
+  flex-wrap: wrap
+  background-color: $primary
+  @media (min-width: $sm-breakpoint)
+    padding-top: 16px
+    padding-bottom: 16px
+  .q-carousel
+    background-color: transparent
+  h1
+    font-size: 24px
+    line-height: 1.1
+    @media (min-width: $sm-breakpoint)
+      font-size: 54px
+    margin-top: 0
+.home-banner:before
+  content: ''
+  background-color: $primary
+  width: 100%
+  height: 0
+  // z-index: -1
+  z-index: 0
+  position: absolute
+  left: 0
+  transform: translateY(4px)
+  top: 0
+  @media (min-width: $xs-breakpoint)
+    height: 178px
+  @media (min-width: $sm-breakpoint)
+    top: unset
+    height: 225px
+
+.home-section
+  display: flex
+  align-items: center
+  justify-content: center
+  img
+    font-size: 24px
+  h2
+    padding: 0px 8px
+    font-size: 24px
+    line-height: 28px
+    color: $primary
+    margin: 0
+    font-weight: bold
+
+.absolute-top-right
+  position: absolute
+  right: 0
+  top: 0
+
+.home-section::after
+  content: ''
+  background-color: #B0BEC5
+  height: 0.5px
+  @extend .flex-1
+
+.list-popular-product
+  .--wording
+    .--title
+      color: $primary
+      font-size: 24px
+      @media (min-width: $sm-breakpoint)
+        font-size: 32px
+      line-height: 1
+      font-weight: bold
+      margin-top: 0
+      margin-bottom: 16px
+
+.item-product-list
+  position: relative
+  .section-product
+    display: flex
+    overflow-x: scroll
+    > div
+      height: 100%
+    .carousel-arrow-right
+      position: absolute
+      top: 72px
+      transform: translateY(50%)
+      right: 0
+      z-index: 1
+      .material-icons
+        font-weight: bold
+    .carousel-arrow-left
+      position: absolute
+      top: 72px
+      transform: translateY(50%)
+      left: 0
+      z-index: 1
+      .material-icons
+        font-weight: bold
+.search-products, .purchase-products
+  display: flex
+  flex-wrap: wrap
+  img
+    border: 1px solid #90A4AE
+.purchase-products
+  .item-product
+    padding: 8px
+    height: 100%
+.purchase-item
+  border-bottom: 1px solid #e0e0e0
+.learnpath-header
+  .--title
+    color: $primary
+    font-weight: bold
+    font-size: 32px
+    line-height: 1.1
+    margin: 0
+    margin-bottom: 8px
+  .--description
+    margin-bottom: 0px
+  .learnpath-info
+    border-left: 1px solid $light
+.learnpath-start::after
+  content: ''
+  width: 16px
+  height: 16px
+  background-color: white
+  border: 2px solid $primary
+  position: absolute
+  left: 16px
+  top: 50%
+  transform: translate(-50%, -50%)
+  border-radius: 50%
+.learnpath-start.active::after
+  background-color: $primary
+
+.learnpath-start::before
+  content: ''
+  width: 2px
+  background-color: #e0e0e0
+  position: absolute
+  left: 16px
+  height: 50%
+  transform: translateX(-50%)
+  z-index: -1
+  top: 50%
+.learnpath-start.active::before
+  background-color: $primary
+
+.learnpath-start
+  position: relative
+  padding: 16px 0px
+  div
+    margin-left: 40px
+  .--title
+    color: $dark
+    font-weight: bold
+    font-size: 18px
+  .--description
+    color: $dark
+    font-size: 14px
+
+.item-product-margin
+  margin: 8px 8px 10px 8px
+  position: relative
+.item-product-container
+  padding: 8px 8px 10px 8px
+  position: relative
+  .item-product
+    width: 100%
+    height: 100%
+    border-radius: 12px
+    .--img
+      padding-top: 56%
+      position: relative
+      overflow: hidden
+      border-bottom-right-radius: 60px
+      img
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+      .--free-tag
+        padding: 4px 8px
+        font-weight: 700
+        position: absolute
+        bottom: 0
+        left: 0
+        width: 100%
+        background-color: rgba(255, 85, 85, 0.8)
+        color: white
+    .--title
+      font-style: normal
+      font-weight: 700
+      font-size: 24px
+      line-height: 1.5
+.item-product:hover .--play-button
+  display: inline-block
+  border-radius: 50%
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  background-color: rgba(242,192,55, 0.7)
+  padding: 16px
+.item-product, .item-product-learnpath
+  position: relative
+  background-color: white
+  box-shadow: 0 2px 6px rgb(100 100 100/ 25%)
+  border-radius: 4px
+  overflow: hidden
+  width: 240px
+  .--product-progress
+    position: absolute
+    right: 0
+    top: 0
+  .--chip
+    font-size: 10px
+    position: absolute
+    right: 12px
+    top: 24px
+  .--img
+    display: block
+    img
+      display: block
+      background-color: #90A4AE
+      width: 100%
+      height: auto
+      overflow: hidden
+  .--play-button
+    display: none
+  a.--title
+    text-decoration: none
+  .--title
+    color: #000
+    font-size: 14px
+    line-height: 19px
+    font-weight: 500
+    margin-bottom: 4px
+    min-height: 38px
+    padding-right: 24px
+    position: relative
+    .--bookmark
+      position: absolute
+      right: 0
+      top: 0
+  .--rating
+    display: flex
+    flex-direction: row
+    align-items: center
+    .--rating-value
+      color: #ffa000
+      font-weight: bold
+      margin-right: 4px
+      font-size: 12px
+    .--rating-people
+      color: $light
+      font-size: 10px
+      margin-left: 4px
+  .--tag
+    font-size: 10px
+    color: #90A4AE
+    margin-bottom: 4px
+  .--price
+    color: $dark
+    font-size: 16px
+    font-weight: 500
+  .--price-discount
+    color: #90A4AE
+    font-size: 16px
+    line-height: 19px
+    font-weight: 300
+    text-decoration: line-through
+    margin-left: 8px
+
+.product-learnpath-container
+  background: #fff
+  border-radius: 4px
+  box-shadow: 0 2px 6px rgb(100 100 100/ 25%)
+  margin-left: 40px
+.product-certificate
+  position: relative
+  display: flex
+  margin-left: 40px
+  padding: 16px 8px
+  flex-wrap: nowrap
+  h1
+    font-size: 20px
+    color: $dark
+    line-height: 1.2
+    font-weight: 600
+    margin: 0
+    margin-bottom: 4px
+  p
+    font-size: 14px
+    color: $neutral
+    margin-bottom: 0
+
+.item-product-learnpath
+  display: flex
+  width: 100%
+  padding: 8px
+  .--content
+    padding-left: 16px
+  .--description
+    @extend .ellipsis-3
+    color: #90A4AE
+    font-size: 12px
+    margin-bottom: 4px
+  .--img
+    border-radius: 8px
+  .--title
+    @extend .ellipsis-1
+    min-height: auto
+
+  @media (max-width: $xs-breakpoint)
+    display: block
+    padding: 12px
+    .--img
+      width: 100%
+      height: auto
+    .--content
+      padding-left: 0px
+    .--title
+      -webkit-line-clamp: 2 !important
+    .--description
+      display: none !important
+
+// BULLET
+.product-certificate.active::after, .item-product-learnpath.active::after
+  background-color: $primary
+  border: 2px solid $primary
+
+.product-certificate::after, .item-product-learnpath::after
+  content: ''
+  width: 16px
+  height: 16px
+  background-color: white
+  border: 2px solid $primary
+  position: absolute
+  left: -24px
+  top: 50%
+  transform: translate(-50%, -50%)
+  border-radius: 50%
+
+.item-product-learnpath::before
+  content: ''
+  width: 100%
+  left: 0
+  height: 1px
+  background-color: $light
+  bottom: 0
+  position: absolute
+.item-product-learnpath:last-child::before
+  background-color: transparent
+
+.--progress-after, .--progress-before
+  width: 2px
+  background-color: #e0e0e0
+  position: absolute
+  left: -24px
+  height: 50%
+  transform: translateX(-50%)
+  z-index: -1
+.--progress-after
+  top: 50%
+.--progress-before
+  bottom: 50%
+.--progress-after.active, .--progress-before.active
+  background-color: $primary
+
+footer
+  .--footer-latest
+    color: $secondary
+    font-size: 10px
+    line-height: 12px
+    padding-bottom: 4px
+  .--footer-section
+    color: $secondary
+    font-weight: bold
+    font-size: 10px
+    line-height: 12px
+    border-bottom: 1px solid #B0BEC5
+    padding-bottom: 4px
+  .--footer-links.--link-text
+    a
+      color: white
+      font-weight: 500
+      font-size: 10px
+      line-height: 12px
+      text-decoration: none
+      margin-right: 40px
+  @media (max-width: 728px)
+    .--footer-navigation, .--footer-follow-us, .--footer-product, .--footer-company
+      width: 100%
+      // align-items: start
+      align-items: flex-start
+      display: flex
+      // justify-content: start
+      justify-content: flex-start
+      .--footer-section
+        // text-align: start
+        text-align: flex-start
+
+.text-underline
+  text-decoration: underline
+
+.txt-sm
+  font-size: 12px
+.txt-md
+  font-size: 14px
+.txt-lg
+  font-size: 16px
+
+.row.--row-margin
+  margin-left: -8px
+  margin-right: -8px
+  > *
+    padding-left: 8px
+    padding-right: 8px
+
+@for $i from 1 through 5
+  .ellipsis-#{$i}
+    overflow: hidden
+    text-overflow: ellipsis
+    display: -webkit-box
+    -webkit-box-orient: vertical
+    -webkit-line-clamp: $i
+
+// @media (max-width: 1024px)
+//   .toolbar-menus
+//     display: none
+
+.bg-light
+  background-color: $light
+.text-light
+  color: $light
+.bg-neutral
+  background-color: $neutral
+.text-neutral
+  color: $neutral
+
+.display-block
+  display: block
+
+.card-dialog
+  width: 560px
+  max-width: calc(100% - 32px)
+  padding: 16px
+
+.relative
+  position: relative
+
+.hidden
+  display: none
+
+// .outline-white.q-field--outlined
+//   .q-field__control:after
+//     border: 1px solid white !important
+.outline-white
+  ::placeholder
+    color: white
+    opacity: 1 /* Firefox */
+
+  :-ms-input-placeholder
+   color: white
+
+  ::-ms-input-placeholder
+   color: white
+
+.vjs-poster::after
+  background-color: rgba(0,0,0,0.3)
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+  position: absolute
+  content: ''
+
+.border-bottom
+  border-bottom: 0.4px solid #B0BEC5
+
+.--inline-block
+  display: inline-block
+
+@media (max-width: 720px)
+  .home-banner
+    h1
+      font-size: 24px
+      line-height: 1.01
+    .--search-products
+      display: none !important
+    p
+      width: 100%
+
+.cursor-pointer
+  cursor: pointer
+
+.custom-form-group
+  border: 1px solid #B0BEC5
+  padding: 8px
+  border-radius: 4px
+  position: relative
+  .--orded-btn
+    padding: 8px
+
+.content-header
+  flex-wrap: nowrap
+  align-items: flex-start
+  .content-title
+    font-size: 32px
+    line-height: 1.01
+
+
+@media (max-width: 720px)
+  .content-header
+    // flex-wrap: wrap
+    align-items: flex-start
+    justify-content: flex-start
+    .content-title
+      flex: auto
+      width: 100%
+      font-size: 24px
+
+.row.row-margin
+  margin-left: -8px
+  margin-right: -8px
+.list-slider
+  .--desc
+    font-size: 12px
+  .price-tag
+    padding: 4px 8px
+.simple-card-item:-webkit-any-link
+  text-decoration: none
+  color: unset
+.simple-card-item
+  .price-tag
+    position: absolute
+    bottom: 0
+    left: 0
+    background-color: $primary
+    padding: 4px 16px
+    color: white
+    border-top-left-radius: 0 !important
+    border-top-right-radius: 8px !important
+  > .q-card
+    overflow: hidden
+    position: relative
+
+.vacancy-item:-webkit-any-link
+  text-decoration: none
+  color: unset
+.vacancy-item
+  .price-tag
+    position: absolute
+    bottom: 0
+    left: 0
+    background-color: $primary
+    padding: 4px 16px
+    color: white
+    border-top-left-radius: 0 !important
+    border-top-right-radius: 8px !important
+  > .q-card
+    overflow: hidden
+    position: relative
+
+.flex-nowrap
+  flex-wrap: nowrap
+
+.mobile-header-menu
+  position: fixed
+  display: flex
+  flex-direction: column
+  width: 100%
+  background-color: rgba(0, 0, 0, 0.4)
+  height: 100%
+  z-index: 100
+  top: 0
+  left: 0
+  padding-top: 50px
+  > div
+    padding: 16px 0
+    .container > *
+      display: block
+      width: 100%
+      span
+        width: 100%
+        text-align: left
+
+.give-rating, .give-rating.give-rating-empty:hover
+  color: #ffa000
+  display: inline-block
+  i
+    cursor: pointer
+.give-rating.give-rating-empty
+  color: $light
+.give-rating > i.--active ~ i
+  color: $light
+.give-rating:hover > i.--active ~ i
+  color: #ffa000
+.give-rating:hover > i:hover ~ i
+  color: $light
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar
+  display: none
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar
+  -ms-overflow-style: none
+  scrollbar-width: none
+
+.media-cooperation, .highlight-container
+  .highlight-carousel, .media-cooperation-carousel
+    position: relative
+    .carousel-arrow-right
+      position: absolute
+      top: 50%
+      transform: translateY(-50%)
+      right: -8px
+      z-index: 1
+      .material-icons
+        font-weight: bold
+    .carousel-arrow-left
+      position: absolute
+      top: 50%
+      transform: translateY(-50%)
+      left: -8px
+      z-index: 1
+      .material-icons
+        font-weight: bold
+
+  h3
+    font-size: 16px
+    line-height: 1.1
+    color: #90a4ae
+    text-align: center
+    margin: 0 0 16px
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .items-container::-webkit-scrollbar
+    display: none
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .items-container
+    -ms-overflow-style: none
+    scrollbar-width: none
+
+  .items-container::before, .items-container::after
+    content: ''
+    height: 0
+    padding: 8px
+    display: inline-block
+
+  .items-container
+    overflow-x: scroll
+    display: flex
+    flex-direction: row
+    flex-wrap: nowrap
+    text-align: center
+    margin-bottom: 20px
+    position: relative
+    a.zoomed:hover
+      transform: scale(1.1)
+      z-index: 1
+      // filter: invert(43%) sepia(61%) saturate(5167%) hue-rotate(161deg) brightness(94%) contrast(92%)
+    a
+      // background-color: white
+      transition: all .2s ease-in-out
+      border-radius: 4px
+      margin: 0px 8px
+      display: inline-block
+      line-height: 1
+      img.fixed-height
+        height: 32px
+.academy-carousel-container
+  width: 300px
+  .q-carousel
+    height: 216px
+  @media (min-width: $sm-breakpoint)
+    width: 400px
+    .q-carousel
+      height: 285px
+
+.academy-carousel
+  position: relative
+  .q-carousel, .q-panel
+    overflow: visible
+  .bc-carousel-item:hover
+    transform: scale(1.05)
+    z-index: 1
+  .bc-carousel-item
+    transition: all .2s ease-in-out
+    background-color: $primary
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.4)
+    padding: 0
+    img
+      width: 100%
+      height: auto
+  .bc-carousel-description
+    position: absolute
+    left: 0
+    top: 50%
+    transform: translate(-50%, -50%)
+  .q-carousel__navigation-inner
+    justify-content: center
+  .q-carousel__navigation--bottom
+    bottom: 20px
+  .q-carousel__navigation--right
+    right: 4px
+  .q-carousel__navigation .q-btn
+    margin: 0
+  h2, h3
+    color: white
+    // text-decoration: none
+    margin: 0
+    line-height: 1.2
+  a
+    text-decoration: none
+    h2, h3
+      text-decoration: none
+  h2
+    font-size: 20px
+    font-weight: bold
+  h3
+    font-size: 14px
+
+.static-page
+  p
+    margin-bottom: 1.5em
+  h2
+    font-size: 24px
+    line-height: 1.1
+    font-weight: bold
+    margin-top: 0px
+    margin-bottom: 16px
+  h3, h4
+    font-size: 20px
+    line-height: 1.1
+    font-weight: bold
+    margin-top: 0px
+    margin-bottom: 12px
+  h4
+    font-size: 18px
+
+.cart-list
+  .--v-container
+    cursor: pointer
+    border-bottom: 1px solid #e0e0e0
+    flex-wrap: wrap
+    @media (min-width: $xs-breakpoint)
+      flex-wrap: nowrap
+  .q-card__section
+    padding-left: 0
+    padding-right: 0
+  .--v-img
+    width: 100%
+    border-radius: 4px
+    margin-bottom: 8px
+    .--img
+      width: 100%
+      height: auto
+    @media (min-width: $xs-breakpoint)
+      height: 100px
+      width: auto
+      margin-bottom: 0
+      .--img
+        height: 100%
+        width: auto
+  .--v-category
+    background-color: $primary
+    color: white
+    border-radius: 0 0 4px 4px
+    font-size: 10px
+    padding: 2px 8px
+    position: absolute
+    bottom: 0
+    z-index: 1
+    left: 0
+    width: 100%
+  .--v-text
+    color: $dark
+    @media (min-width: $xs-breakpoint)
+      padding-left: 10px
+  .--v-name
+    font-size: 14px
+    font-weight: bold
+  .--v-description
+    font-size: 10px
+  .--price
+    color: $dark
+    font-size: 12px
+    font-weight: 500
+  .--price-discount
+    color: #90A4AE
+    font-size: 12px
+    line-height: 19px
+    font-weight: 300
+    text-decoration: line-through
+    margin-left: 8px
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar
+  display: none
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body
+  -ms-overflow-style: none  /* IE and Edge */
+  scrollbar-width: none  /* Firefox */
+
+.select-search-product
+  .q-chip
+    display: none
+
+.app-bg::before
+  content: ''
+  height: 100%
+  width: 100%
+  top: 0
+  position: fixed
+  z-index: -999
+
+.payment-container
+  justify-content: center
+  display: flex
+  flex-direction: row-reverse
+  flex-wrap: wrap-reverse
+  @media(min-width: $sm-breakpoint)
+    flex-direction: row
+    flex-wrap: wrap
+  .payment-main
+    width: 456px
+    @media(min-width: $sm-breakpoint)
+      flex: 1
+      width: auto
+  .payment-sidebar
+    width: 456px
+    position: relative
+  // .payment-sidebar > div
+  //   @media(min-width: $sm-breakpoint)
+  //     position: absolute
+  //     top: 70px
+
+#section-how-to-pay
+  h1
+    font-size: 20px
+    margin: 8px 0
+  p
+    margin: 0
+.payment-method-group
+  font-size: 14px
+  margin-bottom: 16px
+  > div.--label
+    margin-bottom: 8px
+    font-weight: bold
+  > .payment-method-item
+    cursor: pointer
+    border-bottom: 1px solid $border
+.payment-method-item
+  font-weight: normal
+  color: $dark
+  padding: 8px 8px
+  display: flex
+  align-items: center
+  flex-direction: row
+  *
+    vertical-align: middle
+  .--label
+    margin-left: 8px
+    display: inline-block
+    flex: 1
+.payment-box
+  color: $dark
+  text-decoration: none
+  background-color: #f0f0f0
+  border-radius: 4px
+  font-size: 18px
+  padding: 8px
+
+.img-illustration
+  max-width: 400px
+  width: 100%
+.text-title-responsive
+  font-size: 20px
+  color: $dark
+  @media(min-width: $sm-breakpoint)
+    font-size: 32px
+
+
+.q-field--labeled
+  input[type="date"]
+    display: none
+.q-field--focused, .q-field--float
+  input[type="date"]
+    display: unset
+
+.v-html, .v-html-no-margin
+  h1, h2, h3, h4
+    margin-bottom: 8px
+    margin-top: 16px
+  h1
+    font-size: 24px
+    line-height: 1.2
+  h2
+    font-size: 22px
+    line-height: 1.2
+  h3
+    font-size: 20px
+    line-height: 1.2
+  h4
+    font-size: 18px
+    line-height: 1.2
+  ul
+    padding-inline-start: 20px
+.v-html-no-margin
+  p
+    margin-bottom: 8px !important
+
+.btn-secondary
+  color: $dark
+  background-color: $secondary
+  white-space: nowrap
+.btn-push-secondary:before
+  border-right: 1px solid $secondary
+  border-left: 1px solid $secondary
+  border-top: 1px solid $secondary
+  border-bottom: 3px solid $secondary
+
+.text-dark
+  color: $dark
+.bg-secondary-light
+  background-color: $secondary-light
+.bg-blue-grey-05
+  background-color: $blue-grey05
+
+.faq-item
+  background-color: white
+  box-shadow: 0 4px 8px rgb(100 100 100 / 40%)
+  .q-expansion-item__content
+    background-color: #fafafa
+
+.q-field.text-center
+  input
+    text-align: center
+
+.f-tag
+  text-decoration: unset
+  color: $primary
+  font-weight: 700
+
+.q-carousel
+  height: auto
+
+.f-horizontal-slide-container::-webkit-scrollbar
+  display: none
+
+.f-horizontal-slide-container
+  display: flex
+  overflow-x: scroll
+  -ms-overflow-style: none
+  scrollbar-width: none
+
+.card-product
+  max-width: 320px
+  border-radius: 10px
+  background-color: #F2F2F2
+  overflow: hidden
+  .--img-container
+    position: relative
+    width: 100%
+    line-height: 0
+    .--img
+      width: 100%
+    .--tags
+      position: absolute
+      left: 0
+      top: 0
+      line-height: 1
+      .--tag-sell-1
+        background-color: #FBA6A9
+        border-radius: 0 10px 10px 0
+        padding: 4px 8px
+        min-width: 100px
+      .--tag-sell-2
+        background-color: #FFE580
+        border-radius: 0 10px 10px 0
+        width: 40%
+        height: 10px
+    .--price-name-container
+      text-align: right
+      position: absolute
+      bottom: 0
+      right: 0
+      width: 100%
+      line-height: 1
+      .--price
+        text-align: center
+        background-color: white
+        padding: 4px
+        margin: 0 32px
+        border-radius: 10px 10px 0 0
+        font-size: 20px
+  .--description-product
+    background-color: $secondary-dark
+  .--btn-product
+    background-color: #FF5555
+    width: 150px
+    border-radius: 10px
+
+a.app-link
+  color: $dark
+  text-decoration: none
+  cursor: pointer
+  padding: 4px 8px
+a.app-link:hover
+  color: $primary
+  font-weight: bold
+
+.border-primary
+  border: 1px solid $primary
+  border-radius: 8px
+
+.dictionary-container
+  display: block
+  > a
+    display: block
+  @media(min-width: $md-breakpoint)
+    display: flex
+    > a
+      display: unset
+
+@import 'landing.sass'
+@import 'pagebrand.sass'
+@import 'landingbrand.sass'
+@import 'landing-product.sass'
+
+
+h1
+  font-size: 32px
+h2
+  font-size: 24px
+h3
+  font-size: 20px
+h4
+  font-size: 18px
+h4
+  font-size: 16px
+h5
+  font-size: 14px
+
+h1, h2, h3, h4, h5
+  font-weight: 600
+  line-height: 1.25
+  margin-top: 0
+  margin-bottom: 0
+
+.list-package-carousel
+  .--title
+    color: $primary
+    font-size: 24px
+    @media (min-width: $sm-breakpoint)
+      font-size: 32px
+    line-height: 1
+    font-weight: bold
+    margin-top: 0
+    margin-bottom: 16px
+  .package-carousel
+    display: flex
+    overflow-x: scroll
+    flex-wrap: nowrap
+    align-items: center
+    padding-top: 16px
+    padding-bottom: 16px
+    @media (min-width: $sm-breakpoint)
+      justify-content: center
+    .--item-border
+      border: 1px solid $primary
+    .--item-container
+      display: inline-block
+      transition: all .2s ease-in-out
+      max-width: 320px
+      padding: 4px 16px
+      @media (min-width: $sm-breakpoint)
+        width: auto
+    .--item-container:hover
+      transform: scale(1.1)
+      z-index: 2
+    .--item
+      width: calc(100vw - 64px)
+      max-width: 100%
+      @media (min-width: $sm-breakpoint)
+        width: auto
+      border-radius: 8px
+      overflow: hidden
+      cursor: pointer
+      .q-btn
+        border-radius: 8px
+      .--tag
+        font-size: 16px
+        color: $dark
+        font-weight: bold
+        padding: 8px
+        padding-bottom: 18px
+        background-color: $warning
+    .--pkg-title-strikeline
+      text-decoration: line-through
+      font-size: 16px
+      margin: 16 0
+      line-height: 1.1
+      color: $neutral
+      text-align: center
+    .--pkg-title
+      text-align: center
+      margin-top: 0
+      margin-bottom: 16px
+      padding-left: 8px
+      padding-right: 8px
+      font-size: 22px
+      font-weight: bold
+      color: $dark
+      line-height: 1.1
+
+.purchased-package.active
+  // background-color: $primary
+  // color: white
+.purchased-package
+  cursor: default
+  padding: 8px
+  min-width: 240px
+  color: $dark
+  border-radius: 4px
+  font-weight: 300
+  .--title
+    font-size: 18px
+    margin-top: 0
+    margin-bottom: 8px
+    line-height: 1.2
+
+// package component landing page
+.card-product-v2
+  display: flex
+  flex-direction: column
+  .--desc-container
+    min-height: 113px
+    display: flex
+    align-items: center
+  .--img-container
+    display: flex
+    align-items: center
+    flex-grow: 1
+.container-label-card
+  width: 115px
+  height: 84px
+  position: absolute
+  left: 0px
+  border-radius: 0px 16px 16px 0px
+  .label-card
+    border-radius: 0px 16px 16px 0px
+    .f-label
+      color: #583a3b
+      font-size: 12px
+      padding: 8px 16px
+  .bottom-label-card
+    width: 72px
+    height: 8px
+    border-radius: 0px 20px 20px 0px
+.container-name-package
+  margin-bottom: 15px
+  display: flex
+  flex-direction: row-reverse
+
+  span
+    color: #212121
+    font-size: 16px
+    max-width: 180px
+    height: 48px
+
+.f-text-5
+  font-size: 14px
+.cstm-btn-pilih
+  height: 39px
+  font-size: 14px
+  border-radius: 15px
+  box-shadow: none
+  background-color: #FF5555
+
+error
+  font-size: 12px
+  color: $negative
+
+.pre-line
+  white-space: pre-line
+
+.pulse-yellow::before
+  content: ''
+  border-radius: 50%
+  left: 0
+  top: 0
+  width: 100%
+  height: 100%
+  position: absolute
+
+  box-shadow: 0 0 0 0 rgba(242,192,55, 1)
+  transform: scale(1)
+  animation: pulse 2s infinite
+
+@keyframes pulse
+  0%
+    transform: scale(0.95)
+    box-shadow: 0 0 0 0 rgba(242,192,55, 0.7)
+  70%
+    transform: scale(1)
+    box-shadow: 0 0 0 10px rgba(242,192,55, 0)
+  100%
+    transform: scale(0.95)
+    box-shadow: 0 0 0 0 rgba(242,192,55, 0)

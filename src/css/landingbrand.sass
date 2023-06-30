@@ -1,0 +1,491 @@
+#landing-brand
+  .blob
+    background: black
+    border-radius: 50%
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 1)
+    height: 10px
+    width: 10px
+    transform: scale(1)
+    animation: pulse-black 2s infinite
+  .blob.yellow
+    background: #FFDE59
+    box-shadow: 0 0 0 0 rgba(255, 177, 66, 1)
+    animation: pulse-yellow 2s infinite
+
+  @keyframes pulse-yellow
+    0%
+      transform: scale(0.95)
+      box-shadow: 0 0 0 0 rgba(255, 177, 66, 0.7)
+    70%
+      transform: scale(1)
+      box-shadow: 0 0 0 10px rgba(255, 177, 66, 0)
+    100%
+      transform: scale(0.95)
+      box-shadow: 0 0 0 0 rgba(255, 177, 66, 0)
+  .f-text-header.text-left
+    text-align: left
+  .f-text-header
+    // text-h4 text-bold text-center q-mb-lg q-px-md
+    line-height: 3.5rem
+    letter-spacing: 0.00735em
+    font-size: 4rem
+    font-weight: bold
+    text-align: center
+    color: #555555
+  .f-text-title.text-left
+    text-align: left
+  .f-text-title
+    // text-h4 text-bold text-center q-mb-lg q-px-md
+    line-height: 2.5rem
+    letter-spacing: 0.00735em
+    font-size: 2.125rem
+    font-weight: normal
+    text-align: center
+  .f-tag
+    color: #888888
+  .f-btn-product
+    width: 100%
+    height: 59px
+    background-color: #FF5555
+    border-radius: 0.75rem
+    color: #FFFFFF
+    font-size: 1.125rem
+    font-weight: bold
+  .container-label-card
+    width: 136px
+    height: 84px
+    position: absolute
+    left: -10px
+    border-radius: 0px 20px 20px 0px
+    .label-card
+      height: 59px
+      border-radius: 0px 20px 20px 0px
+    .bottom-label-card
+      width: 102px
+      height: 25px
+      border-radius: 0px 20px 20px 0px
+  .bg-vector
+    background-image: url("/images/bg-keunggulan.svg")
+    background-position: center
+    background-repeat: no-repeat
+  .bg-vector-half
+    background-image: url("/images/bg-achiev.svg")
+    background-position-y: top
+    background-position-x: 85%
+    background-size: 369px
+    background-repeat: no-repeat
+  .bg-ellipse-pattern
+    background-image: url("/images/bg-ellipse-pattern.svg")
+    background-position-y: 90%
+    background-size: 148px
+    background-repeat: no-repeat
+  .bg-ellipse-pattern-testi
+    background-image: url("/images/bg-ellipse-pattern-2.svg")
+    background-position-x: 95%
+    background-size: 109px
+    background-repeat: no-repeat
+  .image-advantage
+    margin-top: 20px
+    @media (min-width: $sm-breakpoint)
+      margin-top: 100px
+  #section-creator
+    .q-carousel__navigation-inner
+      .q-btn
+        margin: 0
+  #section-promo
+    background-color: #FEF8F8
+    .--promo-container
+      margin: auto
+      @media (min-width: $sm-breakpoint)
+        flex-wrap: nowrap
+      .--content-container
+        flex-wrap: nowrap
+        flex-grow: 1
+        .--rating
+          border-radius: 10px
+          display: flex
+          align-items: center
+          justify-content: center
+          width: 100px
+          font-size: 2rem
+          @media (min-width: $sm-breakpoint)
+            width: 200px
+            font-size: 3rem
+        @media (min-width: $sm-breakpoint)
+          flex-wrap: nowrap
+        .--content
+          flex-grow: 1
+          .--title
+            font-size: 18px
+            font-weight: medium
+            @media (min-width: $sm-breakpoint)
+              font-size: 24px
+          .--description
+            font-size: 14px
+            @media (min-width: $sm-breakpoint)
+              font-size: 20px
+      .--btn-container
+        width: 100%
+        text-align: center
+        @media (min-width: $sm-breakpoint)
+          width: auto
+  @media (min-width: $md-breakpoint)
+    .how-to-item:nth-child(even)
+      flex-flow: row-reverse
+
+  
+#profil-resiko
+  h1
+    color: $blue
+
+  .container
+    .subTitle-profil
+      font-size: 2.5em
+    
+    .add-effect-fade
+      position: relative
+      // margin-bottom: 200px
+      .keterangan
+        font-size: 4em 
+    
+    .statistik-profil
+      display: grid
+      grid-template-columns: 2fr 2fr 2fr 1fr
+      gap: 40px
+
+      :nth-child(1)
+        div:nth-child(1)
+          font-size: 1.5em
+          color: $neutral-grey
+
+        div:nth-child(2)
+          font-size: 2.5em
+
+      :nth-child(2)
+        div:nth-child(1)
+          font-size: 1.5em
+          color: $neutral-grey
+
+        div:nth-child(2)
+          font-size: 2.5em
+
+      :nth-child(3)
+        div:nth-child(1)
+          font-size: 1.5em
+          color: $neutral-grey
+
+        div:nth-child(2)
+          font-size: 2.5em
+          
+
+  .content-question
+    gap: 20px 
+    flex-direction: column 
+    transition: 1s ease
+
+    .question-title
+      line-height: 2.8rem
+      font-size: 2.5em
+
+
+
+  @media (max-width: $sm-breakpoint)
+    margin-bottom: 5rem !important
+
+    .container
+      .content-profil-resiko
+        h1
+          font-size: 1.8em !important
+          font-weight: 500 !important
+
+        p
+          font-size: 1.25em !important
+          font-weight: 400 !important
+
+      .subTitle-profil
+        font-size: 1.5em !important
+
+      .add-effect-fade
+        .q-option-group
+          display: flex
+          flex-direction: column
+          gap: 15px
+
+        .btn-reset 
+          float: none !important
+          margin: auto
+          border-radius: 40px
+          width: 95% !important
+          padding: 16px 20px
+
+          div
+            font-size: 1.3em !important
+
+        .keterangan
+          font-size: 2.5em !important
+          margin: 0.3rem 0
+
+      .statistik-profil 
+        grid-template-columns: 1fr 1fr !important
+        
+        row-gap: 40px
+        column-gap: 30px
+        margin-bottom: 4rem
+
+        :nth-child(1)
+          div:nth-child(1)
+            font-size: 1.25em
+            color: $neutral-grey
+
+          div:nth-child(2)
+            font-size: 1.3em
+
+        :nth-child(2)
+          div:nth-child(1)
+            font-size: 1.25em
+            color: $neutral-grey
+
+          div:nth-child(2)
+            font-size: 1.3em
+
+        :nth-child(3)
+          grid-column: 1 / span 3
+
+          div:nth-child(1)
+            font-size: 1.25em
+            color: $neutral-grey
+
+          div:nth-child(2)
+            font-size: 1.3em
+
+      
+
+    .container-circle
+      margin-bottom: 2.5rem !important
+      gap: 10px !important
+
+      .circle
+        width: 40px !important
+        height: 40px !important
+
+      div:nth-child(2)
+        font-size: 1.3em !important
+
+    .content-question
+      gap: 8px !important
+
+  @media only screen and (min-width: 768px) 
+    .container
+      .add-effect-fade
+        .btn-reset 
+          float: right !important
+          border-radius: 20px
+          width: 272px !important
+          padding: 16px 20px
+
+
+  @media (max-width: $md-breakpoint)
+    margin-bottom: 15rem 
+
+    .container
+      .content-profil-resiko
+        h1
+          font-size: 2.5em !important
+          font-weight: 500 !important
+
+
+      .subTitle-profil
+        font-size: 1.8em
+
+      .add-effect-fade
+        .btn-reset 
+          float: none 
+          margin: auto
+          border-radius: 40px
+          width: 95%
+          padding: 16px 20px
+
+          div
+            font-size: 1.3em !important
+          
+        .keterangan
+          font-size: 3em
+          margin: 0.3rem 0
+
+      .statistik-profil 
+        grid-template-columns: 1fr 1fr !important
+        
+        row-gap: 40px
+        column-gap: 30px
+        margin-bottom: 4rem
+
+        :nth-child(1)
+          div:nth-child(1)
+            font-size: 1.25em
+            color: $neutral-grey
+
+          div:nth-child(2)
+            font-size: 1.7em
+
+        :nth-child(2)
+          div:nth-child(1)
+            font-size: 1.25em
+            color: $neutral-grey
+
+          div:nth-child(2)
+            font-size: 1.7em
+
+        :nth-child(3)
+          grid-column: 1 / span 3
+
+          div:nth-child(1)
+            font-size: 1.25em
+            color: $neutral-grey
+
+          div:nth-child(2)
+            font-size: 1.7em
+
+    .container-circle
+      margin-bottom: 2.7rem !important
+      gap: 15px !important
+
+      .circle
+        width: 42px !important
+        height: 42px !important
+
+      div:nth-child(2)
+        font-size: 1.5em !important
+
+    .content-question
+      gap: 12px !important
+
+
+    
+    @media (max-width: $sm-breakpoint)
+      .text-article
+        font-size: 1rem !important
+
+      .text-article span:nth-child(2)
+        font-weight: bold !important
+
+      .question-title
+        line-height: 2rem !important
+        font-size: 1.8em !important
+  
+    @media (max-width: $md-breakpoint)
+      .text-article
+        font-size: 1.2rem !important
+
+      .text-article span:nth-child(2)
+        font-weight: bold !important
+
+      .question-title
+        line-height: 2.2rem
+        font-size: 2em
+    
+
+  @media (max-width: $lg-breakpoint)
+    margin-bottom: 15rem
+
+    .container
+      .add-effect-fade
+        .keterangan
+          font-size: 3.5em
+
+      .statistik-profil 
+        grid-template-columns: 2fr 2fr 2fr 1fr
+        row-gap: 40px
+        column-gap: 30px
+        margin-bottom: 4rem
+
+        :nth-child(1)
+          div:nth-child(1)
+            font-size: 1.25em
+            color: $neutral-grey
+
+          div:nth-child(2)
+            font-size: 2em
+
+        :nth-child(2)
+          div:nth-child(1)
+            font-size: 1.25em
+            color: $neutral-grey
+
+          div:nth-child(2)
+            font-size: 2em
+
+        :nth-child(3)
+          div:nth-child(1)
+            font-size: 1.25em
+            color: $neutral-grey
+
+          div:nth-child(2)
+            font-size: 2em
+          
+
+  .content-question ~ div
+    .q-radio__label
+      font-size: 1em
+      color: $neutral-black
+
+    @media (max-width: $sm-breakpoint)
+      padding: 10px
+      margin: 25px 0
+
+    @media (max-width: $md-breakpoint)
+      padding: 15px
+      margin: 20px 0
+
+        
+  
+  .text-article 
+    span:nth-child(1)
+      color : $neutral-grey
+    
+    span:nth-child(2)
+      color: $blue
+
+  .line
+    display: inline-block
+    width: 100%
+    height: 0px
+    border-top: 1px #A1A1A1
+    box-shadow: '0px 2px 2px rgba(0, 0, 0, 0.25)'
+
+  .btn-reset 
+    cursor: pointer
+    float: right
+    border-radius: 20px
+    width: 272px
+    padding: 16px 20px
+    background-color: #FFDE59
+    justify-content: center
+
+  .container-circle
+    gap: 20px
+    align-items: center
+    margin-bottom: 3.2rem
+    width: fit-content
+    cursor: pointer
+
+    .circle
+      transition: 0.3s ease
+
+  .container-circle:hover .circle
+    transform: translateX(-8px) scale(1.1)
+    transition: 0.3s ease
+
+  .add-effect-fade
+    animation: fadeInAnimation ease 2s
+    animation-iteration-count: 1
+    animation-fill-mode: forwards
+
+
+  @keyframes fadeInAnimation 
+    0% 
+      opacity: 0
+    
+    100% 
+      opacity: 1
+    
+  

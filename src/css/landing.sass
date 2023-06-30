@@ -1,0 +1,265 @@
+#landing-page
+  .f-text-title.text-left
+    text-align: left
+  .f-text-title
+    line-height: 1.1
+    letter-spacing: 0.00735em
+    font-size: 2.125rem
+    font-weight: bold
+    text-align: center
+  #section-creator
+    .q-carousel__navigation-inner
+      .q-btn
+        margin: 0
+  @media (min-width: $sm-breakpoint)
+    .how-to-item:nth-child(even)
+      flex-flow: row-reverse
+    .how-to-text
+      border-left: 2px solid $secondary
+
+
+#front-layout
+  .footer-front
+    margin-top: 8rem
+    position: relative
+    .bg-wave
+      position: absolute
+      background-image: url(/images/illustration/bg-wave.svg) 
+      background-repeat: no-repeat
+      background-size: cover
+      width: 100%
+      height: 100px
+      top: -80px
+      left: 0
+      right: 0
+
+    @media only screen and (max-width: $sm-breakpoint) 
+      .bg-wave
+          background-size: contain
+          top: -20px
+          height: 50px
+
+    footer
+      .liner
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+        display: inline-block
+        width: 100%
+        height: 1px
+        border-top: 1px
+        border-color: #EEF0F3
+
+  .nav-bar
+    background: #FEF8F8
+    position: -webkit-sticky
+    position: sticky
+    top: 0
+    z-index: 5
+
+
+  .header-front
+    background: linear-gradient(88.84deg, rgba(157, 46, 125, 0.88) 55.91%, rgba(225, 110,   147, 0.7) 93.95%)
+    position: -webkit-sticky
+    position: sticky
+    z-index: 5
+
+    .container
+      display: flex
+      justify-content: space-between
+      align-items: center
+      gap: 2.2rem
+
+      .content-webinar
+        color: #E8E8E8
+        .title-webinar
+          color: white
+          line-height: 1.1
+          text-decoration: underline
+          text-decoration-thickness: 1.2px
+          display: block
+          padding: 0
+          font-weight: 700
+          font-size: 16px
+          span
+            font-weight: 900
+
+        .subTitle-webinar
+          font-weight: 700
+          font-size: 14px
+          
+
+        @media screen and (max-width: $sm-breakpoint)
+          .title-webinar
+            color: white
+            font-size: 16px
+
+          .subTitle-webinar
+            font-weight: 600
+            font-size: 14px
+
+        
+        @media screen and (min-width: $sm-breakpoint) and (max-width: $md-breakpoint)
+          .title-webinar
+            color: white
+            font-size: 16px
+            span
+              font-weight: 900
+
+          .subTitle-webinar
+            font-weight: 600
+            font-size: 14px
+    
+    @media screen and (max-width: $sm-breakpoint)
+      .container
+        gap: 2rem
+        align-items: flex-start
+
+    @media screen and (min-width: $sm-breakpoint) and (max-width: $md-breakpoint)
+      .container
+        align-items: flex-start
+        gap: 2rem
+      
+#landing-zakat
+  .input-zakat 
+    position: relative   
+    width: 85% 
+    background-color: rgba(186, 185, 185, 0.5)
+    border-bottom: 2.5px solid rgb(186, 185, 185)
+    border-bottom-left-radius: 5px
+    border-bottom-right-radius: 5px
+
+    label
+      input
+        border: none
+        width: 100%
+        font-size: medium
+
+      :focus
+        outline: none
+        border: none  
+
+  @media screen and (min-width: $xs-breakpoint) and (max-width: $sm-breakpoint)
+    .input-zakat
+      width: 100%
+
+      label
+        input
+          font-size: small
+
+  @media screen and (min-width: $sm-breakpoint) and (max-width: $md-breakpoint)
+    .input-zakat 
+      width: 70% 
+
+
+  .banner
+    .items-banner
+      display: grid
+      grid-auto-flow: column 
+      grid-auto-columns: auto
+      overflow-x: scroll    
+      scroll-snap-type: x mandatory
+      gap: 40px
+      
+      @media (max-width: $sm-breakpoint)
+        justify-content: flex-start      
+
+      .item
+        scroll-snap-align: center
+        display: flex
+        align-items: center
+        justify-content: center
+        width: 190px
+        height: 80px
+        gap: 16px
+        background-color: #FFDE594D
+        padding: 8px 16px
+        font-weight: 700
+        font-size: 16px
+        border-radius: 4px
+        transition: 0.2s ease-in
+        text-decoration: none
+        color: black
+        flex: 0 0 auto
+
+      .item:hover
+        background-color: #FFDE59
+
+  .belajar-bersama-kami
+    .keunggulan
+      background-image: url(/images/bg-keunggulan.svg) 
+      background-repeat: no-repeat 
+      background-size: cover 
+      width: 487px 
+      height: 458px 
+      top: -25%
+      transform: translateY(50%) translateX(-50%) 
+      left: 25%
+
+      @media (max-width: $md-breakpoint)
+        left: 50%
+        bottom: 50%
+        transform: translate(-50%, 50%)
+
+
+
+  .belajar-bersama-kami
+    .keunggulan
+      background-image: url(/images/bg-keunggulan.svg) 
+      background-repeat: no-repeat 
+      background-size: cover 
+      width: 487px 
+      height: 458px 
+      bottom: 50% 
+      transform: translateY(50%) translateX(-50%) 
+      left: 25%
+
+      @media (max-width: $md-breakpoint)
+        left: 50%
+        bottom: 50%
+        transform: translate(-50%, 50%)
+
+#personalBudget
+  .banner
+    .items-banner
+      display: grid
+      grid-auto-flow: column 
+      grid-auto-columns: auto
+      overflow-x: scroll    
+      scroll-snap-type: x mandatory
+      gap: 40px
+      
+      @media (max-width: $sm-breakpoint)
+        justify-content: flex-start      
+
+      .item
+        scroll-snap-align: center
+        display: flex
+        align-items: center
+        justify-content: center
+        width: 190px
+        height: 80px
+        gap: 16px
+        background-color: #FFDE594D
+        padding: 8px 16px
+        font-weight: 700
+        font-size: 16px
+        border-radius: 4px
+        transition: 0.2s ease-in
+        text-decoration: none
+        color: black
+        flex: 0 0 auto
+
+      .item:hover
+        background-color: #FFDE59
+
+section
+  .content-article
+    @media (min-width: $md-breakpoint)
+      .card-aturan-mobile  
+        display: none
+
+  .content-card
+    @media (max-width: $md-breakpoint)
+      display: none
