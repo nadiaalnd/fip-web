@@ -43,7 +43,7 @@
 
               <img src="/images/finplan-logo-black.png" style="height: 38px" text-color="white" class="q-mr-md q-mb-md" height="38px" />
 
-
+  
               <div class="text-weight-medium" style="color: #888888; font-size: 1.125em;">
                 Finplan hadir untuk menjawab solusi finansial di Indonesia. Sebagai komunitas belajar investasi, Finplan membahas beragam informasi seputar saham, reksadana, emas, properti, dan NFT.
               </div>
