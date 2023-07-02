@@ -1,9 +1,10 @@
 <template>
-  <div class="item-product-container">
+  <div class="item-product-container"
+    :class="{ 'popular-product': category === 'popularProduct' }">
     <div
       class="item-product">
       <div class="relative">
-        <a class="--img" 
+        <a class="--img"
           :href="$utils.getContentRoute(product)"
           :target="target"
           @click="(e) => { $utils.openLink(e, $utils.getContentRoute(product), $router, target) }">
@@ -20,10 +21,10 @@
           :target="target"
           @click="(e) => { $utils.openLink(e, $utils.getContentRoute(product), $router, target) }">
           <div class="pulse-yellow">
-            <img style="display: block; width: 32px; height: 32px;" src="/images/play.svg"/>
+            <img style="display: block; width: 30px; height: 30px;" src="/images/play.svg"/>
           </div>
         </a>
-        
+
         <!-- <q-circular-progress
           show-value
           class="--product-progress text-white q-ma-xs"
@@ -86,6 +87,10 @@ export default {
     },
     target: {
       default: null
+    },
+    category: {
+      type: String,
+      default: ''
     }
   },
 
@@ -100,7 +105,6 @@ export default {
 
   mounted () {
     this.host = process.env.API_URL_IMG
-    console.log(this.host)
     if (this.product) {
       this.percentage = Math.round(this.product.percentage)
     } else {

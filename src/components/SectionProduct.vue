@@ -25,51 +25,54 @@
           v-else-if="content.icon"
           :name="'img:' + host + content.icon"
           size="sm"/>
-        <q-icon
+        <!-- <q-icon
           v-if="content.id"
           class="text-bold"
           name="chevron_right"
           color="primary"
-          size="24px"/>
+          size="24px"/> -->
       </div>
       <div
         ref="section-product"
         class="section-product">
-        <div
-          style="display: inline-flex">
-        <div v-if="content.products == null || content.products.length == 0"
-          class="flex-center"
-          style="width: 100%; height: 128px; color: #757575; display: flex;">
-          {{content.placeholder ? content.placeholder : 'Belum Ada' }}
+        <div class="section-product">
+          <div class="grid-container">
+            <div v-if="content.products == null || content.products.length == 0"
+              class="flex-center"
+              style="width: 100%; height: 128px; color: #757575; display: flex;">
+                {{content.placeholder ? content.placeholder : 'Belum Ada' }}
+            </div>
+            <ItemProductLP
+              v-else
+              v-for="(product, idx) in content.products"
+              :key="'product-'+idx"
+              :product="product"
+              :category="content.category"
+              @bookmarked="(value) => {
+                product.is_bookmarked = value
+              }"
+              ref="item-product"
+              style="width: 260px"
+              class="grid-item"/>
+              <!-- <template
+              v-if="content.products != null && content.products.length > 0">
+                <q-btn
+                ref="carousel-arrow-right"
+                round
+                icon="chevron_right"
+                class="bg-white text-primary carousel-arrow-right"
+                @click="scrollRight"
+                gtm-action="btn_section_right"/>
+                <q-btn
+                ref="carousel-arrow-left"
+                round
+                icon="chevron_left"
+                class="bg-white text-primary carousel-arrow-left"
+                @click="scrollLeft"
+                gtm-action="btn_section_left"/>
+              </template> -->
+          </div>
         </div>
-        <ItemProductLP
-          v-else
-          v-for="(product, idx) in content.products"
-          :key="'product-'+idx"
-          :product="product"
-          @bookmarked="(value) => {
-            product.is_bookmarked = value
-          }"
-          ref="item-product"
-          style="width: 320px"/>
-        <template
-          v-if="content.products != null && content.products.length > 0">
-          <q-btn
-            ref="carousel-arrow-right"
-            round
-            icon="chevron_right"
-            class="bg-white text-primary carousel-arrow-right gtm-track"
-            @click="scrollRight"
-            gtm-action="btn_section_right"/>
-          <q-btn
-            ref="carousel-arrow-left"
-            round
-            icon="chevron_left"
-            class="bg-white text-primary carousel-arrow-left gtm-track"
-            @click="scrollLeft"
-            gtm-action="btn_section_left"/>
-        </template>
-      </div>
       </div>
     </template>
   </div>
@@ -81,6 +84,9 @@ export default {
   props: {
     content: {
       type: Object
+    },
+    category: {
+      type: String
     }
   },
 

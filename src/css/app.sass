@@ -153,6 +153,18 @@ h2.text-primary
     top: unset
     height: 225px
 
+/*Mengatur Card Video E-Learning*/
+.grid-container
+  display: grid
+  grid-template-columns: repeat(3, 1fr)
+  grid-gap: 10px
+
+.item-product-container.popular-product
+  display: grid !important
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important
+  grid-auto-flow: column !important
+  justify-content: flex-start !important
+
 .home-section
   display: flex
   align-items: center
@@ -177,6 +189,26 @@ h2.text-primary
   background-color: #B0BEC5
   height: 0.5px
   @extend .flex-1
+
+/*Sidebar pada E-Learning*/
+.sidebar-mobile
+    ul
+      padding: 0
+      margin: 10px 10px 30px 0px
+      list-style: none
+    li
+      cursor: pointer
+    li.active
+      background-color: #FFDE59
+
+ul.sidebar-list-group
+  list-style: none
+  padding-left: 0
+
+  .sidebar-list-group-item
+    padding-left: 15px
+    border-radius: 7px
+    margin: 2px
 
 .list-popular-product
   .--wording
@@ -1149,6 +1181,8 @@ a.app-link:hover
 @import 'pagebrand.sass'
 @import 'landingbrand.sass'
 @import 'landing-product.sass'
+@import 'dialog.sass'
+@import 'carousel.sass'
 
 
 h1
@@ -1264,7 +1298,7 @@ h1, h2, h3, h4, h5
     display: flex
     align-items: center
     flex-grow: 1
-.container-label-card 
+.container-label-card
   width: 115px
   height: 84px
   position: absolute
@@ -1278,22 +1312,22 @@ h1, h2, h3, h4, h5
       padding: 8px 16px
   .bottom-label-card
     width: 72px
-    height: 8px 
+    height: 8px
     border-radius: 0px 20px 20px 0px
-.container-name-package 
+.container-name-package
   margin-bottom: 15px
   display: flex
   flex-direction: row-reverse
 
   span
-    color: #212121 
+    color: #212121
     font-size: 16px
     max-width: 180px
     height: 48px
 
-.f-text-5 
+.f-text-5
   font-size: 14px
-.cstm-btn-pilih 
+.cstm-btn-pilih
   height: 39px
   font-size: 14px
   border-radius: 15px
