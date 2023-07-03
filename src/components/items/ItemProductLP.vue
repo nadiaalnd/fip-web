@@ -1,6 +1,5 @@
 <template>
-  <div class="item-product-container"
-    :class="{ 'popular-product': category === 'popularProduct' }">
+  <div class="item-product-container">
     <div
       class="item-product">
       <div class="relative">
@@ -21,7 +20,7 @@
           :target="target"
           @click="(e) => { $utils.openLink(e, $utils.getContentRoute(product), $router, target) }">
           <div class="pulse-yellow">
-            <img style="display: block; width: 30px; height: 30px;" src="/images/play.svg"/>
+            <img style="display: block; width: 32px; height: 32px;" src="/images/play.svg"/>
           </div>
         </a>
 
@@ -87,10 +86,6 @@ export default {
     },
     target: {
       default: null
-    },
-    category: {
-      type: String,
-      default: ''
     }
   },
 

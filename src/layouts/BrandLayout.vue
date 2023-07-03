@@ -1,6 +1,6 @@
 <template>
   <q-layout id="brand-layout" view="lHh LpR lFf">
-    <q-header style="background-color: #FEF8F8;">
+    <q-header style="background-color: #FFFCF2;">
       <q-toolbar
         class="container q-pl-xl q-pr-lg q-py-lg">
         <a href="/" class="q-mr-md mobile-only"
@@ -65,12 +65,12 @@
             label="About"
             color="black"/>
 
-          
+
           <q-btn-dropdown :class="($q.platform.is.mobile ? 'q-px-xs q-ml-sm' : 'q-px-sm q-ml-lg')" color="black" flat no-caps label="Product">
             <q-list>
-              
+
                 <q-item style="width: 10.625rem;" v-for="(item, idx) in itemsDropdown" :key="idx" class="item-dropdown" clickable v-close-popup @click="() => {}"
-                  
+
                   >
 
                   <a
@@ -83,10 +83,10 @@
                         {{ item.label }}
                       </q-item-label>
                     </q-item-section>
-                  </a>  
+                  </a>
 
 
-                </q-item>              
+                </q-item>
             </q-list>
           </q-btn-dropdown>
 
@@ -204,8 +204,8 @@
       <div class="container q-py-lg q-px-md">
         <div class="row flex">
           <div class="col-xs-12 col-md-4 q-mb-lg">
-            
-            <img src="/images/finplan-logo-black.png" style="height: 38px" text-color="white" class="q-mr-md q-mb-md" height="38px" /> 
+
+            <img src="/images/finplan-logo-black.png" style="height: 38px" text-color="white" class="q-mr-md q-mb-md" height="38px" />
 
 
             <div class="text-weight-medium" style="color: #888888; font-size: 1.125em;">
@@ -217,7 +217,7 @@
               <div class="text-bold q-mb-md">
                 <div class="row" style="flex-direction: column; justify-items: center;">
                   <!-- col-4 -->
-                  <div class="col-xs-6 col-md-6" style="font-size: 1.125em; color: #2A3342;"> 
+                  <div class="col-xs-6 col-md-6" style="font-size: 1.125em; color: #2A3342;">
                     Product
                   </div>
 
@@ -410,7 +410,7 @@ export default {
         },
       ],
 
-      setting: {        
+      setting: {
         "e-learning": {
           label: "E-Learning",
           path: "/e-learning"
@@ -469,17 +469,17 @@ export default {
         disclaimer: {
           label: "Disclaimer",
           path: "/media/disclaimer",
-        },        
+        },
 
         "contact us": {
           label: "Contact Us",
           path: "/media/kontak-kami",
-        },  
+        },
 
         "terms and conditions": {
           label: "Terms and Conditions",
           path: "/media/kontak-kami/",
-        },  
+        },
       },
 
       socmeds: [

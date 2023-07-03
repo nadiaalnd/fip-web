@@ -25,86 +25,60 @@
         @click="$router.push({ path: '/free/package/e-learning' })"
         gtm-action="btn_free_get_home"
       />
-      <div class="container q-px-md q-mt-xl q-mb-lg">
-        <div class="sidebar-content-video row">
-          <!-- Sidebar -->
-          <div class="col-12 col-md-3">
-            <div
-              class="card sidebar-mobile"
-              style="
-                background: #FFFCF2;
-                width: 300px;
-                height: 100vh;
-                padding: 40px 24px 40px 24px;
-                border-radius: 32px;"
-            >
-              <h1 class="text-bold text-dark" style="font-size: 20px;">Materi</h1>
-              <ul class="sidebar-list-group">
-                <li
-                  class="sidebar-list-group-item"
-                  v-for="item in navs.materi"
-                  :style="{ backgroundColor: activeMenu === item ? '#FFDE59' : '' }"
-                  :key="item.id"
-                  @click="changeFilter(item)"
-                >
-                  {{ item }}
-                </li>
-              </ul>
-              <h1 class="text-bold text-dark" style="font-size: 20px;">Pekerjaan</h1>
-              <ul class="sidebar-list-group">
-                <li
-                  class="sidebar-list-group-item"
-                  v-for="item in navs.pekerjaan"
-                  :key="item.id"
-                  :class="{ 'active': activeMenu === item }"
-                  @click="changeFilter(item)"
-                >
-                  {{ item }}
-                </li>
-              </ul>
-            </div>
-          </div>
-          <!-- Content Video -->
-          <div class="col-12 col-md-9" style="padding-left:40px ;">
-            <section
-    	        id="start-learning"
-    	        class="container list-popular-product q-px-md q-pb-md">
-              <SectionProduct
-                :showPrice="false"
-                :id="'dashboard-'+idx"
-                class="q-my-md"
-                v-for="(content, idx) in contents"
-                :key="'content-'+idx"
-                :content="content"/>
-            </section>
-          </div>
+      <div class=" q-px-md q-mt-xl q-mb-lg row">
+        <!-- Sidebar -->
+        <div class="col-12 col-md-3">
+          <section>
+            <SidebarElearning
+              :navs="navs"
+              :activeMenu="activeMenu"
+              :changeFilter="changeFilter"
+              :tingkatanMenu="tingkatanMenu"
+              :selectedTingkatan="selectedTingkatan"
+            />
+          </section>
+        </div>
+        <!-- Content Video -->
+        <div class="col-12 col-md-9" style="padding-left: 50px;">
+          <section
+    	      id="start-learning"
+    	      class="container list-popular-product q-px-md q-pb-md">
+            <SectionProduct
+              :showPrice="false"
+              :id="'dashboard-'+idx"
+              class="q-my-md"
+              v-for="(content, idx) in contents"
+              :key="'content-'+idx"
+              :content="content"
+            />
+          </section>
         </div>
       </div>
     </div>
     <!-- Popular Video -->
     <div class="container q-mb-lg" id="popular">
-      <SectionProduct
+      <SectionProductPopular
         :showPrice="false"
         :id="'popular-' + idx"
         class="q-my-md"
-        v-for="(content, idx) in [{...popularProduct, category: 'popularProduct'}]"
+        v-for="(content, idx) in [popularProduct]"
         :key="'popular-' + idx"
         :content="content"
       >
-      </SectionProduct>
+      </SectionProductPopular>
     </div>
   </q-page>
 </template>
 
-<style>
-
-
-</style>
 <script>
 import SectionProduct from "components/SectionProduct";
+import SectionProductPopular from "components/SectionProductPopular";
+import SidebarElearning from "components/SidebarElearning";
 export default {
   components: {
     SectionProduct,
+    SectionProductPopular,
+    SidebarElearning,
   },
 
   data() {
@@ -122,8 +96,15 @@ export default {
       navs: {
         materi: [],
         pekerjaan: [],
+        tingkatan: [],
       },
+      tingkatanMenu:
+        ['Semua Tingkatan',
+          'Pemula',
+          'Menengah'
+        ],
       hasActivePackage: false,
+      selectedTingkatan: null,
       activeMenu: null,
     };
   },
@@ -150,8 +131,8 @@ export default {
     );
     this.getNavItems();
     this.changeFilter("Saham");
+    this.selectedTingkatan = "Semua Tingkatan";
     console.log(this.navItems);
-
   },
 
   methods: {
@@ -175,6 +156,7 @@ export default {
         () => {}
       );
     },
+
     getDashboard() {
       this.$services.dashboard(
         (data) => {
@@ -205,6 +187,7 @@ export default {
         () => {}
       );
     },
+
     changeFilter(filter) {
       // this.filteredVideos = filter;
       // this.getDashboard();
@@ -214,6 +197,7 @@ export default {
       }
       this.activeMenu = filter;
     },
+
     getNavItems() {
       this.$services.product.get(
         {},
@@ -227,6 +211,9 @@ export default {
               if (!this.navs.pekerjaan.includes(tag.name)) {
                 this.navs.pekerjaan.push(tag.name);
               }
+              if (tag.tingkatan && !this.navs.tingkatan.includes(tag.tingkatan)) {
+                this.navs.tingkatan.push(tag.tingkatan);
+              }
             });
           });
         },
@@ -234,6 +221,10 @@ export default {
         () => {}
       );
     },
+    toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar-mobile')
+      sidebar.classList.toggle('open')
+    }
   },
 };
 </script>

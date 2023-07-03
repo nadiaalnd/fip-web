@@ -154,16 +154,10 @@ h2.text-primary
     height: 225px
 
 /*Mengatur Card Video E-Learning*/
-.grid-container
+.grid-product
   display: grid
   grid-template-columns: repeat(3, 1fr)
   grid-gap: 10px
-
-.item-product-container.popular-product
-  display: grid !important
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important
-  grid-auto-flow: column !important
-  justify-content: flex-start !important
 
 .home-section
   display: flex
@@ -190,25 +184,79 @@ h2.text-primary
   height: 0.5px
   @extend .flex-1
 
-/*Sidebar pada E-Learning*/
+/*Sidebar E-Learning start*/
 .sidebar-mobile
-    ul
-      padding: 0
-      margin: 10px 10px 30px 0px
-      list-style: none
-    li
-      cursor: pointer
-    li.active
-      background-color: #FFDE59
+  background: #FFFCF2
+  width: 300px
+  height: 100vh
+  padding: 40px 24px 40px 24px
+  border-radius: 32px
+  ul
+    padding: 0
+    margin: 10px 10px 30px 0px
+    list-style: none
+  li
+    cursor: pointer
 
-ul.sidebar-list-group
+.sidebar-list-group
   list-style: none
   padding-left: 0
 
-  .sidebar-list-group-item
-    padding-left: 15px
-    border-radius: 7px
-    margin: 2px
+.sidebar-list-group-item.active
+  background-color: #FFDE59
+
+.sidebar-list-group-item
+  padding-left: 15px
+  border-radius: 7px
+  margin: 2px
+
+/*Radio button Sidebar E-Learning start*/
+.radio-sidebar-content
+  display: block
+  position: relative
+  padding-left: 25px
+  margin-bottom: 5px
+  cursor: pointer
+  user-select: none
+
+.radio-sidebar-content input
+  position: absolute
+  opacity: 0
+  cursor: pointer
+
+.checkmark-sidebar-content
+  position: absolute
+  top: 0
+  left: 0
+  height: 16px
+  width: 16px
+  background-color: #FFFFFF
+  border-radius: 50%
+  border: 1px solid #CCC
+
+.radio-sidebar-content input:checked
+  outline: none
+
+.radio-sidebar-content input:checked ~ .checkmark-sidebar-content
+  background-color: #FFDE59
+  border: 2px solid #FFDE59
+
+.checkmark-sidebar-content:after
+  content: ""
+  position: absolute
+  display: none
+
+.radio-sidebar-content input:checked ~ .checkmark-sidebar-content:after
+  display: block
+
+.radio-sidebar-content .checkmark-sidebar-content:after
+  top: 3px
+  left: 3px
+  width: 6px
+  height: 6px
+  border-radius: 50%
+  background: white
+/*Sidebar E-Learning end*/
 
 .list-popular-product
   .--wording
@@ -224,7 +272,7 @@ ul.sidebar-list-group
 
 .item-product-list
   position: relative
-  .section-product
+  .section-product, .section-product-popular
     display: flex
     overflow-x: scroll
     > div

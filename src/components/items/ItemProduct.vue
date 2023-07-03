@@ -8,7 +8,7 @@
     <div
       class="item-product">
       <div class="relative">
-        <a class="--img" 
+        <a class="--img"
           :href="$utils.getContentRoute(product)"
           :target="target"
           @click="(e) => { $utils.openLink(e, $utils.getContentRoute(product), $router) }">
@@ -23,7 +23,7 @@
             <img style="display: block; width: 32px; height: 32px;" src="/images/play.svg"/>
           </div>
         </a>
-        
+
         <q-circular-progress
           show-value
           class="--product-progress text-white q-ma-xs"

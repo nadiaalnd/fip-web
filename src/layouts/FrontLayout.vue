@@ -33,9 +33,9 @@
       </div>
 
       <footer class="q-pt-xl" style="margin-top: 6rem;
-      background-color: #FFFCF2;
-      position: relative;
-      ">
+        background-color: #FFFCF2;
+        position: relative;
+        ">
         <div class="bg-wave"></div>
         <div class="container q-py-lg q-px-md">
           <div class="row flex">
@@ -43,7 +43,7 @@
 
               <img src="/images/finplan-logo-black.png" style="height: 38px" text-color="white" class="q-mr-md q-mb-md" height="38px" />
 
-  
+
               <div class="text-weight-medium" style="color: #888888; font-size: 1.125em;">
                 Finplan hadir untuk menjawab solusi finansial di Indonesia. Sebagai komunitas belajar investasi, Finplan membahas beragam informasi seputar saham, reksadana, emas, properti, dan NFT.
               </div>
@@ -62,7 +62,7 @@
                       <div class="col-12 q-py-sm" :key="idx" v-for="(product, idx) in products">
                         <a
                           class="text-weight-medium"
-                          style="color:#3469A7; text-decoration: none; display: block; width: fit-content; font-size: 1em;"
+                          style="color: #3469A7; text-decoration: none; display: block; width: fit-content; font-size: 1em;"
                           v-if="settingProduct[product.key]"
                           :key="'product-'+idx"
                           :target="settingProduct[product.key].target"
@@ -87,7 +87,7 @@
                       <div class="col-xs-6 col-md-12 q-py-sm" :key="idx" v-for="(company, idx) in companies">
                         <a
                           class="text-weight-medium"
-                          style="color:#3469A7; text-decoration: none; display: block; width: fit-content; font-size: 1em;"
+                          style="color: #3469A7; text-decoration: none; display: block; width: fit-content; font-size: 1em;"
                           v-if="settingProduct[company.key]"
                           :key="'company-'+idx"
                           :href="settingProduct[company.key].path">
@@ -418,8 +418,7 @@ export default {
     getDeviceId () {
       let deviceId = this.$utils.getDeviceId()
       if (!deviceId) {
-        this.$services.visitor.generate((data) => {
-          console.log(data)
+        this.$services.visitor.generate(null, (data) => {
           this.$utils.saveDeviceId(data)
         }, (msg, err) => {
           console.log(msg)
@@ -474,11 +473,6 @@ export default {
   },
 
   watch: {
-    '$route.query.login': function (newVal) {
-      if (newVal == 'true') {
-        this.$global.$emit('showLogin')
-      }
-    },
     searchQuery: function (newVal, oldVal) {
       if (newVal) {
         this.$router.push({

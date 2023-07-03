@@ -1,20 +1,9 @@
 <template>
   <div class="item-product-list">
     <template v-if="content.showPlaceholder || (content.products != null && content.products.length > 0)">
-      <!-- <div :class="'home-section ' + (content.id ? 'cursor-not-allowed' : '')" -->
-      <!-- <div class="home-section"
-        @click="() => {
-            if (content.id) {
-              sectionClicked()
-            }
-          }"> -->
-      <!-- <div class="home-section q-mb-sm">
+      <div class="home-section q-mb-sm">
         <h2>
           {{content.code}}
-          <q-tooltip
-            v-if="content.id">
-            Lihat lebih
-          </q-tooltip>
         </h2>
         <q-icon
           v-if="content.icon_name"
@@ -25,17 +14,12 @@
           v-else-if="content.icon"
           :name="'img:' + host + content.icon"
           size="sm"/>
-        <q-icon
-          v-if="content.id"
-          class="text-bold"
-          name="chevron_right"
-          color="primary"
-          size="24px"/>
-      </div> -->
+      </div>
       <div
-        ref="section-product"
-        class="section-product">
-        <div class="grid-product">
+        ref="section-product-popular"
+        class="section-product-popular">
+        <div
+          style="display: inline-flex">
         <div v-if="content.products == null || content.products.length == 0"
           class="flex-center"
           style="width: 100%; height: 128px; color: #757575; display: flex;">
@@ -51,7 +35,7 @@
           }"
           ref="item-product"
           style="width: 260px"/>
-        <!-- <template
+        <template
           v-if="content.products != null && content.products.length > 0">
           <q-btn
             ref="carousel-arrow-right"
@@ -67,7 +51,7 @@
             class="bg-white text-primary carousel-arrow-left"
             @click="scrollLeft"
             gtm-action="btn_section_left"/>
-        </template> -->
+        </template>
       </div>
       </div>
     </template>
@@ -87,7 +71,7 @@ export default {
     ItemProductLP
   },
 
-  name: 'SectionProduct',
+  name: 'SectionProductPopular',
 
   data () {
     return {
