@@ -27,7 +27,7 @@
       />
       <div class=" q-px-md q-mt-xl q-mb-lg row">
         <!-- Sidebar -->
-        <div class="col-12 col-md-3">
+        <div class="col-12 col-md-4">
           <section>
             <SidebarElearning
               :navs="navs"
@@ -39,7 +39,7 @@
           </section>
         </div>
         <!-- Content Video -->
-        <div class="col-12 col-md-9" style="padding-left: 50px;">
+        <div class="col-12 col-md-8">
           <section
     	      id="start-learning"
     	      class="container list-popular-product q-px-md q-pb-md">
@@ -224,7 +224,12 @@ export default {
     toggleSidebar() {
       const sidebar = document.querySelector('.sidebar-mobile')
       sidebar.classList.toggle('open')
-    }
+    },
+    applyFilter() {
+      this.$store.commit('setBottomSheetOpen', false);
+    },
+    resetFilter() {
+    },
   },
 };
 </script>

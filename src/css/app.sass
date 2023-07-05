@@ -153,11 +153,15 @@ h2.text-primary
     top: unset
     height: 225px
 
-/*Mengatur Card Video E-Learning*/
+/*Card Video E-Learning*/
 .grid-product
   display: grid
   grid-template-columns: repeat(3, 1fr)
   grid-gap: 10px
+  @media (min-width: $xs-breakpoint)
+    grid-template-columns: repeat(2, 1fr)
+  @media (min-width: $sm-breakpoint)
+    grid-template-columns: repeat(3, 1fr)
 
 .home-section
   display: flex
@@ -189,7 +193,7 @@ h2.text-primary
   background: #FFFCF2
   width: 300px
   height: 100vh
-  padding: 40px 24px 40px 24px
+  padding: 40px 24px
   border-radius: 32px
   ul
     padding: 0
@@ -202,13 +206,23 @@ h2.text-primary
   list-style: none
   padding-left: 0
 
+.sidebar-list-group-item
+  padding: 0px 15px 0px
+  border-radius: 7px
+  margin: 5px
+  border: 1px solid #CCC
+  width: fit-content
+  display: block
+  @media (max-width: $xs-breakpoint)
+    display: inline-block
+  @media (max-width: $sm-breakpoint)
+    display: inline-block
+
+.sidebar-list-group-item:hover
+  background-color: rgba(242,192,55, 0.7)
+
 .sidebar-list-group-item.active
   background-color: #FFDE59
-
-.sidebar-list-group-item
-  padding-left: 15px
-  border-radius: 7px
-  margin: 2px
 
 /*Radio button Sidebar E-Learning start*/
 .radio-sidebar-content
@@ -258,6 +272,98 @@ h2.text-primary
   background: white
 /*Sidebar E-Learning end*/
 
+/*Bottom sheet start*/
+.sidebar
+  transition: transform 0.3s ease
+  transform: translateX(0)
+  z-index: 999
+
+.bottom-sheet-btn
+  display: none
+  z-index: 999
+  width: auto
+
+.bottom-btn:hover
+  color: black !important
+  background-color: rgba(242,192,55, 0.7)
+
+.bottom-btn
+  padding: 5px 15px 5px
+  border-radius: 7px
+  margin: 2px
+  border: 1px solid #CCC
+  width: auto
+  border-radius: 30px
+  cursor: pointer
+  color: #B0BEC5
+  width: fit-content
+
+.bottom-btn-filter
+  display: block
+  border: none
+  width: auto
+  border-radius: 30px
+  cursor: pointer
+  padding: 5px 0px 5px
+  border-radius: 15px
+  margin: 10px
+  border: 1px solid #CCC
+  text-align: center
+  display: block
+  font-weight: 800
+  font-size: 16px
+
+.bottom-btn-filter:hover
+  background-color:rgba(242,192,55, 0.7)
+  border: none
+
+.bottom-btn-filter.active
+  background-color: #FFDE59
+  border: none
+
+@media (max-width: 768px)
+  .sidebar
+    height: 80%
+    width: 100%
+    position: fixed
+    left: 0
+    bottom: 0
+    transition: transform 0.5s ease-in
+    overflow-x: auto
+    display: none
+    border-radius: 30px 30px 0 0
+    z-index: 999
+  .sidebar.open
+    display: block
+  .bottom-sheet-btn
+    display: block
+
+.menu-wrapper
+    overflow-x: auto
+    white-space: nowrap
+    margin-top: -15px
+
+.menu-scroll
+  display: flex
+
+.bottom-sheet-group-item
+  padding: 4px 15px
+  border-radius: 7px
+  margin: 5px
+  border: 1px solid #CCC
+  width: fit-content
+  display: block
+
+.bottom-sheet-group-item:hover
+  background-color: rgba(242,192,55, 0.7)
+
+
+.bottom-sheet-group-item.active
+  background-color: #FFDE59
+
+
+/*Bottom sheet end*/
+
 .list-popular-product
   .--wording
     .--title
@@ -269,11 +375,29 @@ h2.text-primary
       font-weight: bold
       margin-top: 0
       margin-bottom: 16px
+.list-popular-product
+  @media (min-width: $xs-breakpoint)
+    margin-left: 0px
+.item-product-content
+  @media (min-width: $xs-breakpoint)
+    width: 190px !important
+  @media (min-width: $sm-breakpoint)
+    width: 240px !important
+  @media (min-width: $md-breakpoint)
+    width: 260px !important
+.item-product-popular
+  @media (min-width: $xs-breakpoint)
+    width: 190px !important
+  @media (min-width: $sm-breakpoint)
+    width: 240px !important
+  @media (min-width: $md-breakpoint)
+    width: 260px !important
 
 .item-product-list
   position: relative
-  .section-product, .section-product-popular
+  .section-product
     display: flex
+  .section-product-popular
     overflow-x: scroll
     > div
       height: 100%
@@ -360,7 +484,7 @@ h2.text-primary
   margin: 8px 8px 10px 8px
   position: relative
 .item-product-container
-  padding: 8px 8px 10px 8px
+  padding: 0px 8px 10px 8px
   position: relative
   .item-product
     width: 100%
@@ -371,6 +495,10 @@ h2.text-primary
       position: relative
       overflow: hidden
       border-bottom-right-radius: 60px
+      @media (max-width: $xs-breakpoint)
+        border-bottom-right-radius: 30px
+      @media (max-width: $md-breakpoint)
+        border-bottom-right-radius: 30px
       img
         position: absolute
         top: 0
@@ -385,11 +513,24 @@ h2.text-primary
         width: 100%
         background-color: rgba(255, 85, 85, 0.8)
         color: white
+        @media (min-width: $xs-breakpoint)
+          font-size: 10px
+    .--subcategory
+      @media (max-width: $md-breakpoint)
+        font-size: 12px
     .--title
       font-style: normal
       font-weight: 700
       font-size: 24px
       line-height: 1.5
+      @media (max-width: $xs-breakpoint)
+        font-size: 14px
+      @media (max-width: $md-breakpoint)
+        font-size: 14px
+    .--description
+      @media (max-width: $md-breakpoint)
+        font-size: 12px
+
 .item-product:hover .--play-button
   display: inline-block
   border-radius: 50%

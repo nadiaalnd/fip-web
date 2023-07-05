@@ -33,8 +33,9 @@
           @bookmarked="(value) => {
             product.is_bookmarked = value
           }"
+          class="item-product-popular"
           ref="item-product"
-          style="width: 260px"/>
+          style="width: 250px"/>
         <template
           v-if="content.products != null && content.products.length > 0">
           <q-btn

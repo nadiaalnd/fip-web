@@ -37,8 +37,9 @@
       <div class="q-pa-sm">
         <div>
           <q-chip dense square
-            class="text-primary text-bold q-px-sm"
-            color="light">
+            class="--subcategory text-primary text-bold q-px-sm"
+            color="light"
+            >
             {{ product.subcategory.code }}
           </q-chip>
         </div>
@@ -51,7 +52,7 @@
             {{product.name}}
           </a>
         </div>
-        <div class="text-neutral ellipsis-2">
+        <div class="--description text-neutral ellipsis-2">
           {{product.description}}
         </div>
         <div class="--rating flex flex-center"

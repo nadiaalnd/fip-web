@@ -36,39 +36,40 @@
         ref="section-product"
         class="section-product">
         <div class="grid-product">
-        <div v-if="content.products == null || content.products.length == 0"
-          class="flex-center"
-          style="width: 100%; height: 128px; color: #757575; display: flex;">
-          {{content.placeholder ? content.placeholder : 'Belum Ada' }}
+          <div v-if="content.products == null || content.products.length == 0"
+            class="flex-center"
+            style="width: 100%; height: 128px; color: #757575; display: flex;">
+              {{content.placeholder ? content.placeholder : 'Belum Ada' }}
+          </div>
+          <ItemProductLP
+            v-else
+            v-for="(product, idx) in content.products"
+            :key="'product-'+idx"
+            :product="product"
+            @bookmarked="(value) => {
+              product.is_bookmarked = value
+            }"
+            class="item-product-content"
+            ref="item-product"
+            style="width: 250px"/>
+          <!-- <template
+            v-if="content.products != null && content.products.length > 0">
+            <q-btn
+              ref="carousel-arrow-right"
+              round
+              icon="chevron_right"
+              class="bg-white text-primary carousel-arrow-right"
+              @click="scrollRight"
+              gtm-action="btn_section_right"/>
+            <q-btn
+              ref="carousel-arrow-left"
+              round
+              icon="chevron_left"
+              class="bg-white text-primary carousel-arrow-left"
+              @click="scrollLeft"
+              gtm-action="btn_section_left"/>
+          </template> -->
         </div>
-        <ItemProductLP
-          v-else
-          v-for="(product, idx) in content.products"
-          :key="'product-'+idx"
-          :product="product"
-          @bookmarked="(value) => {
-            product.is_bookmarked = value
-          }"
-          ref="item-product"
-          style="width: 260px"/>
-        <!-- <template
-          v-if="content.products != null && content.products.length > 0">
-          <q-btn
-            ref="carousel-arrow-right"
-            round
-            icon="chevron_right"
-            class="bg-white text-primary carousel-arrow-right"
-            @click="scrollRight"
-            gtm-action="btn_section_right"/>
-          <q-btn
-            ref="carousel-arrow-left"
-            round
-            icon="chevron_left"
-            class="bg-white text-primary carousel-arrow-left"
-            @click="scrollLeft"
-            gtm-action="btn_section_left"/>
-        </template> -->
-      </div>
       </div>
     </template>
   </div>
