@@ -1,14 +1,18 @@
 <template>
-  <div class="filter-menu row">
+  <div
+  v-if="isMobileView"
+  class="filter-menu row">
     <div class="col-3 bottom-sheet-btn">
       <div
-        class="bottom-btn q-px-md q-mt-md gtm-track"
-        @click="toggleSidebar()"
-        >
-          <span class="material-icons q-mr-xs">filter_alt</span>
-          Filter
+      id="open"
+      class="bottom-btn q-px-md q-mt-md gtm-track"
+      @click="toggleSidebar()"
+      >
+        <span class="material-icons q-mr-xs">filter_alt</span>
+        Filter
       </div>
     </div>
+    <!-- Menu materi saat mobile view -->
     <div
     v-if="isMobileView"
     class="col-9 q-px-md menu-wrapper">
@@ -26,48 +30,62 @@
       </ul>
     </div>
   </div>
-  <div class="card sidebar-mobile"
+  <div
+  id="slide"
+  class="card sidebar-mobile"
   :class="['sidebar', { 'sidebar-closed': !isSidebarOpen }]"
   ref="sidebar"
   >
-  <h3
-  v-if="isMobileView"
-  class="title-sidebar text-bold text-dark text-center">
-    Filter
-  </h3>
-  <h1 class="text-bold text-dark" style="font-size: 20px;">Materi</h1>
-  <ul class="sidebar-list-group">
-    <li
-    class="sidebar-list-group-item"
-    v-for="item in navs.materi"
-    :style="{ backgroundColor: activeMenu === item ? '#FFDE59' : '' }"
-    :key="item.id"
-    @click="changeFilter(item)"
+    <span
+    v-if="isMobileView"
+    class="material-icons q-mb-lg"
+    style="
+      font-size: 50px;
+      color: #CCC;
+      display: flex;
+      justify-content: center;
+    "
     >
-      {{ item }}
-    </li>
-  </ul>
-  <h1 class="text-bold text-dark" style="font-size: 20px;">Pekerjaan</h1>
-  <ul class="sidebar-list-group">
-    <li
-    class="sidebar-list-group-item"
-    v-for="item in navs.pekerjaan"
-    :key="item.id"
-    :class="{ 'active': activeMenu === item }"
-    @click="changeFilter(item)"
-    >
-      {{ item.replace ('Rekomendasi', '')}}
-    </li>
-  </ul>
-  <!-- Tingkatan -->
-  <h1 class="text-bold text-dark" style="font-size: 20px;">Tingkatan</h1>
-  <ul class="sidebar-list-button">
-    <li
-    class="sidebar-list-button-item"
-    v-for="item in tingkatanMenu"
-    :key="item"
-    @click="changeFilter(item)"
-    >
+      horizontal_rule
+    </span>
+    <h3
+    v-if="isMobileView"
+    class="title-sidebar text-bold text-dark q-mb-md">
+      Filter
+    </h3>
+    <h1 class="text-bold text-dark" style="font-size: 20px;">Materi</h1>
+    <ul class="sidebar-list-group">
+      <li
+      class="sidebar-list-group-item"
+      v-for="item in navs.materi"
+      :style="{ backgroundColor: activeMenu === item ? '#FFDE59' : '' }"
+      :key="item.id"
+      @click="changeFilter(item)"
+      >
+        {{ item }}
+      </li>
+    </ul>
+    <h1 class="text-bold text-dark" style="font-size: 20px;">Pekerjaan</h1>
+    <ul class="sidebar-list-group">
+      <li
+      class="sidebar-list-group-item"
+      v-for="item in navs.pekerjaan"
+      :key="item.id"
+      :class="{ 'active': activeMenu === item }"
+      @click="changeFilter(item)"
+      >
+        {{ item.replace ('Rekomendasi', '')}}
+      </li>
+    </ul>
+    <!-- Tingkatan -->
+    <!-- <h1 class="text-bold text-dark" style="font-size: 20px;">Tingkatan</h1>
+    <ul class="sidebar-list-button">
+      <li
+      class="sidebar-list-button-item"
+      v-for="item in tingkatanMenu"
+      :key="item"
+      @click="changeFilter(item)"
+      >
       <label class="radio-sidebar-content">
         <input
           type="radio"
@@ -79,12 +97,14 @@
         <span class="checkmark-sidebar-content"></span>
       </label>
       </li>
-    </ul>
+    </ul> -->
+    <!-- Button "Terapkan" dan "Reset" -->
     <div v-if="isMobileView">
       <div
         v-if="isSidebarOpen && activeMenu"
         class="bottom-btn-filter q-px-md q-mt-md gtm-track"
         :class="['bottom-btn-filter', { 'active': isApplyFilterActive }]"
+        :style="{ backgroundColor: isApplyFilterActive ? '#FFDE59' : '' }"
         @click="applyFilter()"
       >Terapkan</div>
       <div
@@ -145,6 +165,7 @@ export default {
     toggleSidebar() {
       const sidebar = document.querySelector('.sidebar-mobile')
       sidebar.classList.toggle('open')
+      this.isApplyFilterActive = this.isSidebarOpen;
       this.isSidebarOpen = sidebar.classList.contains('open');
       this.isMobileView = window.innerWidth <= 768;
     },
@@ -163,6 +184,9 @@ export default {
       this.$emit('change-filter', null);
       this.isResetFilterActive = true;
       this.isApplyFilterActive = true;
+
+      this.localActiveMenu = null;
+      this.localSelectedTingkatan = null;
     },
   },
 };

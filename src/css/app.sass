@@ -217,10 +217,8 @@ h2.text-primary
     display: inline-block
   @media (max-width: $sm-breakpoint)
     display: inline-block
-
 .sidebar-list-group-item:hover
   background-color: rgba(242,192,55, 0.7)
-
 .sidebar-list-group-item.active
   background-color: #FFDE59
 
@@ -232,7 +230,6 @@ h2.text-primary
   margin-bottom: 5px
   cursor: pointer
   user-select: none
-
 .radio-sidebar-content input
   position: absolute
   opacity: 0
@@ -250,7 +247,6 @@ h2.text-primary
 
 .radio-sidebar-content input:checked
   outline: none
-
 .radio-sidebar-content input:checked ~ .checkmark-sidebar-content
   background-color: #FFDE59
   border: 2px solid #FFDE59
@@ -278,11 +274,21 @@ h2.text-primary
   transform: translateX(0)
   z-index: 999
 
+.filter-menu
+  position: relative
+.filter-menu::after
+  content: ''
+  background-color: #B0BEC5
+  height: 0.5px
+  position: absolute
+  bottom: 90px
+  left: 0
+  right: 0
+
 .bottom-sheet-btn
   display: none
   z-index: 999
   width: auto
-
 .bottom-btn:hover
   color: black !important
   background-color: rgba(242,192,55, 0.7)
@@ -312,11 +318,9 @@ h2.text-primary
   display: block
   font-weight: 800
   font-size: 16px
-
 .bottom-btn-filter:hover
-  background-color:rgba(242,192,55, 0.7)
+  background-color: #F2C037
   border: none
-
 .bottom-btn-filter.active
   background-color: #FFDE59
   border: none
@@ -353,15 +357,10 @@ h2.text-primary
   border: 1px solid #CCC
   width: fit-content
   display: block
-
 .bottom-sheet-group-item:hover
   background-color: rgba(242,192,55, 0.7)
-
-
 .bottom-sheet-group-item.active
   background-color: #FFDE59
-
-
 /*Bottom sheet end*/
 
 .list-popular-product
@@ -417,6 +416,15 @@ h2.text-primary
       z-index: 1
       .material-icons
         font-weight: bold
+  .section-product::after
+    content: ''
+    background: linear-gradient(to bottom, rgba(176, 190, 197, 1) 0%, rgba(176, 190, 197, 0) 100%)
+    width: 0.5px
+    position: absolute
+    top: 0
+    bottom: 0
+    right: 795px
+    transform: translateX(-50%)
 .search-products, .purchase-products
   display: flex
   flex-wrap: wrap

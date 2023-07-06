@@ -25,7 +25,7 @@
         @click="$router.push({ path: '/free/package/e-learning' })"
         gtm-action="btn_free_get_home"
       />
-      <div class=" q-px-md q-mt-xl q-mb-lg row">
+      <div class="q-px-md q-mt-xl q-mb-lg row">
         <!-- Sidebar -->
         <div class="col-12 col-md-4">
           <section>
@@ -98,11 +98,11 @@ export default {
         pekerjaan: [],
         tingkatan: [],
       },
-      tingkatanMenu:
-        ['Semua Tingkatan',
-          'Pemula',
-          'Menengah'
-        ],
+      // tingkatanMenu:
+      //   ['Semua Tingkatan',
+      //     'Pemula',
+      //     'Menengah'
+      //   ],
       hasActivePackage: false,
       selectedTingkatan: null,
       activeMenu: null,

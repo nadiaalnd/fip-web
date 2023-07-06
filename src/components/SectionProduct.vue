@@ -92,7 +92,8 @@ export default {
 
   data () {
     return {
-      host: ''
+      host: '',
+      isMobileView: false
     }
   },
 
@@ -103,10 +104,17 @@ export default {
       this.host = process.env.API_URL_IMG
     }
 
-    this.handleScrollContent()
+    this.handleScrollContent();
+    this.checkMobileView();
+    window.addEventListener('resize', this.checkMobileView);
   },
-
+  beforeUnmount () {
+    window.removeEventListener('resize', this.checkMobileView);
+  },
   methods: {
+    checkMobileView() {
+      this.isMobileView = window.innerWidth <= 768;
+    },
     sectionClicked () {
       this.$router.push({
         path: `/learning-path/${this.content.id}/${this.$utils.escapeRoute(this.content.code)}`
@@ -131,7 +139,19 @@ export default {
       })
     },
 
-    handleScrollContent () {
+    handleScrollContent() {
+      if (this.isMobileView) {
+        const sectionProduct = this.$refs['section-product'];
+        sectionProduct.style.paddingRight = '';
+      } else {
+        const sectionProduct = this.$refs['section-product'];
+        sectionProduct.style.paddingRight = '0.5px';
+
+        const afterElement = document.createElement('div');
+        afterElement.classList.add('section-product-after');
+        sectionProduct.appendChild(afterElement);
+      }
+
       if (this.$refs['section-product'] == null) {
         return
       }
