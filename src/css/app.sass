@@ -11,7 +11,6 @@ $lg-breakpoint: 1440px
 html
   scroll-behavior: smooth
 
-
 body
   overflow-x: hidden
 .q-card
@@ -153,7 +152,7 @@ h2.text-primary
     top: unset
     height: 225px
 
-/*Card Video E-Learning*/
+/*Card E-Learning*/
 .grid-product
   display: grid
   grid-template-columns: repeat(3, 1fr)
@@ -189,7 +188,7 @@ h2.text-primary
   @extend .flex-1
 
 /*Sidebar E-Learning start*/
-.sidebar-mobile
+.sidebar-menu
   background: #FFFCF2
   width: 300px
   height: auto
@@ -210,8 +209,6 @@ h2.text-primary
   padding: 0px 15px 0px
   border-radius: 7px
   margin: 5px
-  border: 1px solid #CCC
-  width: fit-content
   display: block
   @media (max-width: $xs-breakpoint)
     display: inline-block
@@ -341,6 +338,8 @@ h2.text-primary
     display: block
   .bottom-sheet-btn
     display: block
+  .sidebar-list-group-item
+    border: 1px solid #CCC
 
 .menu-wrapper
     overflow-x: auto
@@ -357,6 +356,7 @@ h2.text-primary
   border: 1px solid #CCC
   width: fit-content
   display: block
+  cursor: pointer
 .bottom-sheet-group-item:hover
   background-color: rgba(242,192,55, 0.7)
 .bottom-sheet-group-item.active
@@ -396,6 +396,12 @@ h2.text-primary
   position: relative
   .section-product
     display: flex
+    @media (min-width: $xs-breakpoint)
+      margin-left: -30px
+    @media (min-width: $sm-breakpoint)
+      margin-left: -30px
+    @media (min-width: $md-breakpoint)
+      margin-left: 0px
   .section-product-popular
     overflow-x: scroll
     > div
@@ -416,15 +422,6 @@ h2.text-primary
       z-index: 1
       .material-icons
         font-weight: bold
-  .section-product::after
-    content: ''
-    background: linear-gradient(to bottom, rgba(176, 190, 197, 1) 0%, rgba(176, 190, 197, 0) 100%)
-    width: 0.5px
-    position: absolute
-    top: 0
-    bottom: 0
-    right: 795px
-    transform: translateX(-50%)
 .search-products, .purchase-products
   display: flex
   flex-wrap: wrap

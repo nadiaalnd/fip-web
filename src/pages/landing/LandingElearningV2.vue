@@ -9,34 +9,62 @@
         dan tambahan materi ter-update seputar investasi di Pasar Modal.
         <br /><span class="text-bold">AKSES PENUH, TANPA BATAS!</span>
       </div>
-      <q-btn v-if="!hasActivePackage" style="
+      <q-btn
+        v-if="!hasActivePackage"
+        style="
           font-weight: 600;
           font-size: 1rem;
           background-color: #ffcc00;
           border-radius: 10px;
-        " no-caps unelevated color="secondary" class="text-black q-px-md q-mt-md gtm-track" label="Mulai Gratis"
-        @click="$router.push({ path: '/free/package/e-learning' })" gtm-action="btn_free_get_home" />
+        "
+        no-caps
+        unelevated
+        color="secondary"
+        class="text-black q-px-md q-mt-md gtm-track"
+        label="Mulai Gratis"
+        @click="$router.push({ path: '/free/package/e-learning' })"
+        gtm-action="btn_free_get_home"
+      />
       <div class="q-px-md q-mt-xl q-mb-lg row">
         <!-- Sidebar -->
         <div class="col-12 col-md-4">
           <section>
-            <SidebarElearning :navs="navs" :activeMenu="activeMenu" :changeFilter="changeFilter"
-              :tingkatanMenu="tingkatanMenu" :selectedTingkatan="selectedTingkatan" />
+            <SidebarElearning
+              :navs="navs"
+              :activeMenu="activeMenu"
+              :changeFilter="changeFilter"
+              :tingkatanMenu="tingkatanMenu"
+              :selectedTingkatan="selectedTingkatan"
+            />
           </section>
         </div>
         <!-- Content Video -->
         <div class="col-12 col-md-8">
-          <section id="start-learning" class="container list-popular-product q-px-md q-pb-md">
-            <SectionProduct :showPrice="false" :id="'dashboard-' + idx" class="q-my-md" v-for="(content, idx) in contents"
-              :key="'content-' + idx" :content="content" />
+          <section
+    	      id="start-learning"
+    	      class="container list-popular-product q-px-md q-pb-md">
+            <SectionProduct
+              :showPrice="false"
+              :id="'dashboard-'+idx"
+              class="q-my-md"
+              v-for="(content, idx) in contents"
+              :key="'content-'+idx"
+              :content="content"
+            />
           </section>
         </div>
       </div>
     </div>
     <!-- Popular Video -->
     <div class="container q-mb-lg" id="popular">
-      <SectionProductPopular :showPrice="false" :id="'popular-' + idx" class="q-my-md"
-        v-for="(content, idx) in [popularProduct]" :key="'popular-' + idx" :content="content">
+      <SectionProductPopular
+        :showPrice="false"
+        :id="'popular-' + idx"
+        class="q-my-md"
+        v-for="(content, idx) in [popularProduct]"
+        :key="'popular-' + idx"
+        :content="content"
+      >
       </SectionProductPopular>
     </div>
   </q-page>
@@ -70,14 +98,10 @@ export default {
         pekerjaan: [],
         tingkatan: [],
       },
-      // tingkatanMenu:
-      //   ['Semua Tingkatan',
-      //     'Pemula',
-      //     'Menengah'
-      //   ],
       hasActivePackage: false,
       selectedTingkatan: null,
       activeMenu: null,
+      tingkatanMenu: null,
     };
   },
 
@@ -102,7 +126,7 @@ export default {
       }.bind(this)
     );
     this.getNavItems();
-    this.changeFilter('Semua');
+    this.changeFilter("Saham");
     this.selectedTingkatan = "Semua Tingkatan";
     console.log(this.navItems);
   },
@@ -124,8 +148,8 @@ export default {
         (data) => {
           this.popularProduct.products = data;
         },
-        (msg, errors) => { },
-        () => { }
+        (msg, errors) => {},
+        () => {}
       );
     },
 
@@ -144,24 +168,19 @@ export default {
               product["subcategory"] = subcategory;
             });
           });
-          // alert(this.filteredVideos)
-          if (this.filteredVideos == 'Semua') {
-            this.contents = data;
-          }
-          else if (this.filteredVideos) {
+          if (this.filteredVideos) {
             this.contents = data.filter((item) => {
               return item.code == this.filteredVideos;
             });
-          }
-          else {
+          } else {
             this.contents = data;
           }
           this.$nextTick(() => {
             this.$emit("pageReady");
           });
         },
-        (msg, errors) => { },
-        () => { }
+        (msg, errors) => {},
+        () => {}
       );
     },
 
@@ -188,28 +207,21 @@ export default {
               if (!this.navs.pekerjaan.includes(tag.name)) {
                 this.navs.pekerjaan.push(tag.name);
               }
-              if (tag.tingkatan && !this.navs.tingkatan.includes(tag.tingkatan)) {
-                this.navs.tingkatan.push(tag.tingkatan);
-              }
             });
           });
         },
-        (msg, errors) => { },
-        () => { }
+        (msg, errors) => {},
+        () => {}
       );
-      this.navs.materi.push('Semua')
     },
     toggleSidebar() {
-      const sidebar = document.querySelector('.sidebar-mobile')
+      const sidebar = document.querySelector('.sidebar-menu')
       sidebar.classList.toggle('open')
     },
     applyFilter() {
       this.$store.commit('setBottomSheetOpen', false);
     },
     resetFilter() {
-      this.$store.commit('setBottomSheetOpen', false);
-      this.filteredVideos = 'Semua';
-      this.getDashboard();
     },
   },
 };
