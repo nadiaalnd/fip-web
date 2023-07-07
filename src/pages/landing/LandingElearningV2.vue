@@ -9,62 +9,34 @@
         dan tambahan materi ter-update seputar investasi di Pasar Modal.
         <br /><span class="text-bold">AKSES PENUH, TANPA BATAS!</span>
       </div>
-      <q-btn
-        v-if="!hasActivePackage"
-        style="
+      <q-btn v-if="!hasActivePackage" style="
           font-weight: 600;
           font-size: 1rem;
           background-color: #ffcc00;
           border-radius: 10px;
-        "
-        no-caps
-        unelevated
-        color="secondary"
-        class="text-black q-px-md q-mt-md gtm-track"
-        label="Mulai Gratis"
-        @click="$router.push({ path: '/free/package/e-learning' })"
-        gtm-action="btn_free_get_home"
-      />
+        " no-caps unelevated color="secondary" class="text-black q-px-md q-mt-md gtm-track" label="Mulai Gratis"
+        @click="$router.push({ path: '/free/package/e-learning' })" gtm-action="btn_free_get_home" />
       <div class="q-px-md q-mt-xl q-mb-lg row">
         <!-- Sidebar -->
         <div class="col-12 col-md-4">
           <section>
-            <SidebarElearning
-              :navs="navs"
-              :activeMenu="activeMenu"
-              :changeFilter="changeFilter"
-              :tingkatanMenu="tingkatanMenu"
-              :selectedTingkatan="selectedTingkatan"
-            />
+            <SidebarElearning :navs="navs" :activeMenu="activeMenu" :changeFilter="changeFilter"
+              :tingkatanMenu="tingkatanMenu" :selectedTingkatan="selectedTingkatan" />
           </section>
         </div>
         <!-- Content Video -->
         <div class="col-12 col-md-8">
-          <section
-    	      id="start-learning"
-    	      class="container list-popular-product q-px-md q-pb-md">
-            <SectionProduct
-              :showPrice="false"
-              :id="'dashboard-'+idx"
-              class="q-my-md"
-              v-for="(content, idx) in contents"
-              :key="'content-'+idx"
-              :content="content"
-            />
+          <section id="start-learning" class="container list-popular-product q-px-md q-pb-md">
+            <SectionProduct :showPrice="false" :id="'dashboard-' + idx" class="q-my-md" v-for="(content, idx) in contents"
+              :key="'content-' + idx" :content="content" />
           </section>
         </div>
       </div>
     </div>
     <!-- Popular Video -->
     <div class="container q-mb-lg" id="popular">
-      <SectionProductPopular
-        :showPrice="false"
-        :id="'popular-' + idx"
-        class="q-my-md"
-        v-for="(content, idx) in [popularProduct]"
-        :key="'popular-' + idx"
-        :content="content"
-      >
+      <SectionProductPopular :showPrice="false" :id="'popular-' + idx" class="q-my-md"
+        v-for="(content, idx) in [popularProduct]" :key="'popular-' + idx" :content="content">
       </SectionProductPopular>
     </div>
   </q-page>
@@ -126,7 +98,7 @@ export default {
       }.bind(this)
     );
     this.getNavItems();
-    this.changeFilter("Saham");
+    this.changeFilter("3");
     this.selectedTingkatan = "Semua Tingkatan";
     console.log(this.navItems);
   },
@@ -148,12 +120,30 @@ export default {
         (data) => {
           this.popularProduct.products = data;
         },
-        (msg, errors) => {},
-        () => {}
+        (msg, errors) => { },
+        () => { }
       );
     },
 
     getDashboard() {
+      if (this.filteredVideos == null || this.filteredVideos == "" || this.filteredVideos == undefined) {
+        this.filteredVideos = 3;
+      }
+      const params = {
+        id_subcategory: this.filteredVideos,
+      }
+      this.$services.product.getBySubCategory(
+        params,
+        (data) => {
+          this.contents = [
+            {
+              'products': data,
+            }
+          ]
+        },
+        (msg, errors) => { },
+        () => { }
+      );
       this.$services.dashboard(
         (data) => {
           data.forEach((item, i) => {
@@ -168,19 +158,18 @@ export default {
               product["subcategory"] = subcategory;
             });
           });
-          if (this.filteredVideos) {
-            this.contents = data.filter((item) => {
-              return item.code == this.filteredVideos;
-            });
-          } else {
-            this.contents = data;
-          }
+          // this.contents = data.filter((item) => {
+          //   return item.code == "Saham"
+          // });
+
+          console.log(this.contents);
+
           this.$nextTick(() => {
             this.$emit("pageReady");
           });
         },
-        (msg, errors) => {},
-        () => {}
+        (msg, errors) => { },
+        () => { }
       );
     },
 
@@ -195,23 +184,20 @@ export default {
     },
 
     getNavItems() {
-      this.$services.product.get(
+      this.$services.product.getSubCategory(
         {},
         (data) => {
           data.forEach((item) => {
-            if (!this.navs.materi.includes(item.subcategory.code)) {
-              this.navs.materi.push(item.subcategory.code);
+            if (!this.navs.materi.includes(item.code)) {
+              this.navs.materi.push({
+                code: item.code,
+                id: item.id,
+              })
             }
-            // group by tag
-            item.tag.forEach((tag) => {
-              if (!this.navs.pekerjaan.includes(tag.name)) {
-                this.navs.pekerjaan.push(tag.name);
-              }
-            });
           });
         },
-        (msg, errors) => {},
-        () => {}
+        (msg, errors) => { },
+        () => { }
       );
     },
     toggleSidebar() {

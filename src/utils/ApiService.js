@@ -243,6 +243,12 @@ export default {
       }
       return getData("/product", params, onSuccess, onFailed, onFinish);
     },
+    getSubCategory(params, onSuccess, onFailed, onFinish) {
+      return getData("/product/subcategory", params, onSuccess, onFailed, onFinish);
+    },
+    getBySubCategory(params, onSuccess, onFailed, onFinish) {
+      return getData("/product", params, onSuccess, onFailed, onFinish);
+    },
     detailV2(filter, onSuccess, onFailed, onFinish) {
       AppUtils.track.viewContent();
       return getData("/product/detail", filter, onSuccess, onFailed, onFinish);
@@ -380,11 +386,11 @@ export default {
     },
   },
   user: {
-    fillAdditionalUserProfile (body, onSuccess, onFailed, onFinish) {
+    fillAdditionalUserProfile(body, onSuccess, onFailed, onFinish) {
       // phone, birth_year, gender, job, city_id, is_marriege, child_count
       return sendData("put", "/user/profile/additional", body, onSuccess, onFailed, onFinish);
     },
-    getAdditionalUserProfile (onSuccess, onFailed, onFinish) {
+    getAdditionalUserProfile(onSuccess, onFailed, onFinish) {
       // phone, birth_year, gender, job, city_id, is_marriege, child_count
       return getData("/user/profile/additional", {}, onSuccess, onFailed, onFinish);
     },
@@ -513,10 +519,10 @@ export default {
   },
 
   upload: {
-    file (files, cancelToken, onUploadProgress, onSuccess, onFailed, onFinish) {
+    file(files, cancelToken, onUploadProgress, onSuccess, onFailed, onFinish) {
       uploadFile(files, cancelToken, onUploadProgress, onSuccess, onFailed, onFinish)
     },
-    image (type, image, onSuccess, onFailed, onFinish) {
+    image(type, image, onSuccess, onFailed, onFinish) {
       const file = AppUtils.dataURLtoFile(image, 'temp.png')
 
       let path = '/file/upload'
@@ -707,7 +713,7 @@ export default {
   },
 
   location: {
-    getCity (onSuccess, onFailed, onFinish) {
+    getCity(onSuccess, onFailed, onFinish) {
       return getData(`/location/cities`, {}, onSuccess, onFailed, onFinish)
     }
   }

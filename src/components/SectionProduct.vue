@@ -32,26 +32,16 @@
           color="primary"
           size="24px"/>
       </div> -->
-      <div
-        ref="section-product"
-        class="section-product">
+      <div ref="section-product" class="section-product">
         <div class="grid-product">
-          <div v-if="content.products == null || content.products.length == 0"
-            class="flex-center"
+          <div v-if="content.products == null || content.products.length == 0" class="flex-center"
             style="width: 100%; height: 128px; color: #757575; display: flex;">
-              {{content.placeholder ? content.placeholder : 'Belum Ada' }}
+            {{ content.placeholder ? content.placeholder : 'Belum Ada' }}
           </div>
-          <ItemProductLP
-            v-else
-            v-for="(product, idx) in content.products"
-            :key="'product-'+idx"
-            :product="product"
+          <ItemProductLP v-else v-for="(product, idx) in content.products" :key="'product-' + idx" :product="product"
             @bookmarked="(value) => {
               product.is_bookmarked = value
-            }"
-            class="item-product-content"
-            ref="item-product"
-            style="width: 250px"/>
+            }" class="item-product-content" ref="item-product" style="width: 250px" />
           <!-- <template
             v-if="content.products != null && content.products.length > 0">
             <q-btn
@@ -90,14 +80,14 @@ export default {
 
   name: 'SectionProduct',
 
-  data () {
+  data() {
     return {
       host: '',
       isMobileView: false
     }
   },
 
-  mounted () {
+  mounted() {
     if (this.content.host) {
       this.host = this.content.host
     } else {
@@ -108,20 +98,20 @@ export default {
     this.checkMobileView();
     window.addEventListener('resize', this.checkMobileView);
   },
-  beforeUnmount () {
+  beforeUnmount() {
     window.removeEventListener('resize', this.checkMobileView);
   },
   methods: {
     checkMobileView() {
       this.isMobileView = window.innerWidth <= 768;
     },
-    sectionClicked () {
+    sectionClicked() {
       this.$router.push({
         path: `/learning-path/${this.content.id}/${this.$utils.escapeRoute(this.content.code)}`
       })
     },
 
-    scrollRight () {
+    scrollRight() {
       let productWidth = this.$refs['item-product'][0].$el.offsetWidth
       this.$refs['section-product'].scrollTo({
         top: 0,
@@ -130,7 +120,7 @@ export default {
       })
     },
 
-    scrollLeft () {
+    scrollLeft() {
       let productWidth = this.$refs['item-product'][0].$el.offsetWidth
       this.$refs['section-product'].scrollTo({
         top: 0,
@@ -173,7 +163,7 @@ export default {
         }
       }
 
-      function onWindowScroll () {
+      function onWindowScroll() {
         if (self.$refs['section-product'].scrollLeft == 0) {
           self.$refs['carousel-arrow-left'].$el.classList.add('hidden')
           showCarouselLeft = false
