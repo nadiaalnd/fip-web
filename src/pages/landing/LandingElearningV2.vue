@@ -20,23 +20,37 @@
         <!-- Sidebar -->
         <div class="col-12 col-md-4">
           <section>
-            <SidebarElearning :navs="navs" :activeMenu="activeMenu" :changeFilter="changeFilter"
-              :tingkatanMenu="tingkatanMenu" :selectedTingkatan="selectedTingkatan" />
+            <SidebarElearning
+            :navs="navs"
+            :activeMenu="activeMenu"
+            :changeFilter="changeFilter"
+            />
           </section>
         </div>
         <!-- Content Video -->
         <div class="col-12 col-md-8">
-          <section id="start-learning" class="container list-popular-product q-px-md q-pb-md">
-            <SectionProduct :showPrice="false" :id="'dashboard-' + idx" class="q-my-md" v-for="(content, idx) in contents"
-              :key="'content-' + idx" :content="content" />
+          <section
+          id="start-learning"
+          class="container list-popular-product q-px-md q-pb-md">
+            <SectionProduct
+            :showPrice="false"
+            :id="'dashboard-' + idx"
+            class="q-my-md" v-for="(content, idx) in contents"
+            :key="'content-' + idx"
+            :content="content" />
           </section>
         </div>
       </div>
     </div>
     <!-- Popular Video -->
     <div class="container q-mb-lg" id="popular">
-      <SectionProductPopular :showPrice="false" :id="'popular-' + idx" class="q-my-md"
-        v-for="(content, idx) in [popularProduct]" :key="'popular-' + idx" :content="content">
+      <SectionProductPopular
+      :showPrice="false"
+      :id="'popular-' + idx"
+      class="q-my-md"
+      v-for="(content, idx) in [popularProduct]"
+      :key="'popular-' + idx"
+      :content="content">
       </SectionProductPopular>
     </div>
   </q-page>
@@ -67,13 +81,16 @@ export default {
       navItems: [],
       navs: {
         materi: [],
-        pekerjaan: [],
-        tingkatan: [],
+        pekerjaan: [
+          { code: "Pelajar/Mahasiswa", id: "Rekomendasi Pelajar" },
+          { code: "Pekerja", id: "Rekomendasi Pekerja" },
+          { code: "Pebisnis", id: "Rekomendasi Wiraswasta" },
+          { code: "Ibu Rumah Tangga", id: "Rekomendasi Ibu Rumah Tangga" },
+        ],
       },
+
       hasActivePackage: false,
-      selectedTingkatan: null,
       activeMenu: null,
-      tingkatanMenu: null,
     };
   },
 
@@ -98,8 +115,7 @@ export default {
       }.bind(this)
     );
     this.getNavItems();
-    this.changeFilter("3");
-    this.selectedTingkatan = "Semua Tingkatan";
+    this.changeFilter(3);
     console.log(this.navItems);
   },
 
@@ -144,43 +160,6 @@ export default {
         (msg, errors) => { },
         () => { }
       );
-      this.$services.dashboard(
-        (data) => {
-          data.forEach((item, i) => {
-            const subcategory = {
-              id: item.id,
-              code: item.code,
-              icon: item.icon,
-              idx: item.idx,
-            };
-            item.products.forEach((product, i) => {
-              product.type = 0;
-              product["subcategory"] = subcategory;
-            });
-          });
-          // this.contents = data.filter((item) => {
-          //   return item.code == "Saham"
-          // });
-
-          console.log(this.contents);
-
-          this.$nextTick(() => {
-            this.$emit("pageReady");
-          });
-        },
-        (msg, errors) => { },
-        () => { }
-      );
-    },
-
-    changeFilter(filter) {
-      // this.filteredVideos = filter;
-      // this.getDashboard();
-      if (this.filteredVideos !== filter) {
-        this.filteredVideos = filter;
-        this.getDashboard();
-      }
-      this.activeMenu = filter;
     },
 
     getNavItems() {
@@ -200,14 +179,18 @@ export default {
         () => { }
       );
     },
-    toggleSidebar() {
-      const sidebar = document.querySelector('.sidebar-menu')
-      sidebar.classList.toggle('open')
+
+    changeFilter(filter) {
+      // this.filteredVideos = filter;
+      // this.getDashboard();
+      if (this.filteredVideos !== filter) {
+        this.filteredVideos = filter;
+        this.getDashboard();
+      }
+      this.activeMenu = filter;
     },
     applyFilter() {
       this.$store.commit('setBottomSheetOpen', false);
-    },
-    resetFilter() {
     },
   },
 };

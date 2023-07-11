@@ -11,6 +11,14 @@ $lg-breakpoint: 1440px
 html
   scroll-behavior: smooth
 
+
+.nav-bar
+  background: $secondary-super-light
+  position: -webkit-sticky
+  position: sticky
+  top: 0
+  z-index: 5
+
 body
   overflow-x: hidden
 .q-card
@@ -215,7 +223,7 @@ h2.text-primary
   @media (max-width: $sm-breakpoint)
     display: inline-block
 .sidebar-list-group-item:hover
-  background-color: rgba(242,192,55, 0.7)
+  background-color: #F2C037
 .sidebar-list-group-item.active
   background-color: #FFDE59
 
@@ -284,37 +292,54 @@ h2.text-primary
 
 .bottom-sheet-btn
   display: none
-  z-index: 999
   width: auto
 .bottom-btn:hover
   color: black !important
-  background-color: rgba(242,192,55, 0.7)
+  background-color: #FFDE59 !important
 
 .bottom-btn
   padding: 5px 15px 5px
-  border-radius: 7px
-  margin: 2px
+  border-radius: 20px
   border: 1px solid #CCC
   width: auto
-  border-radius: 30px
   cursor: pointer
   color: #B0BEC5
-  width: fit-content
+  @media (min-width: 320px)
+    width: 90px
+    margin-left: -10px
+  @media (min-width: 375px)
+    width: 90px
+  @media (min-width: 425px)
+    width: 100px
+  @media (min-width: 500px)
+    width: 120px
+  @media (min-width: 768px)
+    width: 150px
 
 .bottom-btn-filter
   display: block
   border: none
-  width: auto
+  width: 100%
   border-radius: 30px
   cursor: pointer
   padding: 5px 0px 5px
   border-radius: 15px
   margin: 10px
-  border: 1px solid #CCC
+  background-color: #FFDE59
   text-align: center
-  display: block
   font-weight: 800
   font-size: 16px
+  @media (min-width: 320px)
+    margin-left: -10px
+    width: 260px
+  @media (min-width: 375px)
+    width: 310px
+    margin-left: -10px
+  @media (min-width: 425px)
+    width: 360px
+  @media (min-width: 500px)
+    margin-left: 10px
+    width: 300px
 .bottom-btn-filter:hover
   background-color: #F2C037
   border: none
@@ -334,6 +359,7 @@ h2.text-primary
     display: none
     border-radius: 30px 30px 0 0
     z-index: 999
+    background: #FFFCF2
   .sidebar.open
     display: block
   .bottom-sheet-btn
@@ -348,6 +374,8 @@ h2.text-primary
 
 .menu-scroll
   display: flex
+  @media (min-width: 768px)
+    margin-left: -20px
 
 .bottom-sheet-group-item
   padding: 4px 15px
@@ -358,7 +386,7 @@ h2.text-primary
   display: block
   cursor: pointer
 .bottom-sheet-group-item:hover
-  background-color: rgba(242,192,55, 0.7)
+  background-color: #F2C037
 .bottom-sheet-group-item.active
   background-color: #FFDE59
 /*Bottom sheet end*/
@@ -374,23 +402,24 @@ h2.text-primary
       font-weight: bold
       margin-top: 0
       margin-bottom: 16px
-.list-popular-product
-  @media (min-width: $xs-breakpoint)
-    margin-left: 0px
 .item-product-content
-  @media (min-width: $xs-breakpoint)
+  @media (min-width: 320px)
+    width: 140px !important
+  @media (min-width: 375px)
+    width: 165px !important
+  @media (min-width: 425px)
     width: 190px !important
-  @media (min-width: $sm-breakpoint)
-    width: 240px !important
-  @media (min-width: $md-breakpoint)
-    width: 260px !important
+  @media (min-width: 768px)
+    width: 235px !important
 .item-product-popular
-  @media (min-width: $xs-breakpoint)
+  @media (min-width: 320px)
+    width: 140px !important
+  @media (min-width: 375px)
+    width: 165px !important
+  @media (min-width: 425px)
     width: 190px !important
-  @media (min-width: $sm-breakpoint)
-    width: 240px !important
-  @media (min-width: $md-breakpoint)
-    width: 260px !important
+  @media (min-width: 768px)
+    width: 235px !important
 
 .item-product-list
   position: relative
@@ -545,6 +574,14 @@ h2.text-primary
   transform: translate(-50%, -50%)
   background-color: rgba(242,192,55, 0.7)
   padding: 16px
+  @media (min-width: 320px)
+    padding: 3px !important
+  @media (min-width: 375px)
+    padding: 5px !important
+  @media (min-width: 425px)
+    padding: 7px !important
+  @media (min-width: 768px)
+    padding: 10px !important
 .item-product, .item-product-learnpath
   position: relative
   background-color: white
