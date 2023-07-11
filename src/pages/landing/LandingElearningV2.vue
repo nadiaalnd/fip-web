@@ -203,6 +203,7 @@ export default {
     },
 
     changeFilter(filter, type) {
+      console.log(filter + " " + type);
       if (this.filteredVideos !== filter) {
         this.filteredVideos = filter;
         this.filteredType = type.replace(" ", "+");

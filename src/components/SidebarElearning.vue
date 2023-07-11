@@ -62,7 +62,7 @@
           v-for="item in navs.materi"
           :style="{ backgroundColor: activeMenu === item.id ? '#FFDE59' : '' }"
           :key="item.id"
-          @click="changeFilter(item.id)"
+          @click="changeFilter(item.id, 'materi')"
         >
           {{ item.code }}
         </li>
