@@ -2,8 +2,18 @@
   <div>
     <div v-if="isMobileView" class="filter-menu row">
       <div class="col-3 bottom-sheet-btn">
-        <q-btn v-if="isMobileView" class="bottom-btn" icon="filter_alt" label="Filter" text-color="#ccc"
-        @click="open('bottom')" no-caps no-wrap unelevated rounded />
+        <q-btn
+          v-if="isMobileView"
+          class="bottom-btn"
+          icon="filter_alt"
+          label="Filter"
+          text-color="#ccc"
+          @click="open('bottom')"
+          no-caps
+          no-wrap
+          unelevated
+          rounded
+        />
       </div>
       <!-- Menu materi saat mobile view -->
       <div v-if="isMobileView" class="col-9 q-px-md menu-wrapper">
@@ -11,9 +21,11 @@
           <li
             class="bottom-sheet-group-item"
             v-for="item in navs.materi"
-            :style="{ backgroundColor: activeMenu === item.id ? '#FFDE59' : '' }"
+            :style="{
+              backgroundColor: activeMenu === item.id ? '#FFDE59' : '',
+            }"
             :key="item.id"
-            @click="changeFilter(item.id)"
+            @click="changeFilter(item.id, 'materi')"
           >
             {{ item.code }}
           </li>
@@ -37,19 +49,33 @@
       </q-dialog>
     </div>
     <!-- Bottom-sheet menu end -->
-    <div id="slide" class="card sidebar-menu" ref="sidebar" :class="['sidebar', { 'sidebar-closed': !isSidebarOpen }]">
-      <h1 class="text-bold text-dark" style="font-size: 20px;">Materi</h1>
+    <div
+      id="slide"
+      class="card sidebar-menu"
+      ref="sidebar"
+      :class="['sidebar', { 'sidebar-closed': !isSidebarOpen }]"
+    >
+      <h1 class="text-bold text-dark" style="font-size: 20px">Materi</h1>
       <ul class="sidebar-list-group">
-        <li class="sidebar-list-group-item" v-for="item in navs.materi"
+        <li
+          class="sidebar-list-group-item"
+          v-for="item in navs.materi"
           :style="{ backgroundColor: activeMenu === item.id ? '#FFDE59' : '' }"
-          :key="item.id" @click="changeFilter(item.id)" >
+          :key="item.id"
+          @click="changeFilter(item.id)"
+        >
           {{ item.code }}
         </li>
       </ul>
-      <h1 class="text-bold text-dark" style="font-size: 20px;">Pekerjaan</h1>
+      <h1 class="text-bold text-dark" style="font-size: 20px">Pekerjaan</h1>
       <ul class="sidebar-list-group">
-        <li class="sidebar-list-group-item" v-for="item in navs.pekerjaan" :key="item.id"
-        :class="{ 'active': activeMenu === item.id }" @click="changeFilter(item.id)">
+        <li
+          class="sidebar-list-group-item"
+          v-for="item in navs.pekerjaan"
+          :key="item.id"
+          :class="{ active: activeMenu === item.id }"
+          @click="changeFilter(item.id, 'pekerjaan')"
+        >
           {{ item.code }}
         </li>
       </ul>
@@ -64,8 +90,8 @@
 </style>
 
 <script>
-import DialogMenuContent from './dialogs/DialogMenuContent.vue';
-import { ref } from 'vue';
+import DialogMenuContent from "./dialogs/DialogMenuContent.vue";
+import { ref } from "vue";
 
 export default {
   components: {
@@ -87,7 +113,7 @@ export default {
   },
   setup() {
     const dialog = ref(false);
-    const position = ref('top');
+    const position = ref("top");
 
     return {
       dialog,
@@ -107,7 +133,7 @@ export default {
   },
   mounted() {
     this.checkMobileView();
-    window.addEventListener('resize', this.checkMobileView);
+    window.addEventListener("resize", this.checkMobileView);
   },
   methods: {
     checkMobileView() {
@@ -115,8 +141,8 @@ export default {
     },
     applyFilter() {
       this.dialog = false;
-      if (this.activeMenu === 'Materi') {
-      } else if (this.activeMenu === 'Pekerjaan') {
+      if (this.activeMenu === "Materi") {
+      } else if (this.activeMenu === "Pekerjaan") {
       }
     },
   },

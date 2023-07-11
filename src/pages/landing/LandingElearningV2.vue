@@ -9,35 +9,47 @@
         dan tambahan materi ter-update seputar investasi di Pasar Modal.
         <br /><span class="text-bold">AKSES PENUH, TANPA BATAS!</span>
       </div>
-      <q-btn v-if="!hasActivePackage" style="
+      <q-btn
+        v-if="!hasActivePackage"
+        style="
           font-weight: 600;
           font-size: 1rem;
           background-color: #ffcc00;
           border-radius: 10px;
-        " no-caps unelevated color="secondary" class="text-black q-px-md q-mt-md gtm-track" label="Mulai Gratis"
-        @click="$router.push({ path: '/free/package/e-learning' })" gtm-action="btn_free_get_home" />
+        "
+        no-caps
+        unelevated
+        color="secondary"
+        class="text-black q-px-md q-mt-md gtm-track"
+        label="Mulai Gratis"
+        @click="$router.push({ path: '/free/package/e-learning' })"
+        gtm-action="btn_free_get_home"
+      />
       <div class="q-px-md q-mt-xl q-mb-lg row">
         <!-- Sidebar -->
         <div class="col-12 col-md-4">
           <section>
             <SidebarElearning
-            :navs="navs"
-            :activeMenu="activeMenu"
-            :changeFilter="changeFilter"
+              :navs="navs"
+              :activeMenu="activeMenu"
+              :changeFilter="changeFilter"
             />
           </section>
         </div>
         <!-- Content Video -->
         <div class="col-12 col-md-8">
           <section
-          id="start-learning"
-          class="container list-popular-product q-px-md q-pb-md">
+            id="start-learning"
+            class="container list-popular-product q-px-md q-pb-md"
+          >
             <SectionProduct
-            :showPrice="false"
-            :id="'dashboard-' + idx"
-            class="q-my-md" v-for="(content, idx) in contents"
-            :key="'content-' + idx"
-            :content="content" />
+              :showPrice="false"
+              :id="'dashboard-' + idx"
+              class="q-my-md"
+              v-for="(content, idx) in contents"
+              :key="'content-' + idx"
+              :content="content"
+            />
           </section>
         </div>
       </div>
@@ -45,12 +57,13 @@
     <!-- Popular Video -->
     <div class="container q-mb-lg" id="popular">
       <SectionProductPopular
-      :showPrice="false"
-      :id="'popular-' + idx"
-      class="q-my-md"
-      v-for="(content, idx) in [popularProduct]"
-      :key="'popular-' + idx"
-      :content="content">
+        :showPrice="false"
+        :id="'popular-' + idx"
+        class="q-my-md"
+        v-for="(content, idx) in [popularProduct]"
+        :key="'popular-' + idx"
+        :content="content"
+      >
       </SectionProductPopular>
     </div>
   </q-page>
@@ -88,7 +101,7 @@ export default {
           { code: "Ibu Rumah Tangga", id: "Rekomendasi Ibu Rumah Tangga" },
         ],
       },
-
+      filteredType: null,
       hasActivePackage: false,
       activeMenu: null,
     };
@@ -115,7 +128,7 @@ export default {
       }.bind(this)
     );
     this.getNavItems();
-    this.changeFilter(3);
+    this.changeFilter(3, "materi");
     console.log(this.navItems);
   },
 
@@ -136,29 +149,38 @@ export default {
         (data) => {
           this.popularProduct.products = data;
         },
-        (msg, errors) => { },
-        () => { }
+        (msg, errors) => {},
+        () => {}
       );
     },
 
     getDashboard() {
-      if (this.filteredVideos == null || this.filteredVideos == "" || this.filteredVideos == undefined) {
+      if (
+        this.filteredVideos == null ||
+        this.filteredVideos == "" ||
+        this.filteredVideos == undefined
+      ) {
         this.filteredVideos = 3;
       }
-      const params = {
-        id_subcategory: this.filteredVideos,
+      var params = {};
+
+      if (this.filteredType === "pekerjaan") {
+        params.tag = this.filteredVideos;
+      } else {
+        params.id_subcategory = this.filteredVideos;
       }
+
       this.$services.product.getBySubCategory(
         params,
         (data) => {
           this.contents = [
             {
-              'products': data,
-            }
-          ]
+              products: data,
+            },
+          ];
         },
-        (msg, errors) => { },
-        () => { }
+        (msg, errors) => {},
+        () => {}
       );
     },
 
@@ -171,26 +193,25 @@ export default {
               this.navs.materi.push({
                 code: item.code,
                 id: item.id,
-              })
+              });
             }
           });
         },
-        (msg, errors) => { },
-        () => { }
+        (msg, errors) => {},
+        () => {}
       );
     },
 
-    changeFilter(filter) {
-      // this.filteredVideos = filter;
-      // this.getDashboard();
+    changeFilter(filter, type) {
       if (this.filteredVideos !== filter) {
         this.filteredVideos = filter;
+        this.filteredType = type.replace(" ", "+");
         this.getDashboard();
       }
       this.activeMenu = filter;
     },
     applyFilter() {
-      this.$store.commit('setBottomSheetOpen', false);
+      this.$store.commit("setBottomSheetOpen", false);
     },
   },
 };
