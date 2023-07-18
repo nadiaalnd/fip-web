@@ -174,12 +174,14 @@ export default {
       );
     },
 
-    changeFilter(filter, type) {
+    changeFilter(filter, type,isMobile = false) {
       console.log(filter + " " + type);
-      if (this.filteredVideos !== filter) {
+      if(this.filteredVideos !== filter){
         this.filteredVideos = filter;
         this.filteredType = type.replace(" ", "+");
-        this.getDashboard();
+        if(!isMobile){
+          this.getDashboard();
+        }
       }
       this.activeMenu = filter;
     },
@@ -190,6 +192,10 @@ export default {
     applyFilter() {
       this.$store.commit("setBottomSheetOpen", false);
     },
+    // buat agar tombol diterapkan jalanin runFilter
+    runFilter(){
+      this.getDashboard();
+    }
   },
 };
 </script>

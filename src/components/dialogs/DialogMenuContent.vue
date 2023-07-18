@@ -4,14 +4,14 @@
     <h1 class="text-dark" style="font-size: 18px;">Materi</h1>
     <div class="sidebar-list-group">
       <q-btn class="sidebar-list-group-bottom" unelevated rounded no-caps v-for="item in navs.materi" :style="{ backgroundColor: activeMenu === item.id ? '#FFDE59' : '' }"
-        :key="item.id" @click="changeFilter(item.id, 'materi')">
+        :key="item.id" @click="changeFilter(item.id, 'materi',true)">
         {{ item.code }}
       </q-btn>
     </div>
     <h1 class="text-dark q-mt-md" style="font-size: 18px;">Pekerjaan</h1>
     <div class="sidebar-list-group">
       <q-btn class="sidebar-list-group-bottom" unelevated rounded no-caps v-for="item in navs.pekerjaan" :key="item.id"
-        :class="{ 'active': activeMenu === item.id }" @click="changeFilter(item.id, 'pekerjaan')">
+        :class="{ 'active': activeMenu === item.id }" @click="changeFilter(item.id, 'pekerjaan',true)">
         {{ item.code }}
       </q-btn>
     </div>
