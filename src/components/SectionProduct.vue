@@ -1,37 +1,6 @@
 <template>
   <div class="item-product-list">
     <template v-if="content.showPlaceholder || (content.products != null && content.products.length > 0)">
-      <!-- <div :class="'home-section ' + (content.id ? 'cursor-not-allowed' : '')" -->
-      <!-- <div class="home-section"
-        @click="() => {
-            if (content.id) {
-              sectionClicked()
-            }
-          }"> -->
-      <!-- <div class="home-section q-mb-sm">
-        <h2>
-          {{content.code}}
-          <q-tooltip
-            v-if="content.id">
-            Lihat lebih
-          </q-tooltip>
-        </h2>
-        <q-icon
-          v-if="content.icon_name"
-          :name="content.icon_name"
-          color="primary"
-          size="sm"/>
-        <q-icon
-          v-else-if="content.icon"
-          :name="'img:' + host + content.icon"
-          size="sm"/>
-        <q-icon
-          v-if="content.id"
-          class="text-bold"
-          name="chevron_right"
-          color="primary"
-          size="24px"/>
-      </div> -->
       <div ref="section-product" class="section-product">
         <div class="grid-product">
           <div v-if="content.products == null || content.products.length == 0" class="flex-center"
@@ -42,23 +11,6 @@
             @bookmarked="(value) => {
               product.is_bookmarked = value
             }" class="item-product-content" ref="item-product" style="width: 250px" />
-          <!-- <template
-            v-if="content.products != null && content.products.length > 0">
-            <q-btn
-              ref="carousel-arrow-right"
-              round
-              icon="chevron_right"
-              class="bg-white text-primary carousel-arrow-right"
-              @click="scrollRight"
-              gtm-action="btn_section_right"/>
-            <q-btn
-              ref="carousel-arrow-left"
-              round
-              icon="chevron_left"
-              class="bg-white text-primary carousel-arrow-left"
-              @click="scrollLeft"
-              gtm-action="btn_section_left"/>
-          </template> -->
         </div>
       </div>
     </template>
@@ -73,7 +25,6 @@ export default {
       type: Object
     }
   },
-
   components: {
     ItemProductLP
   },
@@ -93,14 +44,15 @@ export default {
     } else {
       this.host = process.env.API_URL_IMG
     }
-
     this.handleScrollContent();
     this.checkMobileView();
     window.addEventListener('resize', this.checkMobileView);
   },
+
   beforeUnmount() {
     window.removeEventListener('resize', this.checkMobileView);
   },
+
   methods: {
     checkMobileView() {
       this.isMobileView = window.innerWidth <= 768;

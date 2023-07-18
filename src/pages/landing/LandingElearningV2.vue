@@ -9,61 +9,33 @@
         dan tambahan materi ter-update seputar investasi di Pasar Modal.
         <br /><span class="text-bold">AKSES PENUH, TANPA BATAS!</span>
       </div>
-      <q-btn
-        v-if="!hasActivePackage"
-        style="
+      <q-btn v-if="!hasActivePackage" style="
           font-weight: 600;
           font-size: 1rem;
           background-color: #ffcc00;
           border-radius: 10px;
-        "
-        no-caps
-        unelevated
-        color="secondary"
-        class="text-black q-px-md q-mt-md gtm-track"
-        label="Mulai Gratis"
-        @click="$router.push({ path: '/free/package/e-learning' })"
-        gtm-action="btn_free_get_home"
-      />
+        " no-caps unelevated color="secondary" class="text-black q-px-md q-mt-md gtm-track" label="Mulai Gratis"
+        @click="$router.push({ path: '/free/package/e-learning' })" gtm-action="btn_free_get_home" />
       <div class="q-px-md q-mt-xl q-mb-lg row">
         <!-- Sidebar -->
         <div class="col-12 col-md-4">
           <section>
-            <SidebarElearning
-              :navs="navs"
-              :activeMenu="activeMenu"
-              :changeFilter="changeFilter"
-            />
+            <SidebarElearning :navs="navs" :activeMenu="activeMenu" :changeFilter="changeFilter" />
           </section>
         </div>
         <!-- Content Video -->
         <div class="col-12 col-md-8">
-          <section
-            id="start-learning"
-            class="container list-popular-product q-px-md q-pb-md"
-          >
-            <SectionProduct
-              :showPrice="false"
-              :id="'dashboard-' + idx"
-              class="q-my-md"
-              v-for="(content, idx) in contents"
-              :key="'content-' + idx"
-              :content="content"
-            />
+          <section id="start-learning" class="container list-popular-product q-px-md q-pb-md">
+            <SectionProduct :showPrice="false" :id="'dashboard-' + idx" class="q-my-md" v-for="(content, idx) in contents"
+              :key="'content-' + idx" :content="content" />
           </section>
         </div>
       </div>
     </div>
     <!-- Popular Video -->
     <div class="container q-mb-lg" id="popular">
-      <SectionProductPopular
-        :showPrice="false"
-        :id="'popular-' + idx"
-        class="q-my-md"
-        v-for="(content, idx) in [popularProduct]"
-        :key="'popular-' + idx"
-        :content="content"
-      >
+      <SectionProductPopular :showPrice="false" :id="'popular-' + idx" class="q-my-md"
+        v-for="(content, idx) in [popularProduct]" :key="'popular-' + idx" :content="content">
       </SectionProductPopular>
     </div>
   </q-page>
@@ -149,8 +121,8 @@ export default {
         (data) => {
           this.popularProduct.products = data;
         },
-        (msg, errors) => {},
-        () => {}
+        (msg, errors) => { },
+        () => { }
       );
     },
 
@@ -179,8 +151,8 @@ export default {
             },
           ];
         },
-        (msg, errors) => {},
-        () => {}
+        (msg, errors) => { },
+        () => { }
       );
     },
 
@@ -197,8 +169,8 @@ export default {
             }
           });
         },
-        (msg, errors) => {},
-        () => {}
+        (msg, errors) => { },
+        () => { }
       );
     },
 
@@ -210,6 +182,10 @@ export default {
         this.getDashboard();
       }
       this.activeMenu = filter;
+    },
+    toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar-menu')
+      sidebar.classList.toggle('open')
     },
     applyFilter() {
       this.$store.commit("setBottomSheetOpen", false);

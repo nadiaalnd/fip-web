@@ -11,9 +11,8 @@ $lg-breakpoint: 1440px
 html
   scroll-behavior: smooth
 
-
 .nav-bar
-  background: $secondary
+  background: $secondary-super-light
   position: -webkit-sticky
   position: sticky
   top: 0
@@ -142,7 +141,7 @@ h2.text-primary
     line-height: 1.1
     @media (min-width: $sm-breakpoint)
       font-size: 54px
-    margin-top: 0
+      margin-top: 0
 .home-banner:before
   content: ''
   background-color: $primary
@@ -218,61 +217,21 @@ h2.text-primary
   border-radius: 7px
   margin: 5px
   display: block
-  @media (max-width: $xs-breakpoint)
-    display: inline-block
-  @media (max-width: $sm-breakpoint)
+  @media (max-width: 998px)
     display: inline-block
 .sidebar-list-group-item:hover
-  background-color: #F2C037
+  background-color: #F2C037 !important
 .sidebar-list-group-item.active
   background-color: #FFDE59
 
-/*Radio button Sidebar E-Learning start*/
-.radio-sidebar-content
-  display: block
-  position: relative
-  padding-left: 25px
-  margin-bottom: 5px
-  cursor: pointer
-  user-select: none
-.radio-sidebar-content input
-  position: absolute
-  opacity: 0
-  cursor: pointer
-
-.checkmark-sidebar-content
-  position: absolute
-  top: 0
-  left: 0
-  height: 16px
-  width: 16px
-  background-color: #FFFFFF
-  border-radius: 50%
-  border: 1px solid #CCC
-
-.radio-sidebar-content input:checked
-  outline: none
-.radio-sidebar-content input:checked ~ .checkmark-sidebar-content
+.sidebar-list-group-bottom
+  margin: 3px
+  padding: 0px 10px 0px
+  border: 1px solid #B0BEC5
+.sidebar-list-group-bottom:hover
+  background-color: #F2C037 !important
+.sidebar-list-group-bottom.active
   background-color: #FFDE59
-  border: 2px solid #FFDE59
-
-.checkmark-sidebar-content:after
-  content: ""
-  position: absolute
-  display: none
-
-.radio-sidebar-content input:checked ~ .checkmark-sidebar-content:after
-  display: block
-
-.radio-sidebar-content .checkmark-sidebar-content:after
-  top: 3px
-  left: 3px
-  width: 6px
-  height: 6px
-  border-radius: 50%
-  background: white
-/*Sidebar E-Learning end*/
-
 /*Bottom sheet start*/
 .sidebar
   transition: transform 0.3s ease
@@ -281,73 +240,125 @@ h2.text-primary
 
 .filter-menu
   position: relative
-.filter-menu::after
+.filter-menu::before
   content: ''
   background-color: #B0BEC5
   height: 0.5px
   position: absolute
-  bottom: 90px
+  top: 0
   left: 0
   right: 0
+  margin: -15px
+
+.dialog-menu-card
+  border-radius: 25px 25px 0px 0px !important
 
 .bottom-sheet-btn
-  display: none
-  width: auto
+  margin: 0px
 .bottom-btn:hover
   color: black !important
+  background-color: #F2C037 !important
+.bottom-btn:active
   background-color: #FFDE59 !important
 
 .bottom-btn
   padding: 5px 15px 5px
-  border-radius: 20px
-  border: 1px solid #CCC
+  border: 1px solid #B0BEC5
   width: auto
   cursor: pointer
   color: #B0BEC5
+  @media (min-width: 280px)
+    margin-left: -15px
   @media (min-width: 320px)
-    width: 90px
-    margin-left: -10px
+    width: 80px
+    margin-left: -15px
   @media (min-width: 375px)
-    width: 90px
+    margin-left: -5px
+    width: 80px
   @media (min-width: 425px)
+    margin-left: -10px
     width: 100px
   @media (min-width: 500px)
+    margin-left: 0px
     width: 120px
   @media (min-width: 768px)
-    width: 150px
+    margin-left: 0px
+    width: 160px
+  @media (min-width: 900px)
+    margin-left: 0px
+    width: 190px
+
+.bottom-sheet-group-item
+  padding: 4px 15px
+  margin-left: 5px
+  border: 1px solid #B0BEC5
+  width: fit-content
+  display: block
+  cursor: pointer
+
+.bottom-sheet-group-item:hover
+  background-color: #F2C037 !important
+.bottom-sheet-group-item.active
+  background-color: #FFDE59
 
 .bottom-btn-filter
   display: block
-  border: none
   width: 100%
-  border-radius: 30px
   cursor: pointer
-  padding: 5px 0px 5px
-  border-radius: 15px
-  margin: 10px
   background-color: #FFDE59
   text-align: center
   font-weight: 800
   font-size: 16px
   @media (min-width: 320px)
-    margin-left: -10px
-    width: 260px
+    margin-left: 0px
+    width: 290px
+  @media (min-width: 360px)
+    margin-left: 0px
+    width: 330px
   @media (min-width: 375px)
-    width: 310px
-    margin-left: -10px
-  @media (min-width: 425px)
+    margin-left: 0px
+    width: 340px
+  @media (min-width: 390px)
+    margin-left: 0px
     width: 360px
+  @media (min-width: 412px)
+    margin-left: 0px
+    width: 380px
+  @media (min-width: 425px)
+    margin-left: 0px
+    width: 390px !important
   @media (min-width: 500px)
     margin-left: 10px
     width: 300px
+  @media (min-width: 512px)
+    margin-left: 0px
+    width: 480px !important
+  @media (min-width: 540px)
+    margin-left: 0px
+    width: 500px !important
+  @media (min-width: 653px)
+    margin-left: 0px
+    width: 530px !important
+  @media (min-width: 667px)
+    margin-left: 0px
+  @media (min-width: 717px)
+    margin-left: 0px
+  @media (min-width: 740px)
+    margin-left: 0px
+  @media (min-width: 768px)
+    margin-left: 0px
+    width: 100% !important
+  @media (min-width: 900px)
+    margin-left: 0px
+    width: 100% !important
 .bottom-btn-filter:hover
-  background-color: #F2C037
+  background-color: #F2C037 !important
   border: none
 .bottom-btn-filter.active
   background-color: #FFDE59
   border: none
 
-@media (max-width: 768px)
+@media (max-width: 998px)
   .sidebar
     height: 80%
     width: 100%
@@ -365,30 +376,61 @@ h2.text-primary
   .bottom-sheet-btn
     display: block
   .sidebar-list-group-item
-    border: 1px solid #CCC
+    border: 1px solid #B0BEC5
 
 .menu-wrapper
-    overflow-x: auto
-    white-space: nowrap
-    margin-top: -15px
+  overflow-x: auto
+  white-space: nowrap
+  margin-left: 7px
+  @media (min-width: 280px)
+    margin-left: 20px
+  @media (min-width: 320px)
+    margin-left: 5px
+  @media (min-width: 360px)
+    margin-left: -5px
+  @media (min-width: 375px)
+    margin-left: -2px
+  @media (min-width: 390px)
+    margin-left: -5px
+  @media (min-width: 412px)
+    margin-left: -10px
+  @media (min-width: 425px)
+    margin-left: 5px
+  @media (min-width: 512px)
+    margin-left: 10px
+  @media (min-width: 540px)
+    margin-left: 0px
+  @media (min-width: 600px)
+    margin-left: -10px
+  @media (min-width: 653px)
+    margin-left: -25px
+  @media (min-width: 717px)
+    margin-left: -40px
+  @media (min-width: 740px)
+    margin-left: -45px
+  @media (min-width: 768px)
+    margin-left: -10px
+  @media (min-width: 800px)
+    margin-left: -20px
+  @media (min-width: 844px)
+    margin-left: -30px
+  @media (min-width: 896px)
+    margin-left: -40px
+  @media (min-width: 900px)
+    margin-left: 30px
+  @media (min-width: 912px)
+    margin-left: 20px
 
 .menu-scroll
   display: flex
-  @media (min-width: 768px)
+  @media (min-width: 900px)
     margin-left: -20px
 
-.bottom-sheet-group-item
-  padding: 4px 15px
-  border-radius: 7px
-  margin: 5px
-  border: 1px solid #CCC
-  width: fit-content
-  display: block
-  cursor: pointer
-.bottom-sheet-group-item:hover
-  background-color: #F2C037
-.bottom-sheet-group-item.active
-  background-color: #FFDE59
+.dialog-menu-card
+  @media (min-width: 768px)
+    width: 100vh !important
+  @media (min-width: 900px)
+    width: 100vh !important
 /*Bottom sheet end*/
 
 .list-popular-product
@@ -398,28 +440,118 @@ h2.text-primary
       font-size: 24px
       @media (min-width: $sm-breakpoint)
         font-size: 32px
-      line-height: 1
-      font-weight: bold
-      margin-top: 0
-      margin-bottom: 16px
+        line-height: 1
+        font-weight: bold
+        margin-top: 0
+        margin-bottom: 16px
 .item-product-content
+  @media (min-width: 280px)
+    width: 120px !important
   @media (min-width: 320px)
     width: 140px !important
+    margin-left: -2px
+  @media (min-width: 360px)
+    width: 160px !important
   @media (min-width: 375px)
-    width: 165px !important
+    width: 167px !important
+  @media (min-width: 390px)
+    width: 175px !important
+  @media (min-width: 412px)
+    width: 185px !important
   @media (min-width: 425px)
-    width: 190px !important
-  @media (min-width: 768px)
+    width: 193px !important
+  @media (min-width: 512px)
     width: 235px !important
+  @media (min-width: 540px)
+    width: 250px !important
+  @media (min-width: 600px)
+    width: 185px !important
+  @media (min-width: 653px)
+    width: 202px !important
+  @media (min-width: 667px)
+    width: 205px !important
+  @media (min-width: 717px)
+    width: 224px !important
+  @media (min-width: 740px)
+    width: 230px !important
+  @media (min-width: 768px)
+    width: 240px !important
+  @media (min-width: 800px)
+    width: 255px !important
+  @media (min-width: 844px)
+    width: 265px !important
+  @media (min-width: 896px)
+    width: 280px !important
+  @media (min-width: 912px)
+    margin-left: 10px
+    width: 270px !important
+  @media (min-width: 1024px)
+    margin-left: 10px
+    width: 195px !important
+  @media (min-width: 1180px)
+    margin-left: 10px
+    width: 230px !important
+  @media (min-width: 1280px)
+    margin-left: 10px
+    width: 250px !important
+  @media (min-width: 1440px)
+    margin-left: 10px
+    width: 275px !important
+
 .item-product-popular
+  @media (min-width: 280px)
+    margin-left: 15px !important
+    width: 120px !important
   @media (min-width: 320px)
     width: 140px !important
+    margin-left: -2px
+  @media (min-width: 360px)
+    width: 160px !important
   @media (min-width: 375px)
-    width: 165px !important
+    width: 167px !important
+  @media (min-width: 390px)
+    width: 175px !important
+  @media (min-width: 412px)
+    width: 185px !important
   @media (min-width: 425px)
-    width: 190px !important
-  @media (min-width: 768px)
+    width: 193px !important
+  @media (min-width: 512px)
     width: 235px !important
+  @media (min-width: 540px)
+    width: 250px !important
+  @media (min-width: 600px)
+    width: 185px !important
+  @media (min-width: 653px)
+    width: 202px !important
+  @media (min-width: 667px)
+    width: 205px !important
+  @media (min-width: 717px)
+    width: 224px !important
+  @media (min-width: 740px)
+    width: 230px !important
+  @media (min-width: 768px)
+    width: 240px !important
+  @media (min-width: 800px)
+    width: 255px !important
+  @media (min-width: 844px)
+    width: 265px !important
+  @media (min-width: 896px)
+    width: 280px !important
+  @media (min-width: 912px)
+    margin-left: 10px
+    width: 270px !important
+  @media (min-width: 1024px)
+    margin-left: 10px
+    width: 195px !important
+  @media (min-width: 1180px)
+    margin-left: 10px
+    width: 230px !important
+  @media (min-width: 1280px)
+    margin-left: 10px
+    width: 250px !important
+  @media (min-width: 1440px)
+    margin-left: 10px
+    width: 275px !important
 
 .item-product-list
   position: relative
@@ -443,14 +575,59 @@ h2.text-primary
       z-index: 1
       .material-icons
         font-weight: bold
+      @media (min-width: 280px)
+        top: 80px
+      @media (min-width: 320px)
+        top: 80px
+      @media (min-width: 360px)
+        top: 85px
+      @media (min-width: 375px)
+        top: 85px
+      @media (min-width: 425px)
+        top: 90px
+      @media (min-width: 720px)
+        top: 100px
+      @media (min-width: 768px)
+        top: 100px
+      @media (min-width: 844px)
+        top: 110px
+      @media (min-width: 896px)
+        top: 110px
+      @media (min-width: 1024px)
+        top: 100px
+      @media (min-width: 1440px)
+        top: 110px
+
     .carousel-arrow-left
       position: absolute
-      top: 72px
+      top: 100px
       transform: translateY(50%)
       left: 0
       z-index: 1
       .material-icons
         font-weight: bold
+      @media (min-width: 280px)
+        top: 80px
+      @media (min-width: 320px)
+        top: 80px
+      @media (min-width: 360px)
+        top: 85px
+      @media (min-width: 375px)
+        top: 85px
+      @media (min-width: 425px)
+        top: 90px
+      @media (min-width: 720px)
+        top: 100px
+      @media (min-width: 768px)
+        top: 100px
+      @media (min-width: 844px)
+        top: 110px
+      @media (min-width: 896px)
+        top: 110px
+      @media (min-width: 1024px)
+        top: 100px
+      @media (min-width: 1440px)
+        top: 110px
 .search-products, .purchase-products
   display: flex
   flex-wrap: wrap
@@ -515,11 +692,13 @@ h2.text-primary
     font-size: 14px
 
 .item-product-margin
-  margin: 8px 8px 10px 8px
+  margin: 8px 8px 0px 8px
   position: relative
 .item-product-container
   padding: 0px 8px 10px 8px
   position: relative
+  @media (max-width: $md-breakpoint)
+    padding: 0px 0px 4px 0px
   .item-product
     width: 100%
     height: 100%
@@ -842,10 +1021,10 @@ footer
     opacity: 1 /* Firefox */
 
   :-ms-input-placeholder
-   color: white
+    color: white
 
   ::-ms-input-placeholder
-   color: white
+    color: white
 
 .vjs-poster::after
   background-color: rgba(0,0,0,0.3)
@@ -889,7 +1068,6 @@ footer
   .content-title
     font-size: 32px
     line-height: 1.01
-
 
 @media (max-width: 720px)
   .content-header
@@ -1184,8 +1362,8 @@ body::-webkit-scrollbar
 
 /* Hide scrollbar for IE, Edge and Firefox */
 body
-  -ms-overflow-style: none  /* IE and Edge */
-  scrollbar-width: none  /* Firefox */
+  -ms-overflow-style: none /* IE and Edge */
+  scrollbar-width: none /* Firefox */
 
 .select-search-product
   .q-chip
@@ -1265,7 +1443,6 @@ body
   @media(min-width: $sm-breakpoint)
     font-size: 32px
 
-
 .q-field--labeled
   input[type="date"]
     display: none
@@ -1304,6 +1481,14 @@ body
   border-left: 1px solid $secondary
   border-top: 1px solid $secondary
   border-bottom: 3px solid $secondary
+.btn-sm
+  font-size: 14px
+.btn-medium
+  font-weight: 600
+  font-size: 16px
+.btn-large
+  font-weight: 700
+  font-size: 20px
 
 .text-dark
   color: $dark
@@ -1414,7 +1599,7 @@ a.app-link:hover
 @import 'landing-product.sass'
 @import 'dialog.sass'
 @import 'carousel.sass'
-
+@import 'calculator.sass'
 
 h1
   font-size: 32px
@@ -1441,10 +1626,10 @@ h1, h2, h3, h4, h5
     font-size: 24px
     @media (min-width: $sm-breakpoint)
       font-size: 32px
-    line-height: 1
-    font-weight: bold
-    margin-top: 0
-    margin-bottom: 16px
+      line-height: 1
+      font-weight: bold
+      margin-top: 0
+      margin-bottom: 16px
   .package-carousel
     display: flex
     overflow-x: scroll
@@ -1471,9 +1656,9 @@ h1, h2, h3, h4, h5
       max-width: 100%
       @media (min-width: $sm-breakpoint)
         width: auto
-      border-radius: 8px
-      overflow: hidden
-      cursor: pointer
+        border-radius: 8px
+        overflow: hidden
+        cursor: pointer
       .q-btn
         border-radius: 8px
       .--tag
@@ -1572,6 +1757,19 @@ error
 .pre-line
   white-space: pre-line
 
+img.playButtonImage
+  @media (min-width: 320px)
+    width: 12px !important
+    height: 12px !important
+  @media (min-width: 375px)
+    width: 16px !important
+    height: 16px !important
+  @media (min-width: 412px)
+    width: 18px !important
+    height: 18px !important
+  @media (min-width: 425px)
+    width: 24px !important
+    height: 24px !important
 .pulse-yellow::before
   content: ''
   border-radius: 50%
@@ -1595,3 +1793,105 @@ error
   100%
     transform: scale(0.95)
     box-shadow: 0 0 0 0 rgba(242,192,55, 0)
+
+// Floating Action Button WA
+.floating-action-button-wa
+  .image-logo-wa
+    width: 120px
+
+  .q-tooltip
+    font-size: 16px
+
+  @media only screen and (max-width: $sm-breakpoint)
+    .image-logo-wa
+      width: 88px
+
+@media only screen and (max-width: $sm-breakpoint)
+  .floating-action-button-wa
+    background-color: transparent
+    overflow: hidden
+    height: 88px
+    width: 88px
+    cursor: pointer
+
+.dialog-form-whatsapp .q-dialog__backdrop
+  background-color: transparent !important
+
+.dialog-card-wa
+  width: 584px
+  height: 450px
+  padding: 16px
+  border-radius: 12px !important
+  position: fixed
+  bottom: 18px
+  right: 18px
+  background-color: white
+  overflow: hidden
+
+  .cancel-icon-card-wa
+    display: flex
+    position: absolute
+    justify-content: flex-end
+    margin: 9px
+    top: 0
+    right: 0
+    cursor: pointer
+    z-index: 1
+
+  .title-card-heading-wa
+    font-size: 20px
+    font-weight: 700
+
+  .text-card-body-wa
+    font-size: 16px
+    font-weight: 400
+
+  .form-title-input-wa
+    font-size: 20px
+    font-weight: 600
+
+  .character-counter-question-wa
+    position: absolute
+    bottom: 0
+    right: 10px
+    color: #777
+    font-size: 12px
+    margin-bottom: 4px
+
+  .btn-send-wa-question
+    background-color: #FFDE59
+    color: black
+    font-size: 16px
+    font-weight: 700
+    padding-left: 16px
+    padding-right: 16px
+    margin-top: 8px
+
+  .btn-send-wa-question:hover
+    background-color: #f5cd2f
+
+  .disabled-button-send-wa
+    opacity: 0.5
+
+  @media only screen and (max-width: $sm-breakpoint)
+    .cancel-icon-card-wa
+      margin-right: 12px
+
+    .title-card-heading-wa
+      font-size: 16px
+
+    .text-card-body-wa
+      font-size: 14px
+
+    .form-title-input-wa
+      font-size: 16px
+
+    .btn-send-wa-question
+      font-size: 14px
+
+@media only screen and (max-width: $sm-breakpoint)
+  .dialog-card-wa
+    max-width: 300px
+    height: 394px
+    padding: 1px
+    overflow: scroll

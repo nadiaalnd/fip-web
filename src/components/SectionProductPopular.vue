@@ -3,57 +3,28 @@
     <template v-if="content.showPlaceholder || (content.products != null && content.products.length > 0)">
       <div class="home-section q-mb-sm">
         <h2>
-          {{content.code}}
+          {{ content.code }}
         </h2>
-        <q-icon
-          v-if="content.icon_name"
-          :name="content.icon_name"
-          color="primary"
-          size="sm"/>
-        <q-icon
-          v-else-if="content.icon"
-          :name="'img:' + host + content.icon"
-          size="sm"/>
+        <q-icon v-if="content.icon_name" :name="content.icon_name" color="primary" size="sm" />
+        <q-icon v-else-if="content.icon" :name="'img:' + host + content.icon" size="sm" />
       </div>
-      <div
-        ref="section-product-popular"
-        class="section-product-popular">
-        <div
-          style="display: inline-flex">
-        <div v-if="content.products == null || content.products.length == 0"
-          class="flex-center"
-          style="width: 100%; height: 128px; color: #757575; display: flex;">
-          {{content.placeholder ? content.placeholder : 'Belum Ada' }}
+      <div ref="section-product-popular" class="section-product-popular">
+        <div style="display: inline-flex">
+          <div v-if="content.products == null || content.products.length == 0" class="flex-center"
+            style="width: 100%; height: 128px; color: #757575; display: flex;">
+            {{ content.placeholder ? content.placeholder : 'Belum Ada' }}
+          </div>
+          <ItemProductLP v-else v-for="(product, idx) in content.products" :key="'product-' + idx" :product="product"
+            @bookmarked="(value) => {
+              product.is_bookmarked = value
+            }" class="item-product-popular" ref="item-product" style="width: 250px" />
+          <template v-if="content.products != null && content.products.length > 0">
+            <q-btn ref="carousel-arrow-right" round icon="chevron_right"
+              class="bg-white text-primary carousel-arrow-right" @click="scrollRight" gtm-action="btn_section_right" />
+            <q-btn ref="carousel-arrow-left" round icon="chevron_left" class="bg-white text-primary carousel-arrow-left"
+              @click="scrollLeft" gtm-action="btn_section_left" />
+          </template>
         </div>
-        <ItemProductLP
-          v-else
-          v-for="(product, idx) in content.products"
-          :key="'product-'+idx"
-          :product="product"
-          @bookmarked="(value) => {
-            product.is_bookmarked = value
-          }"
-          class="item-product-popular"
-          ref="item-product"
-          style="width: 250px"/>
-        <template
-          v-if="content.products != null && content.products.length > 0">
-          <q-btn
-            ref="carousel-arrow-right"
-            round
-            icon="chevron_right"
-            class="bg-white text-primary carousel-arrow-right"
-            @click="scrollRight"
-            gtm-action="btn_section_right"/>
-          <q-btn
-            ref="carousel-arrow-left"
-            round
-            icon="chevron_left"
-            class="bg-white text-primary carousel-arrow-left"
-            @click="scrollLeft"
-            gtm-action="btn_section_left"/>
-        </template>
-      </div>
       </div>
     </template>
   </div>
@@ -74,13 +45,13 @@ export default {
 
   name: 'SectionProductPopular',
 
-  data () {
+  data() {
     return {
       host: ''
     }
   },
 
-  mounted () {
+  mounted() {
     if (this.content.host) {
       this.host = this.content.host
     } else {
@@ -91,13 +62,13 @@ export default {
   },
 
   methods: {
-    sectionClicked () {
+    sectionClicked() {
       this.$router.push({
         path: `/learning-path/${this.content.id}/${this.$utils.escapeRoute(this.content.code)}`
       })
     },
 
-    scrollRight () {
+    scrollRight() {
       let productWidth = this.$refs['item-product'][0].$el.offsetWidth
       this.$refs['section-product'].scrollTo({
         top: 0,
@@ -106,7 +77,7 @@ export default {
       })
     },
 
-    scrollLeft () {
+    scrollLeft() {
       let productWidth = this.$refs['item-product'][0].$el.offsetWidth
       this.$refs['section-product'].scrollTo({
         top: 0,
@@ -115,7 +86,7 @@ export default {
       })
     },
 
-    handleScrollContent () {
+    handleScrollContent() {
       if (this.$refs['section-product'] == null) {
         return
       }
@@ -137,7 +108,7 @@ export default {
         }
       }
 
-      function onWindowScroll () {
+      function onWindowScroll() {
         if (self.$refs['section-product'].scrollLeft == 0) {
           self.$refs['carousel-arrow-left'].$el.classList.add('hidden')
           showCarouselLeft = false
