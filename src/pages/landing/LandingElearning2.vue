@@ -20,7 +20,7 @@
         <!-- Sidebar -->
         <div class="col-12 col-md-4">
           <section>
-            <SidebarElearning :navs="navs" :activeMenu="activeMenu" :changeFilter="changeFilter" />
+            <SidebarElearning  ref="sidebarElearning" :navs="navs" :activeMenu="activeMenu" :changeFilter="changeFilter" />
           </section>
         </div>
         <!-- Content Video -->
@@ -192,7 +192,6 @@ export default {
     applyFilter() {
       this.$store.commit("setBottomSheetOpen", false);
     },
-    // buat agar tombol diterapkan jalanin runFilter
     runFilter(){
       this.getDashboard();
     }
