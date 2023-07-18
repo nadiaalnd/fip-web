@@ -115,13 +115,14 @@ const routes = [
         name: "e-learning-recommendation",
         path: "free/package/e-learning/recommendation",
         meta: RouteMeta.user["e-learning-recommendation"],
-        component: () => import("pages/users/elearning/ELearningRecommendationIndex.vue"),
+        component: () =>
+          import("pages/users/elearning/ELearningRecommendationIndex.vue"),
       },
       {
         name: "e-learning",
         path: "e-learning",
         meta: RouteMeta.user["e-learning"],
-        component: () => import("pages/landing/LandingElearningV2.vue"),
+        component: () => import("pages/landing/LandingElearning2.vue"),
       },
       {
         path: "privacy-policy",
@@ -178,26 +179,33 @@ const routes = [
             notifyMustLogin(next, "/", from, to)
           }
         },
-        component: () => import("pages/users/transaction/TransactionDetailIndex.vue"),
-      },
-      {
-        path: "kalkulator/personal/budget",
-        meta: RouteMeta.user["budget"],
         component: () =>
-          import("pages/kalkulator/personal/PersonalBudgetPage.vue"),
+          import("pages/users/transaction/TransactionDetailIndex.vue"),
       },
-
       {
-        path: "kalkulator/personal/profil-resiko",
-        meta: RouteMeta.user["profil-resiko"],
-        component: () => import("pages/kalkulator/profil/ProfilResikoPage.vue"),
-      },
-
-      {
-        path: "kalkulator/personal/zakat-mal",
-        meta: RouteMeta.user["kalkulator-zakat"],
-        component: () =>
-          import("pages/kalkulator/personal/PersonalZakatPage.vue"),
+        path: "kalkulator/",
+        component: () => import("layouts/CalculatorLayout.vue"),
+        children: [
+          {
+            path: "personal/budget",
+            meta: RouteMeta.user["budget"],
+            component: () =>
+              import("pages/kalkulator/personal/PersonalBudgetPage.vue"),
+          },
+    
+          {
+            path: "personal/profil-resiko",
+            meta: RouteMeta.user["profil-resiko"],
+            component: () => import("pages/kalkulator/profil/ProfilResikoPage.vue"),
+          },
+    
+          {
+            path: "personal/zakat-mal",
+            meta: RouteMeta.user["kalkulator-zakat"],
+            component: () =>
+              import("pages/kalkulator/personal/PersonalZakatPage.vue"),
+          },
+        ]
       },
 
       {
@@ -216,14 +224,14 @@ const routes = [
           const user = AppUtils.getUser();
           if (user != null) {
             if (to.query.id_purchase) {
-              console.log(to.query.id_purchase)
+              console.log(to.query.id_purchase);
               return next({
-                name: 'transaction-detail',
+                name: "transaction-detail",
                 params: {
-                  id_purchase: to.query.id_purchase
-                }
+                  id_purchase: to.query.id_purchase,
+                },
               });
-              return
+              return;
             }
             return next();
           } else {
@@ -239,21 +247,22 @@ const routes = [
         path: "package/detail/:slug",
         name: "package-detail-readonly",
         meta: RouteMeta.user["package-detail"],
-        component: () => import("pages/users/package/PackageDetailReadonlyIndex.vue"),
+        component: () =>
+          import("pages/users/package/PackageDetailReadonlyIndex.vue"),
       },
       {
         beforeEnter: (to, from, next) => {
           const user = AppUtils.getUser();
           if (user != null) {
             if (to.query.id_purchase) {
-              console.log(to.query.id_purchase)
+              console.log(to.query.id_purchase);
               return next({
-                name: 'transaction-detail',
+                name: "transaction-detail",
                 params: {
-                  id_purchase: to.query.id_purchase
-                }
+                  id_purchase: to.query.id_purchase,
+                },
               });
-              return
+              return;
             }
             return next();
           } else {
@@ -261,7 +270,7 @@ const routes = [
           }
         },
         path: "package/:id/:name",
-        meta: RouteMeta.user['package-detail'],
+        meta: RouteMeta.user["package-detail"],
         component: () => import("pages/users/package/PackageDetailIndex.vue"),
       },
       {
@@ -275,8 +284,9 @@ const routes = [
         },
         path: "student-package/:slug",
         name: "student-package-detail",
-        meta: RouteMeta.user['student-package-detail'],
-        component: () => import("pages/users/package/StudentPackageDetailIndex.vue"),
+        meta: RouteMeta.user["student-package-detail"],
+        component: () =>
+          import("pages/users/package/StudentPackageDetailIndex.vue"),
       },
 
       {

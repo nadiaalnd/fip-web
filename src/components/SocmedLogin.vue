@@ -1,13 +1,10 @@
 <template>
-  <div>
-    <a @click="loginWithGoogle" class="q-mr-md cursor-pointer" >
+  <div class="flex justify-center items-center q-my-lg">
+    <a @click="loginWithGoogle" class="q-mr-md cursor-pointer flex" >
       <img src="/images/logo-google.png" style="width:36px; height:36px"/>
       <q-tooltip>Akun Google</q-tooltip>
+      <span class="text-weight-medium q-ml-md" style="font-size: 20px;">Google</span>
     </a>
-    <!-- <a @click="loginWithFacebook" class="cursor-pointer">
-      <img src="/images/logo-facebook.png" style="width:36px; height:36px"/>
-      <q-tooltip>Akun Facebook</q-tooltip>
-    </a> -->
   </div>
 </template>
 
@@ -27,7 +24,6 @@ export default {
 
   data () {
     return {
-
     }
   },
   created () {

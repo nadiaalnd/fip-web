@@ -56,8 +56,8 @@ function handleSuccess(response, onSuccess, onFailed, onFinish) {
 
 function handleError(error, onSuccess, onFailed, onFinish) {
   if (error && error.response && error.response.status == 401) {
-    AppUtils.saveUser(null)
-    AppUtils.saveToken(null)
+    AppUtils.saveUser(null);
+    AppUtils.saveToken(null);
   }
   if (
     typeof error.response === "object" &&
@@ -96,31 +96,12 @@ function getData(
   if (token) {
     headers["Token-Access"] = token;
   }
+  headers["Token-X"] = AppUtils.getDeviceToken()
   instance
     .get(url, {
       params: params,
       headers: headers,
       ...options,
-    })
-    .then((response) => {
-      return handleSuccess(response, onSuccess, onFailed, onFinish, role);
-    })
-    .catch((error) => {
-      return handleError(error, onSuccess, onFailed, onFinish, role);
-    });
-}
-
-function putData(url, data, onSuccess, onFailed, onFinish, role) {
-  const token = getToken(role);
-  let headers = {
-    "Content-Type": "application/json",
-  };
-  if (token) {
-    headers["Token-Access"] = token;
-  }
-  instance
-    .put(url, data, {
-      headers: headers,
     })
     .then((response) => {
       return handleSuccess(response, onSuccess, onFailed, onFinish, role);
@@ -138,6 +119,7 @@ function sendData(method, url, data, onSuccess, onFailed, onFinish, role) {
   if (token) {
     headers["Token-Access"] = token;
   }
+  headers["Token-X"] = AppUtils.getDeviceToken()
   instance({
     method: method,
     headers: headers,
@@ -159,6 +141,7 @@ function postData(url, data, onSuccess, onFailed, onFinish, role) {
       headers: {
         "Content-Type": "application/json",
         "Token-Access": token,
+        "Token-X": AppUtils.getDeviceToken()
       },
     })
     .then((response) => {
@@ -244,7 +227,13 @@ export default {
       return getData("/product", params, onSuccess, onFailed, onFinish);
     },
     getSubCategory(params, onSuccess, onFailed, onFinish) {
-      return getData("/product/subcategory", params, onSuccess, onFailed, onFinish);
+      return getData(
+        "/product/subcategory",
+        params,
+        onSuccess,
+        onFailed,
+        onFinish
+      );
     },
     getBySubCategory(params, onSuccess, onFailed, onFinish) {
       return getData("/product", params, onSuccess, onFailed, onFinish);
@@ -266,10 +255,63 @@ export default {
       );
     },
 
+    getComment(id, onSuccess, onFailed, onFinish) {
+      return getData(
+        "/product/comment",
+        {
+          id_product: id,
+        },
+        onSuccess,
+        onFailed,
+        onFinish
+      );
+    },
+    getChildComments(idParent, onSuccess, onFailed, onFinish) {
+      return getData(
+        "/product/comment/child",
+        {
+          id_parent: idParent,
+        },
+        onSuccess,
+        onFailed,
+        onFinish
+      );
+    },
+    sendComment(form, onSuccess, onFailed, onFinish) {
+      return sendData(
+        "put",
+        "/product/comment",
+        form,
+        onSuccess,
+        onFailed,
+        onFinish
+      );
+    },
+    updateFinishComment(body, onSuccess, onFailed, onFinish) {
+      return sendData(
+        "put",
+        "/product/comment/finish",
+        body,
+        onSuccess,
+        onFailed,
+        onFinish
+      );
+    },
+    deleteComment(body, onSuccess, onFailed, onFinish) {
+      return sendData(
+        "delete",
+        "/product/comment",
+        body,
+        onSuccess,
+        onFailed,
+        onFinish
+      );
+    },
+
     purchase(body, onSuccess, onFailed, onFinish) {
       // id_paymentmethod: 101 : VA, 102 : E-wallet
       if (body.user_phone) {
-        body.user_phone = AppUtils.getPhone(body.user_phone, "+62", "0");
+        body.user_phone = AppUtils.getPhone(body.user_phone, "0", "+62");
       }
       AppUtils.track.initiateCheckout();
       return sendData(
@@ -388,11 +430,24 @@ export default {
   user: {
     fillAdditionalUserProfile(body, onSuccess, onFailed, onFinish) {
       // phone, birth_year, gender, job, city_id, is_marriege, child_count
-      return sendData("put", "/user/profile/additional", body, onSuccess, onFailed, onFinish);
+      return sendData(
+        "put",
+        "/user/profile/additional",
+        body,
+        onSuccess,
+        onFailed,
+        onFinish
+      );
     },
     getAdditionalUserProfile(onSuccess, onFailed, onFinish) {
       // phone, birth_year, gender, job, city_id, is_marriege, child_count
-      return getData("/user/profile/additional", {}, onSuccess, onFailed, onFinish);
+      return getData(
+        "/user/profile/additional",
+        {},
+        onSuccess,
+        onFailed,
+        onFinish
+      );
     },
     checkActivePackage(onSuccess, onFailed, onFinish) {
       return getData("/user/package", {}, onSuccess, onFailed, onFinish);
@@ -490,6 +545,21 @@ export default {
       );
     },
   },
+
+  captcha: {
+    get(onSuccess, onFailed, onFinish) {
+      return getData("/captcha/generate", {}, onSuccess, onFailed, onFinish);
+    },
+
+    generate(body, onSuccess, onFailed, onFinish) {
+      return postData("/captcha/generate", body, onSuccess, onFailed, onFinish);
+    },
+
+    verify(body, onSuccess, onFailed, onFinish) {
+      return postData("/captcha/verify", body, onSuccess, onFailed, onFinish);
+    },
+  },
+
   bookmark: {
     add(body, onSuccess, onFailed, onFinish) {
       AppUtils.track.addToWishlist();
@@ -520,17 +590,24 @@ export default {
 
   upload: {
     file(files, cancelToken, onUploadProgress, onSuccess, onFailed, onFinish) {
-      uploadFile(files, cancelToken, onUploadProgress, onSuccess, onFailed, onFinish)
+      uploadFile(
+        files,
+        cancelToken,
+        onUploadProgress,
+        onSuccess,
+        onFailed,
+        onFinish
+      );
     },
     image(type, image, onSuccess, onFailed, onFinish) {
-      const file = AppUtils.dataURLtoFile(image, 'temp.png')
+      const file = AppUtils.dataURLtoFile(image, "temp.png");
 
-      let path = '/file/upload'
+      let path = "/file/upload";
 
-      const formData = new FormData()
-      formData.append(type, file)
+      const formData = new FormData();
+      formData.append(type, file);
 
-      postData(path, formData, onSuccess, onFailed, onFinish)
+      postData(path, formData, onSuccess, onFailed, onFinish);
     },
   },
 
@@ -562,7 +639,6 @@ export default {
         return handleSuccess(response, onSuccess, onFailed, onFinish);
       })
       .catch((error) => {
-        console.log(error);
         return handleError(error, onSuccess, onFailed, onFinish);
       });
   },
@@ -581,8 +657,15 @@ export default {
   },
 
   visitor: {
-    generate(onSuccess, onFailed, onFinish) {
-      return sendData("put", "/visitor/generate", {}, onSuccess, onFailed, onFinish);
+    generate(body, onSuccess, onFailed, onFinish) {
+      return sendData(
+        "put",
+        "/visitor/generate",
+        body,
+        onSuccess,
+        onFailed,
+        onFinish
+      );
     },
   },
 
@@ -700,7 +783,6 @@ export default {
 
   calculator: {
     add(form, onSuccess, onFailed, onFinish) {
-      form.uuid = AppUtils.getDeviceId()
       return sendData(
         "put",
         "/calculator",
@@ -712,9 +794,23 @@ export default {
     },
   },
 
+  nps: {
+    getQuestion(params, onSuccess, onFailed, onFinish) {
+      return getData("/nps/question", params, onSuccess, onFailed, onFinish);
+    },
+    submitAnswer(body, onSuccess, onFailed, onFinish) {
+      return postData("/nps/answer", body, onSuccess, onFailed, onFinish);
+    },
+    getAnswered(params, onSuccess, onFailed, onFinish) {
+      return getData("/nps/answered", params, onSuccess, onFailed, onFinish);
+    },
+  },
+  sendQuestionWA(body, onSuccess, onFailed, onFinish) {
+    return sendData("put", "/question/wa", body, onSuccess, onFailed, onFinish);
+  },
   location: {
     getCity(onSuccess, onFailed, onFinish) {
-      return getData(`/location/cities`, {}, onSuccess, onFailed, onFinish)
-    }
+      return getData(`/location/cities`, {}, onSuccess, onFailed, onFinish);
+    },
   }
 };

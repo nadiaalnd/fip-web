@@ -16,9 +16,12 @@
         text-color="dark"
         color="warning"
         label="Berlangganan"
-        gtm-action="btn_package_subscribe"/>
+        gtm-action="btn_package_subscribe"
+        :id="'subscribe-package' + model.id"
+      />
     </q-card>
 </template>
+
 <script>
 export default {
   props: {
@@ -28,27 +31,25 @@ export default {
     }
   },
 
-  data () {
-      return {
-
-      }
+  data() {
+    return {};
   },
 
   methods: {
-    onClickPackage () {
+    onClickPackage() {
       if (this.$utils.getToken() == null) {
         this.$q.notify({
-          message: 'Harap masuk terlebih dahulu',
-          color: 'info'
-        })
-        this.$global.$emit('showLogin')
-        return
+          message: "Harap masuk terlebih dahulu",
+          color: "info"
+        });
+        this.$global.$emit("showLogin");
+        return;
       }
 
       this.$router.push({
         path: this.$utils.getPackageDetailRoute(this.model)
-      })
+      });
     }
   }
-}
+};
 </script>

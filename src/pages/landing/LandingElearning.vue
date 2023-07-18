@@ -1,7 +1,6 @@
 <template>
   <q-page class="q-py-md">
     <div class="container q-mb-lg">
-      <ListPackageCarousel/>
       <div
         v-if="setting"
         class="container q-px-md q-pt-md q-mb-lg">
@@ -15,10 +14,8 @@
             </div>
             <q-btn
               v-if="!hasActivePackage"
-              style="font-weight: 600; font-size: 1rem; background-color: #FFCC00; border-radius: 10px;"
-              no-caps unelevated
-              color="secondary"
-              class="text-black q-px-md gtm-track"
+              no-caps push
+              class="gtm-track btn-secondary btn-medium"
               label="Mulai Gratis"
               @click="$router.push({
                 path: '/free/package/e-learning'
@@ -60,12 +57,10 @@
   </q-page>
 </template>
 <script>
-import ListPackageCarousel from 'components/list/ListPackageCarousel'
 import SectionProduct from 'components/SectionProduct'
 export default {
   components: {
-    SectionProduct,
-    ListPackageCarousel
+    SectionProduct
   },
 
   data () {
@@ -117,7 +112,6 @@ export default {
 
       this.$services.product.get(filter, (data) => {
         this.popularProduct.products = data
-        console.log(this.popularProduct)
       }, (msg, errors) => {
       }, () => {
       })

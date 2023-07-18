@@ -1,5 +1,5 @@
 <template>
-  <div v-if = "hasActivePackages == 0"
+  <div v-if = "alwaysShow || hasActivePackages == 0"
     class="list-package-carousel q-mb-md">
     <h1 class="--title text-center q-px-md">
         Dapatkan Akses Video Eksklusif Belajar Investasi Bersertifikat
@@ -28,6 +28,12 @@ export default {
   components: {
     ItemPackageCarouselHighlighted,
     ItemPackageCarousel
+  },
+
+  props: {
+    alwaysShow: {
+      default: false
+    }
   },
 
   data () {

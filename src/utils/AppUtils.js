@@ -15,15 +15,15 @@ export default {
     LocalStorage.set("token", token);
   },
 
-  saveDeviceId(deviceId) {
-    LocalStorage.set("device_id", deviceId);
+  saveDeviceToken(token) {
+    LocalStorage.set("token_device", token);
   },
 
   hasLogin() {
     return !this.isEmpty(this.getToken());
   },
 
-  getToken() {
+  getToken() { // user auth token
     const token = LocalStorage.getItem("token");
     if (token == "null") {
       return null;
@@ -32,12 +32,12 @@ export default {
     }
   },
 
-  getDeviceId() {
-    const deviceId = LocalStorage.getItem("device_id");
-    if (deviceId == "null") {
-      return null;
+  getDeviceToken() {
+    const token = LocalStorage.getItem("token_device");
+    if (token == "null" || token == null) {
+      return "";
     } else {
-      return deviceId;
+      return token;
     }
   },
 
@@ -487,6 +487,15 @@ export default {
     
   },
 
+  stringToHexEncrypted(str) {
+    let hex = '';
+    for (let i = 0; i < str.length; i++) {
+      const charCode = (str.charCodeAt(i) + 17).toString(16);
+      hex += ('00' + charCode).slice(-2);
+    }
+    return hex;
+  },
+
   stripHtml(html) {
     let tmp = document.createElement("div");
     tmp.innerHTML = html;
@@ -641,6 +650,6 @@ export default {
         }
       }
       return null;
-    },
+    }
   }
 };

@@ -66,11 +66,10 @@
             <q-btn
               :disable="!agree"
               :loading="loading"
-              style="font-weight: 600; font-size: 1rem; background-color: #FFCC00; border-radius: 10px;"
-              no-caps unelevated
+              no-caps push
               color="secondary"
-              class="text-black q-px-md gtm-track"
-              label="Mulai Sekarang"
+              class="text-black btn-secondary btn-medium gtm-track"
+              label="Simpan"
               @click="submitForm"
               gtm-action="btn_free_package_submit"/>
           </div>

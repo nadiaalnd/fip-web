@@ -1,99 +1,80 @@
 <template>
-  <q-page id="landing-zakat">
-    <CarouselHeader/>
-    <section class="banner q-my-xl relative-position">
-      <div :class="$q.platform.is.mobile ? 'hidden' : ''" class="absolute-right" style="background-image: url(/images/bg-ellipse-pattern.svg); background-repeat: no-repeat; width: 148px; height: 181px; transform: rotate(180deg) translateY(50%); top: 50%; z-index: -2;"></div>
-      <div class="container q-mx-auto">
-        <div class="items-banner q-mx-md" :class="banner.length < 5 ? 'justify-center' : 'justify-start'">
-          <a :href="item.link" class="item" :key="idx" v-for="(item, idx) in banner">
-            <div><img :src="item.image" :alt="item.title" style="width: 60px; height: 60px;"></div>
-            <div>{{ item.title }}</div>
-          </a>
-
-        </div>
-      </div> 
-    </section>
-
-    <section class="container row wrap q-pt-lg relative-position">
-      <div class="absolute-bottom-right" style="background-image: url(/images/bg-keunggulan.svg); 
-        background-repeat: no-repeat; background-size: cover; width: 487px; height: 458px; bottom: -10%;"></div>
-
-      <div class="q-px-md  col-12 col-md-6 ">
-        <div class="absolute-top" style="background-image: url(/images/bg-achiev.svg); 
-        transform: rotate(180deg) translate(-50%, 10%); right: 50%; background-repeat: no-repeat; background-size: cover; width: 369px; height: 366.15px;"></div>
-
-
-        <div class="q-mb-sm" style="font-size: 16px; font-weight: 700;">
-          Ketentuan Zakat Mal
-        </div>
-        <div class="text-body">
-          Zakat mal merupakan zakat yang dikenakan atas harta yang dimiliki seseorang dimana proses perolehannya sesuai dengan syariat agama Islam. Adapun zakat mal terdiri dari
-          <strong>harta, aset dan simpanan kekayaan</strong> (UU No. 23 Tahun 2011) yang meliputi:
-        </div>
-        <ol>
-          <li>Emas, perak, dan logam mulia lainnya;</li>
-          <li>Uang dan surat berharga lainnya;</li>
-          <li>Perniagaan;</li>
-          <li>Pertanian, perkebunan, dan kehutanan;</li>
-          <li>Peternakan dan perikanan</li>
-          <li>Pertambangan;</li>
-          <li>Perindustrian;</li>
-          <li>Pendapatan dan jasa; dan</li>
-          <li>Rikaz.</li>
-        </ol>
-  
-        <div class="text-body">
-          Apabila harta atau simpanan kekayaan mu ada pada daftar di atas dan kamu ingin berzakat, pastikan kamu memenuhi <strong>syarat berzakat</strong>, yaitu:
-        </div>
-        <ol>
-          <li>Islam;</li>
-          <li>Merdeka;</li>
-          <li>Berakal dan baligh; dan</li>
-          <li>Memiliki nishab (batas terendah yang dijadikan pedoman untuk menentukan kewajiban zakat mal)</li>
-        </ol>
+  <section class="container row wrap q-pt-lg relative-position">
+    <div class="absolute-bottom-right" style="background-image: url(/images/bg-keunggulan.svg); 
+      background-repeat: no-repeat; background-size: cover; width: 487px; height: 458px; bottom: -10%;"></div>
+    <div class="q-px-md  col-12 col-md-6 ">
+      <div class="absolute-top" style="background-image: url(/images/bg-achiev.svg); 
+      transform: rotate(180deg) translate(-50%, 10%); right: 50%; background-repeat: no-repeat; background-size: cover; width: 369px; height: 366.15px;"></div>
+      <div class="q-mb-sm" style="font-size: 16px; font-weight: 700;">
+        Ketentuan Zakat Mal
       </div>
-      <div class="q-px-md q-mb-lg col-12 col-md-6">
-        <q-card class="q-pa-md full-width">
-          <div class="content-header">
-            <h1 class="content-title text-primary q-mt-none q-mb-md text-bold">
-              Kalkulator Zakat Mal
-            </h1>
-            <span>
-              Kalau syarat berzakat di atas sudah kamu penuhi, yuk hitung berapa besar zakat mal yang perlu kamu keluarkan
-            </span>
+      <div class="text-body">
+        Zakat mal merupakan zakat yang dikenakan atas harta yang dimiliki seseorang dimana proses perolehannya sesuai dengan syariat agama Islam. Adapun zakat mal terdiri dari
+        <strong>harta, aset dan simpanan kekayaan</strong> (UU No. 23 Tahun 2011) yang meliputi:
+      </div>
+      <ol>
+        <li>Emas, perak, dan logam mulia lainnya;</li>
+        <li>Uang dan surat berharga lainnya;</li>
+        <li>Perniagaan;</li>
+        <li>Pertanian, perkebunan, dan kehutanan;</li>
+        <li>Peternakan dan perikanan</li>
+        <li>Pertambangan;</li>
+        <li>Perindustrian;</li>
+        <li>Pendapatan dan jasa; dan</li>
+        <li>Rikaz.</li>
+      </ol>
+
+      <div class="text-body">
+        Apabila harta atau simpanan kekayaan mu ada pada daftar di atas dan kamu ingin berzakat, pastikan kamu memenuhi <strong>syarat berzakat</strong>, yaitu:
+      </div>
+      <ol>
+        <li>Islam;</li>
+        <li>Merdeka;</li>
+        <li>Berakal dan baligh; dan</li>
+        <li>Memiliki nishab (batas terendah yang dijadikan pedoman untuk menentukan kewajiban zakat mal)</li>
+      </ol>
+    </div>
+    <div class="q-px-md q-mb-lg col-12 col-md-6">
+      <q-card class="q-pa-md full-width">
+        <div class="content-header">
+          <h1 class="content-title text-primary q-mt-none q-mb-md text-bold">
+            Kalkulator Zakat Mal
+          </h1>
+          <span>
+            Kalau syarat berzakat di atas sudah kamu penuhi, yuk hitung berapa besar zakat mal yang perlu kamu keluarkan
+          </span>
+          <div>
+
+            <div class="q-gutter-sm q-py-md text-weight-bold">
+              <q-radio size="xs" v-model="formRadio" val="perbulan" label="Perbulan" style="margin-left: 0px;" />
+              <q-radio size="xs" v-model="formRadio" val="pertahun" label="Pertahun" />
+            </div>
+
             <div>
-  
-              <div class="q-gutter-sm q-py-md text-weight-bold">
-                <q-radio size="xs" v-model="formRadio" val="perbulan" label="Perbulan" style="margin-left: 0px;" />
-                <q-radio size="xs" v-model="formRadio" val="pertahun" label="Pertahun" />
+              <div class="q-mb-sm text-weight-bold">
+                Pendapatan
               </div>
-  
-  
-              <div>
-                <div class="q-mb-sm text-weight-bold">
-                  Pendapatan
-                </div>
-                <div
-                  class="row justify-start"
-                >
-                  <q-input
+              <div
+                class="row justify-start"
+              >
+                <q-input
                   outlined dense
                   class="q-mb-md col-4 income"
                   style="max-width: 200px; font-size: 16px; min-width: 170px;"
                   v-model="form.income">
-                    <template v-slot:prepend>
-                      Rp
-                    </template>
-                  </q-input>
-                </div>
-  
-                <div class="q-mb-sm text-weight-bold">
-                  Penghasilan lain
-                </div>
-                <div
-                  class="row justify-start"
-                >
-                  <q-input
+                  <template v-slot:prepend>
+                    Rp
+                  </template>
+                </q-input>
+              </div>
+
+              <div class="q-mb-sm text-weight-bold">
+                Penghasilan lain
+              </div>
+              <div
+                class="row justify-start"
+              >
+                <q-input
                   outlined dense
                   class="q-mb-md col-4"
                   style="max-width: 200px; font-size: 16px; min-width: 170px;"
@@ -101,35 +82,41 @@
                     <template v-slot:prepend>
                       Rp
                     </template>
-                  </q-input>
-                </div>
-  
-                <div class="q-mb-sm text-weight-bold">
-                  Pengeluaran kebutuhan pokok bulanan (termasuk utang)
-                </div>
-                <div
-                  class="row justify-start"
-                >
-                  <q-input
+                </q-input>
+              </div>
+
+              <div class="q-mb-sm text-weight-bold">
+                Pengeluaran kebutuhan pokok bulanan (termasuk utang)
+              </div>
+              <div
+                class="row justify-start"
+              >
+                <q-input
                   outlined dense
                   class="q-mb-md col-4"
                   style="max-width: 200px; font-size: 16px; min-width: 170px;"
                   v-model="form.expenditure">
-                    <template v-slot:prepend>
-                      Rp
-                    </template>
-                  </q-input>
-                </div>
-  
-  
+                  <template v-slot:prepend>
+                    Rp
+                  </template>
+                </q-input>
+              </div>
+              <div v-if="!showResult">
+                <q-btn
+                  push no-caps
+                  class="btn-sm gtm-track"
+                  color="primary"
+                  label="Lihat Perhitungan"
+                  :disable="form.income == 0 || form.expenditure == 0"
+                  @click="calculateAndSaveResult"
+                  gtm-action="btn_calculator_zakat-mal_calculate"/>
+              </div>
+              <section v-if="showResult">
                 <div class="input-zakat" style="position: relative;">
                   <label for="zakat" style="width: 100%;">
                     <input :value="result.countValue ? 'Wajib Membayar Zakat' : 'Tidak Wajib Membayar Zakat, Tapi Bisa Berinfak'" :disabled="true" type="text" id="zakat" class="q-mt-lg q-mx-sm q-mb-sm text-weight-bold" style="border: none; width: 100%;"
-                    :style="result.countValue ? 'color: black;' : 'color: red;'"
-                    >
-  
+                      :style="result.countValue ? 'color: black;' : 'color: red;'">
                   </label>
-  
                   <div class="text-weight-bold" style="position:  absolute; top: 5px; font-size: smaller;">
                     Wajib Bayar 
                   </div>
@@ -156,52 +143,49 @@
                     {{ result.calculate ? result.calculate : "Rp. - " }}
                   </h2>
                 </div>
-  
-              </div>
+              </section>
+
             </div>
           </div>
-        </q-card>
-      </div>
-
-    </section>
-
-    <section class="relative-position belajar-bersama-kami">
-      <div class="absolute-left keunggulan" style=""></div>
-
-      <div class="container-article">
-        <div class="q-px-md q-py-sm q-mb-md">
-          <h1 class="q-mb-md">
-            Belajar Bersama Kami
-          </h1>
-          <p class="q-mb-md">
-            Kamu bisa pelajari berbagai hal tentang finansial, mulai dari perencanaan keuangan sampai investasi dengan detail mendasar oleh para pemateri terbaik secara asyik dan menarik.
-          </p>
-          <q-icon name="arrow_forward_ios" class="float-right q-ml-sm q-mr-md q-mt-sm" size="14px" />
-          <a href="/e-learning" class="text-body1 float-right" style="color:#000000">Lihat lainnya</a>
         </div>
-        <div class="q-px-md q-py-md">
-          <div class="row justify-between items-stretch">
-            <ItemProductLP
-              class="col-12 col-sm-6 col-md-4 q-px-md q-py-md"
-              v-for="(product, idx) in products"
-              :key="idx"
-              :product="product"/>
-          </div>
+      </q-card>
+    </div>
+  </section>
+
+  <section class="relative-position belajar-bersama-kami">
+    <div class="absolute-left keunggulan" style=""></div>
+
+    <div class="container-article">
+      <div class="q-px-md q-py-sm q-mb-md">
+        <h1 class="q-mb-md">
+          Belajar Bersama Kami
+        </h1>
+        <p class="q-mb-md">
+          Kamu bisa pelajari berbagai hal tentang finansial, mulai dari perencanaan keuangan sampai investasi dengan detail mendasar oleh para pemateri terbaik secara asyik dan menarik.
+        </p>
+        <q-icon name="arrow_forward_ios" class="float-right q-ml-sm q-mr-md q-mt-sm" size="14px" />
+        <a href="/e-learning" class="text-body1 float-right" style="color:#000000">Lihat lainnya</a>
+      </div>
+      <div class="q-px-md q-py-md">
+        <div class="row justify-between items-stretch">
+          <ItemProductLP
+            class="col-12 col-sm-6 col-md-4 q-px-md q-py-md"
+            v-for="(product, idx) in products"
+            :key="idx"
+            :product="product"/>
         </div>
       </div>
-    </section>
-  </q-page>
+    </div>
+  </section>
 </template>
 
 <script>
 import { defineComponent, ref } from 'vue'
 import ItemProductLP from 'src/components/items/ItemProductLP.vue';
-import CarouselHeader from 'src/components/CarouselHeader.vue'
 
   export default defineComponent({
     components: {
-      ItemProductLP,
-      CarouselHeader
+      ItemProductLP
     },
 
     setup(){
@@ -210,36 +194,35 @@ import CarouselHeader from 'src/components/CarouselHeader.vue'
       }
     },
     data () {
-        return {
-          setting: null,
-          banner:[],
-          formType: {
-            type: "Bulan",
-            month: 0,
-            year: 0,
-            "gold_per_gram": 0,
-            "gold_nishab": 0,
+      return {
+        showResult: false,
+        setting: null,
+        formType: {
+          type: "Bulan",
+          month: 0,
+          year: 0,
+          "gold_per_gram": 0,
+          "gold_nishab": 0,
+        },
+          products: [],
+          form: {
+            income: 0,
+            incomeBonus: 0,
+            expenditure: 0,
+            salaryInt: 0
           },
-            products: [],
-            form: {
-                income: 0,
-                incomeBonus: 0,
-                expenditure: 0,
-                salaryInt: 0
-            },
-            calculatorBody:{
-                input : "",
-                output : "",
-                type : "calculator_503020",
-                id_user : 0
-            },
-            result: {
-                income: 0,
-                incomeBonus: 0,
-                expenditure: 0,
-                calculate: "",
-                countValue: false,
-            },
+          calculatorBody:{
+            input : "",
+            output : "",
+            type : "calculator_zakat-mal"
+          },
+          result: {
+            income: 0,
+            incomeBonus: 0,
+            expenditure: 0,
+            calculate: "",
+            countValue: false,
+          },
         }
     },
 
@@ -294,9 +277,7 @@ import CarouselHeader from 'src/components/CarouselHeader.vue'
       },
       setupSetting (setting) {
         const kalkulatorZakatMal = JSON.parse(setting?.["Kalkulator Zakat Mal"]);
-        // this.formType.gold_per_gram = kalkulatorZakatMal.gold_per_gram;
         this.formType.gold_nishab = kalkulatorZakatMal.gold_nishab;
-        this.banner = JSON.parse(setting['List Kalkulator']);
       },
 
       formatRupiah : (money) => {
@@ -312,9 +293,24 @@ import CarouselHeader from 'src/components/CarouselHeader.vue'
       getPercentage: function (percentage) {
           return Math.round(this.form.salaryInt * percentage / 100).toLocaleString()
       },
+
+      calculateAndSaveResult: function () {
+        this.showResult = true
+        this.calculatorBody.input = JSON.stringify(this.form)
+        this.calculatorBody.output = JSON.stringify(this.result)
+        this.$services.calculator.add(
+          this.calculatorBody,
+          (data) => {},
+          () => {},
+          () => {}
+        );
+      },
     },
 
     watch: {
+      formRadio: function (newVal) {
+        this.showResult = false
+      },
       'form.income': function (newVal, oldVal) {
         if (newVal) {
           const money = parseInt(newVal.replaceAll(/[,.]/g, ''))
@@ -392,10 +388,9 @@ import CarouselHeader from 'src/components/CarouselHeader.vue'
 
             if(resultFormRadio === "perbulan"){
               this.formType.type = "Bulan";
+              this.formType.month = this.formType.gold_nishab * this.formType.gold_per_gram / 12;
               this.result.countValue = this.formType.month >= pureCount ? false : true; 
-            }
-
-            if(resultFormRadio === "pertahun"){
+            } else if(resultFormRadio === "pertahun"){
               this.formType.type = "Tahun";
               this.formType.year = this.formType.gold_nishab * this.formType.gold_per_gram;
               this.result.countValue = this.formType.year >= pureCount ? false : true; 

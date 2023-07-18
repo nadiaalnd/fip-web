@@ -36,10 +36,6 @@
   </div>
 </template>
 
-<style lang="sass">
-  @import "../css/carousel.sass"
-</style>
-
 <script>
 import { ref, watch } from 'vue'
 

@@ -78,7 +78,7 @@ export default {
         this.contents = [
           {
             icon: this.product.subcategory.icon,
-            code: 'Rekomendasi Produk',
+            code: 'Rekomendasi Materi Lainnya',
             products: data,
             host: process.env.API_URL
           }

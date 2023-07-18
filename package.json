@@ -9,6 +9,7 @@
     "lint": "eslint --ext .js,.vue ./",
     "test": "echo \"No test specified\" && exit 0",
     "dev-header": "vite",
+    "dev": "quasar dev",
     "build-header": "vite build --outDir dist/header && cp dist/header/header.mjs src/lib/header.mjs"
   },
   "dependencies": {
@@ -18,6 +19,7 @@
     "crypto-js": "^4.1.1",
     "dotenv": "^12.0.3",
     "jwt-decode": "^3.1.2",
+    "moment": "^2.29.4",
     "qrcode": "^1.5.0",
     "quasar": "^2.11.6",
     "tiny-emitter": "^2.1.0",

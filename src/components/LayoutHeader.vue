@@ -139,10 +139,9 @@
           <template
               v-else>
               <q-btn
-                style="font-weight: 600; font-size: 1rem; background-color: #FFCC00; border-radius: 10px;"
-                no-caps unelevated
+                no-caps push
                 color="secondary"
-                class="text-black q-px-md"
+                class="text-black q-px-md btn-medium"
                 :class="'gtm-track ' + ($q.platform.is.mobile ? 'q-px-xs q-ml-sm' : 'q-px-xs q-ml-sm')"
                 label="Daftar / Masuk"
                 @click="$global.$emit('showLogin')"

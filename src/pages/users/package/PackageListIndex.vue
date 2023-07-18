@@ -1,7 +1,8 @@
 <template>
   <q-page class="q-py-md">
     <div class="container q-mb-lg">
-      <ListPackageCarousel/>
+      <ListPackageCarousel
+        :alwaysShow="true"/>
       <div
         v-if="setting"
         class="container q-px-md q-pt-md q-mb-lg">
