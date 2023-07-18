@@ -16,7 +16,7 @@
           border-radius: 10px;
         " no-caps unelevated color="secondary" class="text-black q-px-md q-mt-md gtm-track" label="Mulai Gratis"
         @click="$router.push({ path: '/free/package/e-learning' })" gtm-action="btn_free_get_home" />
-      <div class="q-px-md q-mt-xl q-mb-lg row">
+      <div class="q-mt-xl q-mb-md row">
         <!-- Sidebar -->
         <div class="col-12 col-md-4">
           <section>
@@ -24,7 +24,7 @@
           </section>
         </div>
         <!-- Content Video -->
-        <div class="col-12 col-md-8">
+        <div class="q-pl-md col-12 col-md-8">
           <section id="start-learning" class="container list-popular-product q-px-md q-pb-md">
             <SectionProduct :showPrice="false" :id="'dashboard-' + idx" class="q-my-md" v-for="(content, idx) in contents"
               :key="'content-' + idx" :content="content" />
