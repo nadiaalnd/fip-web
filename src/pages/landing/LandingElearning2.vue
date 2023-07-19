@@ -83,6 +83,12 @@ export default {
     this.$global.$on("active_package", (data) => {
       this.hasActivePackage = data.ActivePackage == 1;
     });
+
+    // get emit from sidebarElearning
+    this.$global.$on("applyFilter", () => {
+      this.applyFilter();
+      this.getDashboard();
+    });
   },
 
   mounted() {
@@ -174,12 +180,12 @@ export default {
       );
     },
 
-    changeFilter(filter, type,isMobile = false) {
-      console.log(filter + " " + type);
-      if(this.filteredVideos !== filter){
+    changeFilter(filter, type, isMobile = false, child = false) {
+      console.log(filter + " " + type + " " + isMobile);
+      if (this.filteredVideos !== filter || child) {
         this.filteredVideos = filter;
         this.filteredType = type.replace(" ", "+");
-        if(!isMobile){
+        if (isMobile == false) {
           this.getDashboard();
         }
       }
@@ -189,13 +195,6 @@ export default {
       const sidebar = document.querySelector('.sidebar-menu')
       sidebar.classList.toggle('open')
     },
-    applyFilter() {
-      this.$store.commit("setBottomSheetOpen", false);
-    },
-    // buat agar tombol diterapkan jalanin runFilter
-    runFilter(){
-      this.getDashboard();
-    }
   },
 };
 </script>

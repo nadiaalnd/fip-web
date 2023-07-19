@@ -107,6 +107,8 @@ export default {
     },
     applyFilter() {
       this.dialog = false;
+      // create emit
+      this.$emit("runFilter");
       if (this.activeMenu === "Materi") {
       } else if (this.activeMenu === "Pekerjaan") {
       }
