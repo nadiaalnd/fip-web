@@ -20,7 +20,7 @@
         <!-- Sidebar -->
         <div class="col-12 col-md-4">
           <section>
-            <SidebarElearning :navs="navs" :activeMenu="activeMenu" :changeFilter="changeFilter" />
+            <SidebarElearning ref="sidebarElearning" :navs="navs" :activeMenu="activeMenu" :changeFilter="changeFilter" />
           </section>
         </div>
         <!-- Content Video -->
@@ -195,6 +195,12 @@ export default {
       const sidebar = document.querySelector('.sidebar-menu')
       sidebar.classList.toggle('open')
     },
+    applyFilter() {
+      this.$store.commit("setBottomSheetOpen", false);
+    },
+    runFilter() {
+      this.getDashboard();
+    }
   },
 };
 </script>
