@@ -49,7 +49,6 @@ export default defineComponent({
   methods: {
     applyFilter() {
       this.$emit('applyFilter');
-      this.$refs.sidebarElearning.runFilter();
     },
   },
 });

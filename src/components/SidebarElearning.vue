@@ -106,10 +106,14 @@ export default {
       this.isMobileView = window.innerWidth <= 998;
     },
     applyFilter() {
+      this.runFilter();
       this.dialog = false;
       if (this.activeMenu === "Materi") {
       } else if (this.activeMenu === "Pekerjaan") {
       }
+    },
+    runFilter() {
+      this.$emit("runFilter");
     },
   },
 };
