@@ -60,9 +60,10 @@ export default defineComponent({
       this.$emit('applyFilter');
     },
     handleButtonClick(id, type, flag) {
+      // alert('handleButtonClick');
       this.id = id;
       this.type = type;
-      this.changeFilter(id, type, flag);
+      // this.changeFilter(id, type, flag);
     },
   },
 });

@@ -98,6 +98,7 @@ export default {
     };
   },
   mounted() {
+    // console.log(activeMenu);
     this.checkMobileView();
     window.addEventListener("resize", this.checkMobileView);
   },
