@@ -23,7 +23,7 @@
     <!-- Bottom-sheet menu start -->
     <div v-if="isMobileView">
       <q-dialog v-model="dialog" :position="position">
-        <q-card class="dialog-menu-card">
+        <q-card id="dialog-menu-card" class="dialog-menu-card">
           <q-card-section class="items-center no-wrap">
             <DialogMenuContent
               :navs="navs"
@@ -63,6 +63,17 @@
 <style scoped>
 ::-webkit-scrollbar {
   width: 0;
+}
+.q-dialog {
+  margin: 0;
+}
+.q-dialog .q-card {
+  border-radius: 25px 25px 0 0;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  position: fixed;
+  bottom: 0;
 }
 </style>
 
