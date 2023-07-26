@@ -20,7 +20,12 @@
         <!-- Sidebar -->
         <div class="col-12 col-md-4">
           <section>
-            <SidebarElearning ref="sidebarElearning" :navs="navs" :activeMenu="activeMenu" :changeFilter="changeFilter" />
+            <SidebarElearning
+              ref="sidebarElearning"
+              :navs="navs"
+              :activeMenu="activeMenu"
+              :changeFilter="changeFilter"
+            />
           </section>
         </div>
         <!-- Content Video -->
