@@ -3,17 +3,15 @@
     <div v-if="isMobileView" class="row filter-menu">
       <div class="col-3 bottom-sheet-btn">
         <q-btn v-if="isMobileView" class="bottom-btn" icon="filter_alt" color="white" text-color="black"
-          @click="open('bottom')" no-caps no-wrap unelevated rounded>
+          @click="openDialog()" no-caps no-wrap unelevated rounded>
           Filter
         </q-btn>
       </div>
       <!-- Menu materi saat mobile view -->
       <div v-if="isMobileView" class="col menu-wrapper">
         <div class="menu-scroll sidebar-list-group">
-          <q-btn class="bottom-sheet-group-item" unelevated rounded no-caps no-wrap
-            v-for="item in navs.materi"
-            :style="{ backgroundColor: activeMenu === item.id ? '#FFDE59' : '' }"
-            :key="item.id"
+          <q-btn class="bottom-sheet-group-item" unelevated rounded no-caps no-wrap v-for="item in navs.materi"
+            :style="{ backgroundColor: activeMenu === item.id ? '#FFDE59' : '' }" :key="item.id"
             @click="changeFilter(item.id, 'materi')">
             {{ item.code }}
           </q-btn>
@@ -25,13 +23,8 @@
       <q-dialog v-model="dialog" :position="position">
         <q-card id="dialog-menu-card" class="dialog-menu-card">
           <q-card-section class="items-center no-wrap">
-            <DialogMenuContent
-              :navs="navs"
-              :activeMenu="activeMenu"
-              :changeFilter="changeFilter"
-              :isApplyFilterActive="isApplyFilterActive"
-              @applyFilter="applyFilter"
-            />
+            <DialogMenuContent :navs="navs" :activeMenu="activeMenu" :changeFilter="changeFilter"
+              :isApplyFilterActive="isApplyFilterActive" @applyFilter="applyFilter" />
           </q-card-section>
         </q-card>
       </q-dialog>
@@ -41,18 +34,15 @@
       <h1 class="text-bold text-dark" style="font-size: 20px">Materi</h1>
       <ul class="sidebar-list-group">
         <li class="sidebar-list-group-item" v-for="item in navs.materi"
-          :style="{ backgroundColor: activeMenu === item.id ? '#FFDE59' : '' }"
-          :key="item.id"
+          :style="{ backgroundColor: activeMenu === item.id ? '#FFDE59' : '' }" :key="item.id"
           @click="changeFilter(item.id, 'materi')">
           {{ item.code }}
         </li>
       </ul>
       <h1 class="text-bold text-dark" style="font-size: 20px">Pekerjaan</h1>
       <ul class="sidebar-list-group">
-        <li class="sidebar-list-group-item" v-for="item in navs.pekerjaan"
-          :key="item.id"
-          :class="{ active: activeMenu === item.id }"
-          @click="changeFilter(item.id, 'pekerjaan')">
+        <li class="sidebar-list-group-item" v-for="item in navs.pekerjaan" :key="item.id"
+          :class="{ active: activeMenu === item.id }" @click="changeFilter(item.id, 'pekerjaan')">
           {{ item.code }}
         </li>
       </ul>
@@ -64,9 +54,11 @@
 ::-webkit-scrollbar {
   width: 0;
 }
+
 .q-dialog {
   margin: 0;
 }
+
 .q-dialog .q-card {
   border-radius: 25px 25px 0 0;
   width: 100%;
@@ -128,6 +120,11 @@ export default {
     checkMobileView() {
       this.isMobileView = window.innerWidth <= 998;
     },
+    openDialog() {
+      localStorage.setItem("localActive", this.activeMenu);
+      // this.activeMenuLocal = this.activeMenu;
+      this.dialog = true;
+    },
     applyFilter() {
       this.dialog = false;
       // create emit
@@ -138,6 +135,7 @@ export default {
     },
     updateActiveMenuLocal(id) {
       this.activeMenuLocal = id;
+      localStorage.setItem("localActive", id);
     },
   },
 };
