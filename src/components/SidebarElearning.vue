@@ -119,12 +119,6 @@ export default {
       activeMenuLocal: this.activeMenu,
     };
   },
-  watch: {
-    // Watch for changes to the 'activeMenu' prop and update the local variable
-    activeMenu(newValue) {
-      this.activeMenuLocal = newValue;
-    },
-  },
   mounted() {
     // console.log(activeMenu);
     this.checkMobileView();
