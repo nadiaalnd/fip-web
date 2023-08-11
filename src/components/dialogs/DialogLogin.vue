@@ -59,15 +59,15 @@
               }
             "
           />
-          <div :class="itemsCaptcha.imgCaptcha ? 'block' : 'hidden'" class="q-mx-auto q-mb-lg" style="width: 250px;">
+          <div :class="imgCaptcha ? 'block' : 'hidden'" class="q-mx-auto q-mb-lg" style="width: 250px;">
             <div class="flex justify-center items-center" style="gap: 16px;">
-              <q-img :src="itemsCaptcha.imgCaptcha" spinner-color="white" style="width: 159px; height: 60px;"/>
+              <q-img :src="imgCaptcha" spinner-color="white" style="width: 159px; height: 60px;"/>
               <q-icon @click="doGenerateCaptcha" name="img:images/reload.svg" size="sm" class="cursor-pointer" />
             </div>
             <div class="flex justify-center q-my-md">
-              <q-input outlined v-model="itemsCaptcha.inputCaptcha" placeholder="Masukan kode verifikasi." dense style="width: 90%;"
-                :error="itemsCaptcha.err_capthcha != null"
-                :error-message="itemsCaptcha.err_capthcha"
+              <q-input outlined v-model="form.captcha" placeholder="Masukan kode verifikasi." dense style="width: 90%;"
+                :error="errors.captcha != null"
+                :error-message="errors.captcha"
                 maxlength="6"
                 for="input-verification-code"/>
             </div>
@@ -178,16 +178,18 @@ export default {
       model: null,
       loading: false,
       disableBtn: true,
-      itemsCaptcha: {
-        inputCaptcha: "",
-        captcha: null,
-        imgCaptcha: "",
-        err_capthcha: null,
-      },
+      imgCaptcha: null,
 
       form: {
         username: "",
         passwd: "",
+        captcha: null
+      },
+
+      errors: {
+        username: null,
+        passwd: null,
+        captcha: null
       },
 
       generate: {
@@ -205,7 +207,7 @@ export default {
       return {
         username: this.form.username,
         password: this.form.passwd,
-        inputCaptcha: this.itemsCaptcha.inputCaptcha,
+        inputCaptcha: this.form.captcha,
       };
     },
   },
@@ -229,15 +231,13 @@ export default {
     doGenerateCaptcha(){
       this.$services.captcha.generate({},
         (data) => {
-          this.itemsCaptcha.imgCaptcha = data.captcha
-          this.itemsCaptcha.err_capthcha = null;
+          this.imgCaptcha = data.captcha
         },
       )
     },
 
     doLogin() {
-      const {passwd, username} = this.form;
-      const {inputCaptcha, imgCaptcha} = this.itemsCaptcha;
+      const {passwd, username, captcha} = this.form;
       if(!passwd || !username){
         return this.$q.notify({
           message: "Harap lengkapi form",
@@ -245,26 +245,24 @@ export default {
         });
       }
 
-
-      if(imgCaptcha){
-        if(inputCaptcha === "" || inputCaptcha.length <= 0){
-          this.itemsCaptcha.err_capthcha = "Harap isi kode verifikasi";
+      if(this.imgCaptcha){
+        if(captcha === "" || captcha.length <= 0){
+          this.errors.captcha = "Harap isi kode verifikasi";
           return;
         }
 
-        this.generate.captcha = inputCaptcha;
-        this.itemsCaptcha.err_capthcha = "";
+        this.errors.captcha = null;
       }
 
       this.loading = true;
       this.$services.user.login(
-        {...this.form, ...this.generate},
+        this.form,
         (data) => {
           this.form.passwd = "";
           this.form.username = "";
-          this.itemsCaptcha.inputCaptcha = "";
-          this.itemsCaptcha.imgCaptcha = "";
-          this.itemsCaptcha.err_capthcha = null
+          this.form.captcha = "";
+          this.imgCaptcha = "";
+          this.errors.captcha = null
 
           this.$utils.saveToken(data.token);
           this.$utils.saveUser(data);
@@ -287,18 +285,19 @@ export default {
         },
         (msg, errors, raw) => {
           let message = "Harap periksa username & password"
-          if(msg){
-            this.doGenerateCaptcha()
-          }
 
           if (raw.response?.status == 401) {
-            this.itemsCaptcha.inputCaptcha = ""
-            this.itemsCaptcha.err_capthcha = "Harap masukan kode verifikasi"
+            this.form.captcha = ""
+            this.errors.captcha = "Harap masukan kode verifikasi"
             message = "Harap masukan kode verifikasi"
+            this.doGenerateCaptcha()
           } else if(msg === "Captcha Invalid") {
-            this.itemsCaptcha.inputCaptcha = ""
-            this.itemsCaptcha.err_capthcha = "Harap masukan kode verifikasi dengan benar"
+            this.form.captcha = ""
+            this.errors.captcha = "Harap masukan kode verifikasi dengan benar"
             message = "Harap masukan kode verifikasi dengan benar"
+            this.doGenerateCaptcha()
+          } else if (this.imgCaptcha) {
+            this.doGenerateCaptcha()
           }
 
           this.$q.notify({

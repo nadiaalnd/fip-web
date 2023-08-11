@@ -13,10 +13,8 @@
       <q-icon name="highlight_off" type="button" size="24px" class="q-mr-sm cancel-icon-card-wa"
         @click="dialogWaVisible = false" />
       <q-card-section>
-        <q-card-title style="display: flex; flex-wrap: wrap;">
-          <span class="title-card-heading-wa">Hi, kami akan membantu kamu</span>
-          <span class="text-card-body-wa">Silahkan isi nama kamu dan pertanyaan yang ingin kamu tanyakan</span>
-        </q-card-title>
+        <div class="title-card-heading-wa">Hi, kami akan membantu kamu</div>
+        <div class="text-card-body-wa">Silahkan isi nama kamu dan pertanyaan yang ingin kamu tanyakan</div>
       </q-card-section>
 
       <q-card-section>

@@ -162,11 +162,11 @@ h2.text-primary
 /*Card E-Learning*/
 .grid-product
   display: grid
-  grid-template-columns: repeat(3, 1fr)
+  grid-template-columns: repeat(1, 1fr)
   grid-gap: 10px
-  @media (min-width: $xs-breakpoint)
-    grid-template-columns: repeat(2, 1fr)
   @media (min-width: $sm-breakpoint)
+    grid-template-columns: repeat(2, 1fr)
+  @media (min-width: $md-breakpoint)
     grid-template-columns: repeat(3, 1fr)
 
 .home-section
@@ -197,7 +197,6 @@ h2.text-primary
 /*Sidebar E-Learning start*/
 .sidebar-menu
   background: #FFFCF2
-  width: 300px
   height: auto
   padding: 40px 24px
   border-radius: 32px
@@ -251,8 +250,6 @@ h2.text-primary
   right: 0
   margin: -15px
 
-.bottom-sheet-btn
-  margin: 0px
 .bottom-btn:hover
   color: black !important
   background-color: #F2C037 !important
@@ -265,24 +262,6 @@ h2.text-primary
   width: auto
   cursor: pointer
   color: #B0BEC5
-  @media (min-width: 320px)
-    width: 80px
-    margin-left: -5px
-  @media (min-width: 375px)
-    margin-left: -3px
-    width: 80px
-  @media (min-width: 425px)
-    margin-left: -3px
-    width: 100px
-  @media (min-width: 500px)
-    margin-left: 0px
-    width: 120px
-  @media (min-width: 768px)
-    margin-left: 0px
-    width: 160px
-  @media (min-width: 900px)
-    margin-left: 0px
-    width: 190px
 
 .bottom-sheet-group-item
   padding: 4px 15px
@@ -305,48 +284,6 @@ h2.text-primary
   text-align: center
   font-weight: 800
   font-size: 16px
-  @media (min-width: 320px)
-    margin-left: 0px
-    width: 290px
-  @media (min-width: 360px)
-    margin-left: 0px
-    width: 330px
-  @media (min-width: 375px)
-    margin-left: 0px
-    width: 340px
-  @media (min-width: 390px)
-    margin-left: 0px
-    width: 360px
-  @media (min-width: 412px)
-    margin-left: 0px
-    width: 380px
-  @media (min-width: 425px)
-    margin-left: 0px
-    width: 390px !important
-  @media (min-width: 500px)
-    margin-left: 10px
-    width: 300px
-  @media (min-width: 512px)
-    margin-left: 0px
-    width: 480px !important
-  @media (min-width: 540px)
-    margin-left: 0px
-    width: 500px !important
-  @media (min-width: 653px)
-    margin-left: 0px
-    width: 530px !important
-  @media (min-width: 667px)
-    margin-left: 0px
-  @media (min-width: 717px)
-    margin-left: 0px
-  @media (min-width: 740px)
-    margin-left: 0px
-  @media (min-width: 768px)
-    margin-left: 0px
-    width: 100% !important
-  @media (min-width: 900px)
-    margin-left: 0px
-    width: 100% !important
 .bottom-btn-filter:hover
   background-color: #F2C037 !important
   border: none
@@ -369,54 +306,12 @@ h2.text-primary
     background: #FFFCF2
   .sidebar.open
     display: block
-  .bottom-sheet-btn
-    display: block
   .sidebar-list-group-item
     border: 1px solid #B0BEC5
 
 .menu-wrapper
   overflow-x: auto
   white-space: nowrap
-  @media (min-width: 280px)
-    margin-left: 30px
-  @media (min-width: 320px)
-    margin-left: 5px
-  @media (min-width: 360px)
-    margin-left: -5px
-  @media (min-width: 375px)
-    margin-left: -10px
-  @media (min-width: 390px)
-    margin-left: -10px
-  @media (min-width: 412px)
-    margin-left: -18px
-  @media (min-width: 425px)
-    margin-left: 0px
-  @media (min-width: 512px)
-    margin-left: 10px
-  @media (min-width: 540px)
-    margin-left: -5px
-  @media (min-width: 600px)
-    margin-left: -10px
-  @media (min-width: 653px)
-    margin-left: -34px
-  @media (min-width: 667px)
-    margin-left: -38px
-  @media (min-width: 717px)
-    margin-left: -50px
-  @media (min-width: 740px)
-    margin-left: -55px
-  @media (min-width: 768px)
-    margin-left: -20px
-  @media (min-width: 800px)
-    margin-left: -35px
-  @media (min-width: 844px)
-    margin-left: -42px
-  @media (min-width: 896px)
-    margin-left: -55px
-  @media (min-width: 900px)
-    margin-left: 30px
-  @media (min-width: 912px)
-    margin-left: -30px
 
 .menu-scroll
   display: flex
@@ -433,114 +328,6 @@ h2.text-primary
         font-weight: bold
         margin-top: 0
         margin-bottom: 16px
-.item-product-content
-  @media (min-width: 280px)
-    width: 120px !important
-  @media (min-width: 320px)
-    width: 140px !important
-    margin-left: -2px
-  @media (min-width: 360px)
-    width: 160px !important
-  @media (min-width: 375px)
-    width: 167px !important
-  @media (min-width: 390px)
-    width: 175px !important
-  @media (min-width: 412px)
-    width: 185px !important
-  @media (min-width: 425px)
-    width: 193px !important
-  @media (min-width: 512px)
-    width: 235px !important
-  @media (min-width: 540px)
-    width: 250px !important
-  @media (min-width: 600px)
-    width: 185px !important
-  @media (min-width: 653px)
-    width: 202px !important
-  @media (min-width: 667px)
-    width: 208px !important
-  @media (min-width: 717px)
-    width: 224px !important
-  @media (min-width: 740px)
-    width: 230px !important
-  @media (min-width: 768px)
-    width: 240px !important
-  @media (min-width: 800px)
-    width: 255px !important
-  @media (min-width: 844px)
-    width: 265px !important
-  @media (min-width: 896px)
-    width: 280px !important
-  @media (min-width: 912px)
-    margin-left: 10px
-    width: 270px !important
-  @media (min-width: 1024px)
-    margin-left: 10px
-    width: 195px !important
-  @media (min-width: 1180px)
-    margin-left: 10px
-    width: 230px !important
-  @media (min-width: 1280px)
-    margin-left: 10px
-    width: 250px !important
-  @media (min-width: 1440px)
-    margin-left: 10px
-    width: 275px !important
-
-.item-product-popular
-  @media (min-width: 280px)
-    margin-left: 15px !important
-    width: 120px !important
-  @media (min-width: 320px)
-    width: 140px !important
-    margin-left: -2px
-  @media (min-width: 360px)
-    width: 160px !important
-  @media (min-width: 375px)
-    width: 167px !important
-  @media (min-width: 390px)
-    width: 175px !important
-  @media (min-width: 412px)
-    width: 185px !important
-  @media (min-width: 425px)
-    width: 193px !important
-  @media (min-width: 512px)
-    width: 235px !important
-  @media (min-width: 540px)
-    width: 250px !important
-  @media (min-width: 600px)
-    width: 185px !important
-  @media (min-width: 653px)
-    width: 202px !important
-  @media (min-width: 667px)
-    width: 208px !important
-  @media (min-width: 717px)
-    width: 224px !important
-  @media (min-width: 740px)
-    width: 230px !important
-  @media (min-width: 768px)
-    width: 240px !important
-  @media (min-width: 800px)
-    width: 255px !important
-  @media (min-width: 844px)
-    width: 265px !important
-  @media (min-width: 896px)
-    width: 280px !important
-  @media (min-width: 912px)
-    margin-left: 10px
-    width: 270px !important
-  @media (min-width: 1024px)
-    margin-left: 10px
-    width: 195px !important
-  @media (min-width: 1180px)
-    margin-left: 10px
-    width: 230px !important
-  @media (min-width: 1280px)
-    margin-left: 10px
-    width: 250px !important
-  @media (min-width: 1440px)
-    margin-left: 10px
-    width: 275px !important
 
 .item-product-list
   position: relative
@@ -683,25 +470,29 @@ h2.text-primary
 .item-product-margin
   margin: 8px 8px 0px 8px
   position: relative
-.item-product-container
-  padding: 0px 8px 10px 8px
+.item-video-container
+  padding: 8px 8px 10px 8px
   position: relative
-  @media (max-width: $md-breakpoint)
-    padding: 0px 0px 4px 0px
-  .item-product
+  .item-video
     width: 100%
     height: 100%
     border-radius: 12px
+    position: relative
+    background-color: white
+    box-shadow: 0 2px 6px rgb(100 100 100/ 25%)
+    overflow: hidden
     .--img
       padding-top: 56%
       position: relative
       overflow: hidden
       border-bottom-right-radius: 60px
-      @media (max-width: $xs-breakpoint)
-        border-bottom-right-radius: 30px
-      @media (max-width: $md-breakpoint)
-        border-bottom-right-radius: 30px
+      display: block
       img
+        display: block
+        background-color: #90A4AE
+        width: 100%
+        height: auto
+        overflow: hidden
         position: absolute
         top: 0
         left: 0
@@ -720,36 +511,28 @@ h2.text-primary
     .--subcategory
       @media (max-width: $md-breakpoint)
         font-size: 12px
+    .--play-button
+      display: none
+    a.--title
+      text-decoration: none
     .--title
+      color: #000
+      margin-bottom: 4px
+      padding-right: 24px
+      position: relative
       font-style: normal
-      font-weight: 700
-      font-size: 24px
-      line-height: 1.5
-      @media (max-width: $xs-breakpoint)
-        font-size: 14px
-      @media (max-width: $md-breakpoint)
-        font-size: 14px
-    .--description
-      @media (max-width: $md-breakpoint)
-        font-size: 12px
-
-.item-product:hover .--play-button
-  display: inline-block
-  border-radius: 50%
-  position: absolute
-  top: 50%
-  left: 50%
-  transform: translate(-50%, -50%)
-  background-color: rgba(242,192,55, 0.7)
-  padding: 16px
-  @media (min-width: 320px)
-    padding: 3px !important
-  @media (min-width: 375px)
-    padding: 5px !important
-  @media (min-width: 425px)
-    padding: 7px !important
-  @media (min-width: 768px)
-    padding: 10px !important
+      font-weight: 600
+      font-size: 20px
+      line-height: 28px
+  .item-video:hover .--play-button
+    display: inline-block
+    border-radius: 50%
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    background-color: rgba(242,192,55, 0.7)
+    padding: 16px
 .item-product, .item-product-learnpath
   position: relative
   background-color: white
@@ -1060,13 +843,14 @@ footer
 
 @media (max-width: 720px)
   .content-header
-    // flex-wrap: wrap
-    align-items: flex-start
-    justify-content: flex-start
+    flex-wrap: wrap
+    align-items: flex-end
+    justify-content: flex-end
     .content-title
       flex: auto
       width: 100%
       font-size: 24px
+      padding-bottom: 8px
 
 .row.row-margin
   margin-left: -8px
@@ -1092,6 +876,7 @@ footer
   > .q-card
     overflow: hidden
     position: relative
+    padding-bottom: 24px
 
 .vacancy-item:-webkit-any-link
   text-decoration: none
@@ -1118,12 +903,11 @@ footer
   display: flex
   flex-direction: column
   width: 100%
-  background-color: rgba(0, 0, 0, 0.4)
   height: 100%
   z-index: 100
   top: 0
   left: 0
-  padding-top: 50px
+  padding-top: 60px
   > div
     padding: 16px 0
     .container > *
@@ -1132,6 +916,42 @@ footer
       span
         width: 100%
         text-align: left
+
+/*Header Menu Mobile Only Start*/
+.nav-bar .toolbar-menus .mobile-only
+  .q-btn.active
+    .q-icon
+      transform: rotate(90deg)
+      transition: transform 0.3s ease
+    .q-icon img
+      opacity: 0
+    .q-icon svg
+      opacity: 1
+  .q-btn
+    .q-icon img
+      transition: opacity 0.3s ease
+    .q-icon svg
+      opacity: 0
+      transition: opacity 0.3s ease
+
+.burger-icon-rotate-in
+  animation: burgerIconRotateIn 0.3s ease
+
+.burger-icon-rotate-out
+  animation: burgerIconRotateOut 0.3s ease
+
+@keyframes burgerIconRotateIn
+  from
+    transform: rotate(0deg)
+  to
+    transform: rotate(45deg)
+
+@keyframes burgerIconRotateOut
+  from
+    transform: rotate(45deg)
+  to
+    transform: rotate(0deg)
+/*Header Menu Mobile Only End*/
 
 .give-rating, .give-rating.give-rating-empty:hover
   color: #ffa000
@@ -1582,32 +1402,11 @@ a.app-link:hover
     > a
       display: unset
 
-@import 'landing.sass'
-@import 'pagebrand.sass'
-@import 'landingbrand.sass'
-@import 'landing-product.sass'
+@import 'landing-page.sass'
 @import 'dialog.sass'
 @import 'carousel.sass'
 @import 'calculator.sass'
-
-h1
-  font-size: 32px
-h2
-  font-size: 24px
-h3
-  font-size: 20px
-h4
-  font-size: 18px
-h4
-  font-size: 16px
-h5
-  font-size: 14px
-
-h1, h2, h3, h4, h5
-  font-weight: 600
-  line-height: 1.25
-  margin-top: 0
-  margin-bottom: 0
+@import 'typograph.sass'
 
 .list-package-carousel
   .--title
@@ -1675,9 +1474,6 @@ h1, h2, h3, h4, h5
       color: $dark
       line-height: 1.1
 
-.purchased-package.active
-  // background-color: $primary
-  // color: white
 .purchased-package
   cursor: default
   padding: 8px
@@ -1884,3 +1680,6 @@ img.playButtonImage
     height: 394px
     padding: 1px
     overflow: scroll
+
+.q-btn--outline.text-dark:before
+  border: 1px solid #B0BEC5

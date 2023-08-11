@@ -1,6 +1,6 @@
 <template>
-  <div class="item-product-container">
-    <div class="item-product">
+  <div class="item-video-container">
+    <div class="item-video">
       <div class="relative">
         <a class="--img"
           :href="$utils.getContentRoute(product)"
@@ -64,7 +64,7 @@
         </div>
         <div class="relative">
           <a
-            class="--title ellipsis-1"
+            class="--title ellipsis-2"
             :href="$utils.getContentRoute(product)"
             :target="target"
             @click="

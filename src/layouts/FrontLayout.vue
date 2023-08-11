@@ -23,7 +23,7 @@
             <div class="col-xs-12 col-md-4 q-mb-lg">
               <img src="/images/finplan-logo-black.png" style="height: 38px" text-color="white" class="q-mr-md q-mb-md"
                 height="38px" />
-              <div class="text-weight-medium" style="color: #212121; font-size: 1.125em;">
+              <div class="text-weight-medium f-text-description">
                 Finplan hadir untuk menjawab solusi finansial di Indonesia. Sebagai komunitas belajar investasi, Finplan
                 membahas beragam informasi seputar saham, reksadana, emas, properti, dan NFT.
               </div>
@@ -76,7 +76,7 @@
               :class="($q.platform.is.mobile ? 'q-mt-xl' : 'q-mt-none')">
               <div class="q-mb-lg" style="font-size: 1.125em; color: #212121;">
                 <div class="text-bold">PT. Yang Muda Kaya</div>
-                <div class="q-my-md">Jl. Cijerokaso No. 57, Sarijadi, Kec. Sukasari, Bandung, Jawa Barat 40151 Indonesia
+                <div class="q-my-md f-text-description">Jl. Cijerokaso No. 57, Sarijadi, Kec. Sukasari, Bandung, Jawa Barat 40151 Indonesia
                 </div>
                 <div style="text-decoration: underline;">cs@finplan.id</div>
               </div>

@@ -192,25 +192,27 @@ const routes = [
             component: () =>
               import("pages/kalkulator/personal/PersonalBudgetPage.vue"),
           },
-    
+
           {
             path: "personal/profil-resiko",
             meta: RouteMeta.user["profil-resiko"],
             component: () => import("pages/kalkulator/profil/ProfilResikoPage.vue"),
           },
-    
+
           {
             path: "personal/zakat-mal",
             meta: RouteMeta.user["kalkulator-zakat"],
             component: () =>
               import("pages/kalkulator/personal/PersonalZakatPage.vue"),
           },
-        ]
-      },
 
-      {
-        path: "landing/:productcode",
-        component: () => import("pages/landing/LandingProductIndex.vue"),
+          {
+            path: "personal/investasi",
+            meta: RouteMeta.user["kalkulator-investasi"],
+            component: () =>
+              import("pages/kalkulator/personal/PersonalInvestmentPage.vue"),
+          },
+        ]
       },
 
       {
@@ -301,11 +303,11 @@ const routes = [
         path: "content",
         component: () => import("pages/users/content/ContentIndex.vue"),
       },
-      {
-        path: "content/category/:id_subcategory/:code",
-        component: () =>
-          import("pages/users/content/ContentPerCategoryIndex.vue"),
-      },
+      // {
+      //   path: "content/category/:id_subcategory/:code",
+      //   component: () =>
+      //     import("pages/users/content/ContentPerCategoryIndex.vue"),
+      // },
       {
         path: "e-learning/:subcategory/:title",
         component: () => import("pages/users/content/ContentIndex.vue"),
@@ -391,11 +393,11 @@ const routes = [
         path: "content",
         component: () => import("pages/users/content/ContentIndex.vue"),
       },
-      {
-        path: "content/category/:id_subcategory/:code",
-        component: () =>
-          import("pages/users/content/ContentPerCategoryIndex.vue"),
-      },
+      // {
+      //   path: "content/category/:id_subcategory/:code",
+      //   component: () =>
+      //     import("pages/users/content/ContentPerCategoryIndex.vue"),
+      // },
       {
         path: "content/:id/:subcategory/:title",
         component: () => import("pages/users/content/ContentIndex.vue"),
@@ -451,10 +453,10 @@ const routes = [
         component: () => import("pages/users/certificate/CertificateIndex.vue"),
       },
 
-      {
-        path: "search",
-        component: () => import("pages/users/search/SearchIndex.vue"),
-      },
+      // {
+      //   path: "search",
+      //   component: () => import("pages/users/search/SearchIndex.vue"),
+      // },
 
       {
         path: "auth/forgotpassword",
@@ -470,26 +472,6 @@ const routes = [
   {
     path: "/creator",
     component: () => import("layouts/BlankLayout.vue"),
-  },
-  {
-    path: "/brand",
-    component: () => import("layouts/FrontLayout.vue"),
-    children: [
-      { path: "", component: () => import("pages/brand/LandingPageBrand.vue") },
-      {
-        path: "profile",
-        meta: RouteMeta.user["profile"],
-        beforeEnter: (to, from, next) => {
-          const user = AppUtils.getUser();
-          if (user != null) {
-            return next();
-          } else {
-            notifyMustLogin(next, "/", from, to)
-          }
-        },
-        component: () => import("pages/brand/PageBrand.vue"),
-      },
-    ],
   },
 
   // Always leave this as last one,

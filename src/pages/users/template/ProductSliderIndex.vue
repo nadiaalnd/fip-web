@@ -74,7 +74,7 @@
 </template>
 <script>
 // import ItemSimpleCard from 'components/items/ItemSimpleCard'
-import ItemProductLP from 'src/components/items/ItemProductLP.vue';
+import ItemProductLP from 'src/components/items/ItemProductVideo.vue';
 export default {
   components: {
     // ItemSimpleCard

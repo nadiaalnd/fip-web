@@ -1,46 +1,45 @@
 <template>
   <div class="q-py-md">
     <div class="content-header q-mb-lg flex">
-      <h1
-        class="content-title text-primary q-ma-none text-bold inline-block flex-1"
-      >
+      <h1 class="content-title text-primary q-ma-none text-bold inline-block flex-1">
         {{ product.name }}
       </h1>
-      <!-- <q-icon color="amber-8" name="star" size="28px"/> -->
-      <img height="28" width="28" src="/images/star-fill.svg" />
-      <span
-        class="q-ml-sm text-primary vertical-middle text-bold"
-        style="font-size: 20px"
-        >{{ $utils.getRating(product) }}</span
-      >
-      <span class="q-ml-sm text-neutral vertical-middle" style="font-size: 20px"
-        >({{ $utils.getRatingCnt(product) }} ulasan)</span
-      >
-      <q-btn
-        class="q-ml-sm gtm-track"
-        dense flat
-        color="dark"
-        icon="img:/images/share.svg"
-        @click="$refs.dialogShare.show()"
-        gtm-action="btn_video_share"
-      />
-      <q-btn
-        class="q-ml-sm gtm-track"
-        dense flat
-        color="dark"
-        :icon="product.is_bookmarked === 1 ? 'bookmark' : 'bookmark_border'"
-        @click="bookmarkProduct"
-        gtm-action="btn_video_bookmark"
-      />
-      <q-btn
-        id="comment-button"
-        class="q-ml-sm"
-        dense
-        flat
-        color="dark"
-        icon="img:/images/comment.svg"
-        @click="$refs.dialogComment.show()"
-      />
+      <div class="flex flex-center">
+        <img height="28" width="28" src="/images/star-fill.svg" />
+        <span
+          class="q-ml-sm text-primary vertical-middle text-bold"
+          style="font-size: 20px"
+          >{{ $utils.getRating(product) }}</span
+        >
+        <span class="q-ml-sm text-neutral vertical-middle" style="font-size: 20px"
+          >({{ $utils.getRatingCnt(product) }} ulasan)</span
+        >
+        <q-btn
+          class="q-ml-sm gtm-track"
+          dense flat
+          color="dark"
+          icon="img:/images/share.svg"
+          @click="$refs.dialogShare.show()"
+          gtm-action="btn_video_share"
+        />
+        <q-btn
+          class="q-ml-sm gtm-track"
+          dense flat
+          color="dark"
+          :icon="product.is_bookmarked === 1 ? 'bookmark' : 'bookmark_border'"
+          @click="bookmarkProduct"
+          gtm-action="btn_video_bookmark"
+        />
+        <q-btn
+          id="comment-button"
+          class="q-ml-sm"
+          dense
+          flat
+          color="dark"
+          icon="img:/images/comment.svg"
+          @click="$refs.dialogComment.show()"
+        />
+      </div>
     </div>
     <div
       v-if="product.url"

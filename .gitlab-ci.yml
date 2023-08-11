@@ -4,7 +4,43 @@
 # Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
 # Note that environment variables can be set in several places
 # See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
+# You can override the included template(s) by including variable overrides
+# SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
+# Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/#customizing-settings
+# Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
+# Note that environment variables can be set in several places
+# See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
+stages:
+- build
+- test
+- deploy
+
+build:
+  stage: build
+  script:
+    - echo 'START BUILD'
+    - echo $CI_COMMIT_BRANCH;
+    - cd ~/tmp/
+    - if [ ! -d "finplan-base-web" ]; then git clone ssh://git@gitlabfinplan:16022/finplan/web/finplan-base-web.git --branch $CI_COMMIT_BRANCH; fi
+    - cd finplan-base-web 
+    - git checkout $CI_COMMIT_BRANCH --force
+    - git pull
+    - cp .env.staging .env
+    - yarn
+    - quasar build
+    - echo 'FINISH BUILD'
+
+test:
+  stage: test
+  script:
+    - echo 'START TEST'
+    - cd ~/tmp/finplan-base-web
+    - if [! -d "dist/spa" ]; then exit 1; fi
+    - echo 'FINISH TEST'
+
 include:
+  - ref: general
+    local: '/.gitlab-ci-general.yml'
   - ref: staging
     local: '/.gitlab-ci-staging.yml'
     rules:

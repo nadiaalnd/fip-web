@@ -1,69 +1,119 @@
 <template>
   <div class="item-product-list">
     <template v-if="content.showPlaceholder || (content.products != null && content.products.length > 0)">
-      <div ref="section-product" class="section-product">
-        <div class="grid-product">
-          <div v-if="content.products == null || content.products.length == 0" class="flex-center"
-            style="width: 100%; height: 128px; color: #757575; display: flex;">
-            {{ content.placeholder ? content.placeholder : 'Belum Ada' }}
-          </div>
-          <ItemProductLP v-else v-for="(product, idx) in content.products" :key="'product-' + idx" :product="product"
-            @bookmarked="(value) => {
-              product.is_bookmarked = value
-            }" class="item-product-content" ref="item-product" style="width: 250px" />
+      <!-- <div :class="'home-section ' + (content.id ? 'cursor-not-allowed' : '')" -->
+      <!-- <div class="home-section"
+        @click="() => {
+            if (content.id) {
+              sectionClicked()
+            }
+          }"> -->
+      <div class="home-section q-mb-sm">
+        <q-icon
+          v-if="content.icon_name"
+          :name="content.icon_name"
+          color="primary"
+          size="sm"/>
+        <q-icon
+          v-else-if="content.icon"
+          :name="'img:' + host + content.icon"
+          size="sm"/>
+        <h2>
+          {{content.code}}
+          <!-- <q-tooltip
+            v-if="content.id">
+            Lihat lebih
+          </q-tooltip> -->
+        </h2>
+        <q-icon
+          v-if="content.id"
+          class="text-bold"
+          name="chevron_right"
+          color="primary"
+          size="24px"/>
+      </div>
+      <div 
+        ref="section-product"
+        class="section-product">
+        <div 
+          style="display: inline-flex">
+        <div v-if="content.products == null || content.products.length == 0"
+          class="flex-center"
+          style="width: 100%; height: 128px; color: #757575; display: flex;">
+          {{content.placeholder ? content.placeholder : 'Belum Ada' }}
         </div>
+        <ItemProductVideo
+          v-else
+          v-for="(product, idx) in content.products"
+          :key="'product-'+idx"
+          :product="product"
+          @bookmarked="(value) => {
+            product.is_bookmarked = value
+          }"
+          ref="item-product"
+          style="width: 320px"/>
+        <template
+          v-if="content.products != null && content.products.length > 0">
+          <q-btn
+            ref="carousel-arrow-right"
+            round
+            icon="chevron_right"
+            class="bg-white text-primary carousel-arrow-right gtm-track"
+            @click="scrollRight"
+            gtm-action="btn_section_right"/>
+          <q-btn
+            ref="carousel-arrow-left"
+            round
+            icon="chevron_left"
+            class="bg-white text-primary carousel-arrow-left gtm-track"
+            @click="scrollLeft"
+            gtm-action="btn_section_left"/>
+        </template>
+      </div>
       </div>
     </template>
   </div>
 </template>
 
 <script>
-import ItemProductLP from 'components/items/ItemProductLP'
+import ItemProductVideo from 'components/items/ItemProductVideo'
 export default {
   props: {
     content: {
       type: Object
     }
   },
+
   components: {
-    ItemProductLP
+    ItemProductVideo
   },
 
   name: 'SectionProduct',
 
-  data() {
+  data () {
     return {
-      host: '',
-      isMobileView: false
+      host: ''
     }
   },
 
-  mounted() {
+  mounted () {
     if (this.content.host) {
       this.host = this.content.host
     } else {
       this.host = process.env.API_URL_IMG
     }
-    this.handleScrollContent();
-    this.checkMobileView();
-    window.addEventListener('resize', this.checkMobileView);
-  },
 
-  beforeUnmount() {
-    window.removeEventListener('resize', this.checkMobileView);
+    this.handleScrollContent()
   },
 
   methods: {
-    checkMobileView() {
-      this.isMobileView = window.innerWidth <= 768;
-    },
-    sectionClicked() {
+    sectionClicked () {
       this.$router.push({
         path: `/learning-path/${this.content.id}/${this.$utils.escapeRoute(this.content.code)}`
       })
     },
 
-    scrollRight() {
+    scrollRight () {
       let productWidth = this.$refs['item-product'][0].$el.offsetWidth
       this.$refs['section-product'].scrollTo({
         top: 0,
@@ -72,7 +122,7 @@ export default {
       })
     },
 
-    scrollLeft() {
+    scrollLeft () {
       let productWidth = this.$refs['item-product'][0].$el.offsetWidth
       this.$refs['section-product'].scrollTo({
         top: 0,
@@ -81,19 +131,7 @@ export default {
       })
     },
 
-    handleScrollContent() {
-      if (this.isMobileView) {
-        const sectionProduct = this.$refs['section-product'];
-        sectionProduct.style.paddingRight = '';
-      } else {
-        const sectionProduct = this.$refs['section-product'];
-        sectionProduct.style.paddingRight = '0.5px';
-
-        const afterElement = document.createElement('div');
-        afterElement.classList.add('section-product-after');
-        sectionProduct.appendChild(afterElement);
-      }
-
+    handleScrollContent () {
       if (this.$refs['section-product'] == null) {
         return
       }
@@ -115,7 +153,7 @@ export default {
         }
       }
 
-      function onWindowScroll() {
+      function onWindowScroll () {
         if (self.$refs['section-product'].scrollLeft == 0) {
           self.$refs['carousel-arrow-left'].$el.classList.add('hidden')
           showCarouselLeft = false

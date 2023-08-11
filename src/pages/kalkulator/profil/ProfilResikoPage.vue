@@ -1,121 +1,239 @@
 <template>
   <q-page id="profil-resiko">
-    <div class="container q-px-md q-pt-md q-mb-lg">
-      <div class="q-mt-xl content-profil-resiko">
-        <h1 style="font-weight: 700; font-size: 2.5em; color: $blue">
-          Kenali Profil Risiko Investasi Anda
-        </h1>
-        <p style="font-size: 1.5em" class="q-mt-lg q-mb-md text-weight-medium">
-          Pertanyaan-pertanyaan di bawah ini merupakan alat bantu bagi Anda
-          untuk mengetahui risiko-risiko investasi Reksa Dana dan produk-produk
-          investasi yang sesuai dengan dengan tingkat toleransi risiko Anda.
-        </p>
-      </div>
-
-      <hr class="q-my-lg line" />
-      <div class="add-effect-fade" v-if="skor.length > 7">
-        <div
-          class="text-weight-regular"
-          style="color: #7a7a7a; font-size: 1.25em"
-        >
-          Profil risiko investasi Anda
-        </div>
-        <div class="q-my-lg keterangan text-weight-regular">
-          {{ calculateSkor.tipe }}
-        </div>
-
-        <div
-          class="text-weight-medium"
-          style="color: #7a7a7a; font-size: 1.25em"
-        >
-          {{ calculateSkor.keterangan }}
-        </div>
-
-        <div class="subTitle-profil text-weight-regular q-my-xl">
-          Profil risiko investasi Anda
-        </div>
-
-        <div>
-          <div class="statistik-profil">
-            <div>
-              <div class="q-mb-md">Kas / Deposito</div>
-              <div>{{ profilRisiko.kas }}</div>
-            </div>
-
-            <div>
-              <div class="q-mb-md">Pasar Uang</div>
-              <div>{{ profilRisiko.pasarUang }}%</div>
-            </div>
-
-            <div>
-              <div class="q-mb-md">Jangka waktu investasi</div>
-              <div>{{ profilRisiko.jangkaWaktu }}</div>
-            </div>
-          </div>
-        </div>
-        <div @click="resetQuestion" class="flex q-mt-xl btn-reset">
-          <div class="text-weight-medium" style="font-size: 1.5em">
-            Ulangi Pertanyaan
-          </div>
-        </div>
-      </div>
+    <div class="container row wrap q-pt-lg relative-position">
+      <div
+        class="absolute-top"
+        style="
+          background-image: url(/images/bg-achiev.svg);
+          transform: rotate(180deg) translate(-50%, 10%);
+          right: 50%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          width: 369px;
+          height: 366.15px;
+          z-index: -1;
+        "
+      ></div>
 
       <div
-        v-else
-        ref="content_question"
-        v-for="(data, idx) in selectedQuestion"
-        :class="data.addClass"
-        class="q-mt-lg"
-        :key="idx"
-      >
-        <div
-          v-if="skor.length !== 0"
-          @click="previous"
-          class="flex container-circle"
-        >
-          <div
-            class="circle flex"
-            style="
-              width: 44px;
-              height: 44px;
-              border-radius: 50%;
-              align-items: center;
-              justify-content: center;
-              background-color: #ffde59;
-            "
-          >
-            <img src="icons/Arrow-Left.svg" alt="arrow left" />
-          </div>
-          <div class="text-weight-regular" style="font-size: 1.5em">
-            Pertanyaan Sebelumnya
-          </div>
+        class="absolute-bottom-right"
+        style="
+          background-image: url(/images/bg-keunggulan.svg);
+          background-repeat: no-repeat;
+          background-size: cover;
+          width: 487px;
+          height: 458px;
+          bottom: -10%;
+          z-index: -1;
+        "
+      ></div>
+
+      <div class="q-px-md q-mb-lg content-article col-12 col-md-6">
+        <h2 class="f-text-title">
+          Kenali Profil Risiko Investasi Anda
+        </h2>
+        <div class="f-text-body">
+          Kalkulator Profil Risiko menjadi salah satu pemecah masalah
+          bahwa potensi imbal hasil suatu investasi selalu berbanding
+          lurus dengan risikonya atau biasa disebut dengan
+          <span class="text-italic">
+            High Risk High Return.
+          </span>
+          Artinya, investor yang mempunyai profil risiko
+          <span class="text-bold">
+            Konservatif (Potensi imbal hasil yang rendah)
+          </span>
+          , biasanya juga mempunyai risiko yang relatif rendah. Begitupun sebaliknya,
+          investor yang mempunyai profil risiko
+          <span class="text-bold">
+            Agresif (Potensi imbal hasil yang tinggi)
+          </span>
+          , biasanya juga mempunyai risiko yang relatif tinggi.
         </div>
 
-        <div class="content-question flex">
-          <div class="text-article" style="font-size: 1.5em; font-weight: 600">
-            <span>Pertanyaan {{ data.no }}/8 : </span>
-            <span style="font-weight: bolder; display: inline-block"
-              >Tujuan Investasi</span
-            >
-          </div>
-          <div class="question-title" style="font-weight: 400">
-            {{ data.question }}
-          </div>
-        </div>
-
-        <div class="q-pa-lg">
-          <q-option-group
-            v-model="data.selected"
-            :options="data.choose"
-            :model-value="data.selected"
-            @update:model-value="(val) => selectAnswer(val, data)"
-            color="primary"
-            class="text-weight-regular"
-            style="font-size: 20px; letter-spacing: 0.2px"
-          />
+        <div class="q-mt-lg q-mb-md f-text-body">
+          <span class="text-bold">Jadi apa itu kalkulator profil risiko?</span>
+          <br>
+          Kalkulator Profil Resiko merupakan alat bantu bagi investor untuk
+          mengetahui tingkat toleransi risiko investor dalam berinvestasi.
+          Dari hasil pengisian beberapa pertanyaan yang disediakan, investor
+          dapat kemudian menentukan profil resiko, mulai dari tingkat profil
+          risiko
+          <span class="text-bold">Konservatif, Moderat,</span>
+          atau
+          <span class="text-bold">Agresif</span>
+          yang disertai dengan penjelasan, jangka waktu investasi dan
+          instrumen investasi yang sesuai dengan profil risikonya.
+          Mengetahui profil risiko investasi menjadi salah poin penting
+          kunci kesuksesan dalam berinvestasi.
         </div>
       </div>
+
+      <div class="q-px-md q-mb-lg content-article col-12 col-md-6">
+        <q-card class="q-px-lg q-py-sm full-width q-mb-lg">
+          <div class="content-header">
+            <h1 class="text-primary q-mt-none q-mb-md text-bold">
+              Profil Resiko
+            </h1>
+          </div>
+
+          <!-- SKOR / Result -->
+          <div class="add-effect-fade" v-if="skor.length > 6">
+            <div class="q-my-sm text-weight-regular">
+              <span class="text-bold">{{ calculateSkor.tipe }}</span><span> adalah profil resiko Anda</span>
+            </div>
+
+            <div
+              class="text-weight-medium q-mb-md"
+            >
+              {{ calculateSkor.keterangan }}
+            </div>
+
+            <div>
+              <div class="">
+                <div class="q-my-sm">
+                  <div class="">KAS / DEPOSITO</div>
+                  <div class="f-text-highlighted">{{ profilRisiko.kas }}</div>
+                </div>
+
+                <div class="q-my-sm">
+                  <div class="">PASAR UANG</div>
+                  <div class="f-text-highlighted">{{ profilRisiko.pasarUang }}%</div>
+                </div>
+
+                <div class="q-my-sm">
+                  <div class="">JANGKA WAKTU INSVESTASI</div>
+                  <div class="f-text-highlighted">{{ calculateSkor.jangkaWaktu }}</div>
+                </div>
+
+                <div class="q-my-sm">
+                  <div class="">INSTRUMEN INVESTASI</div>
+                  <div class="f-text-highlighted">{{ calculateSkor.instrument }}</div>
+                </div>
+              </div>
+            </div>
+            <q-btn class="text-bold q-py-sm full-width q-my-md" outline rounded @click="resetQuestion"
+              text-color="dark">
+              Ulangi Pertanyaan
+            </q-btn>
+          </div>
+
+          <!-- Question -->
+          <div
+            v-else
+            ref="content_question"
+            v-for="(data, idx) in selectedQuestion"
+            :class="data.addClass"
+            class="q-mt-lg"
+            :key="idx"
+          >
+
+            <div
+              v-if="skor.length !== 0"
+              @click="previous"
+              class="flex container-circle"
+              style="margin-bottom: 16px;"
+            >
+              <div
+                class="circle flex"
+                style="
+                  width: 33px;
+                  height: 33px;
+                  border-radius: 50%;
+                  align-items: center;
+                  justify-content: center;
+                  background-color: #ffde59;
+                "
+              >
+                <img src="icons/Arrow-Left.svg" alt="arrow left" style="width: 75%;"/>
+              </div>
+              <div class="text-weight-regular" style="font-size: 16px">
+                Pertanyaan Sebelumnya
+              </div>
+            </div>
+
+            <div class="--question-content">
+              <div class="--question-status">
+                <span>Pertanyaan {{ data.no }}/7 : </span>
+                <span>
+                  Tujuan Investasi
+                </span>
+              </div>
+              <div class="--question-title">
+                {{ data.question }}
+              </div>
+            </div>
+
+            <div class="q-pa-xs --question-answers">
+              <q-option-group
+                v-model="data.selected"
+                :options="data.choose"
+                :model-value="data.selected"
+                @update:model-value="(val) => selectAnswer(val, data)"
+                color="primary"
+                class="text-weight-regular"
+              />
+            </div>
+          </div>
+          <hr />
+          <div class="q-py-md">
+              <h1 class="text-primary q-mt-none q-mb-md text-bold">
+                Ayo Belajar Keuangan Gratis
+              </h1>
+              <p>
+                Dengan memahami konsep dasar keuangan untuk meningkatkan kemampuan
+                finansial Anda. Jadi, jangan ragu untuk memulai belajar keuangan
+                sekarang!
+              </p>
+              <q-btn
+                no-caps push
+                color="secondary"
+                class="text-black q-px-md gtm-track btn-medium"
+                label="Mulai Sekarang"
+                @click="getFreePackage"
+                gtm-action="btn_free_get_calculator_503020"
+              />
+            </div>
+          <!--  -->
+        </q-card>
+      </div>
     </div>
+
+    <section class="relative-position belajar-bersama-kami">
+      <div class="absolute-left keunggulan" style=""></div>
+
+      <div class="container-article">
+        <div class="q-px-md q-py-sm q-mb-md">
+          <h1 class="q-mb-md">Belajar Bersama Kami</h1>
+          <p class="q-mb-md">
+            Kamu bisa pelajari berbagai hal tentang finansial, mulai dari
+            perencanaan keuangan sampai investasi dengan detail mendasar oleh
+            para pemateri terbaik secara asyik dan menarik.
+          </p>
+          <q-icon
+            name="arrow_forward_ios"
+            class="float-right q-ml-sm q-mr-md q-mt-sm"
+            size="14px"
+          />
+          <a
+            href="/e-learning"
+            class="f-text-body1 float-right"
+            style="color: #000000"
+            >Lihat lainnya</a
+          >
+        </div>
+        <div class="q-px-md q-py-md">
+          <div class="row justify-between items-stretch">
+            <ItemProductLP
+              class="col-12 col-sm-6 col-md-4 q-px-md q-py-md"
+              v-for="(product, idx) in products"
+              :key="idx"
+              :product="product"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
     <dialog-nps v-if="showNPS" :showNPS="showNPS" :section="`calculator`" />
   </q-page>
 </template>
@@ -176,6 +294,12 @@ export default {
         this.calculatorBodyProfilResiko.id_user = user.id;
       } else this.calculatorBodyProfilResiko.id_user = 1;
     },
+
+    getFreePackage: function () {
+      this.$router.push({
+        path: "/free/package/e-learning",
+      });
+    },
   },
 
   computed: {
@@ -185,37 +309,33 @@ export default {
     },
 
     calculateSkor() {
-      const total = this.skor.reduce((acc, { value }) => acc + value, 0);
+      const total = this.skor.reduce((acc, { value }) => acc + value, 7);
+      const finalScore = (total) / 28;
+      console.log(finalScore);
       let result = {};
-      if (total >= 24) {
+      if (finalScore > 0.75) {
         result = {
           keterangan:
-            "Investor tipe agresif, berani mengambil resiko lebih tinggi buat dapet hasil yang lebih tinggi",
+            "Investor tipe Agresif. Meningkatakan peluang dengan memaksimalkan pertumbuhan modal. Investor tidak ragu untuk mengalokasikan uang dalam jumlah tertentu ke jenis investasi berisiko tinggi.",
           tipe: "Agresif",
+          jangkaWaktu: "Lebih dari 5 tahun",
+          instrument: "Saham, Reksadana Saham, Crypto, Forex"
         };
-      } else if (total >= 15) {
+      } else if (finalScore > 0.3) {
         result = {
           keterangan:
-            "Investor tipe berkembang. berani mengambil resiko tinggi untuk mendapatkan hasil yang tinggi tapi masih memikirkan opsi untuk investasi yang lebih aman",
-          tipe: "Berkembang",
+            "Investor tipe Moderat. Menyeimbangkan antara risiko dengan imbal hasil agar mencapai keuntungan yang optimal secara berkala namun tetap berhati-hati saat menentukan instrumen investasinya.",
+          tipe: "Moderat",
+          jangkaWaktu: "3-5 Tahun",
+          instrument: "Reksadana Pendapatan Tetap, Obligasi, Saham Bluechip"
         };
-      } else if (total >= 10) {
+      } else if (finalScore >= 0) {
         result = {
           keterangan:
-            "Investor tipe seimbang. Berani mengambil resiko, tapi lebih menyukai investasi yang berimbang yang dapat memberikan hasil secara reguler.",
-          tipe: "Seimbang",
-        };
-      } else if (total >= 5) {
-        result = {
-          keterangan:
-            "Investor tipe konservatif. Tidak suka mengambil resiko dan selalu ingin melindungi nilai pokok investai anda.",
+            "Investor tipe Konservatif. Mencari modal, menghondari risiko tinggi, dan menyukai produk demham nilai stabil dengan memberikan pengembalian yang lebih rendah.",
           tipe: "Konservatif",
-        };
-      } else if (total >= 0) {
-        result = {
-          keterangan:
-            "Anda tipe investor sangat konservatif. Anda menghindari resiko dan tidak ingin kehilangan uang anda sama sekali",
-          tipe: "Sangat Konservatif",
+          jangkaWaktu: "Kurang dari 1 Tahun",
+          instrument: "Emas, Reksadana Pasar Uang, Deposito"
         };
       } else {
         result = { keterangan: "", tipe: "" };
@@ -241,19 +361,6 @@ export default {
           no: 1,
           selected: null,
           addClass: "add-effect-fade",
-          question:
-            "Menurutmu, gaya investasi apa yang saat ini paling cocok denganmu?",
-          choose: [
-            { label: "konservatif", value: 0 },
-            { label: "seimbang", value: 1 },
-            { label: "berkembang", value: 2 },
-            { label: "agresif", value: 3 },
-          ],
-        },
-        {
-          no: 2,
-          selected: null,
-          addClass: "add-effect-fade",
           question: "Berapa lama kamu mau menginvestasikan uangmu?",
           choose: [
             { label: "kurang dari 1 tahun", value: 0 },
@@ -263,7 +370,7 @@ export default {
           ],
         },
         {
-          no: 3,
+          no: 2,
           selected: null,
           addClass: "add-effect-fade",
           question:
@@ -276,7 +383,7 @@ export default {
           ],
         },
         {
-          no: 4,
+          no: 3,
           selected: null,
           addClass: "add-effect-fade",
           question:
@@ -304,7 +411,7 @@ export default {
           ],
         },
         {
-          no: 5,
+          no: 4,
           selected: null,
           addClass: "add-effect-fade",
           question: "Pilih salah satu skenario investasi yang kamu banget!",
@@ -328,7 +435,7 @@ export default {
           ],
         },
         {
-          no: 6,
+          no: 5,
           selected: null,
           addClass: "add-effect-fade",
           question:
@@ -356,7 +463,7 @@ export default {
           ],
         },
         {
-          no: 7,
+          no: 6,
           selected: null,
           addClass: "add-effect-fade",
           question: "Berapa besar total investasi reksadana mu saat ini?",
@@ -368,7 +475,7 @@ export default {
           ],
         },
         {
-          no: 8,
+          no: 7,
           selected: null,
           addClass: "add-effect-fade",
           question:
@@ -401,7 +508,7 @@ export default {
 
   watch: {
     "skor.length"(newSkor, oldSkor) {
-      if (this.skor.length <= 7) {
+      if (this.skor.length <= 6) {
         if (this.$refs.content_question.length !== 0) {
           if (
             this.$refs.content_question[0].classList.contains("add-effect-fade")
@@ -413,8 +520,8 @@ export default {
           }
         }
       } else {
-        const { label: kas } = this.findQuestion(this.skor, 7)[0];
-        const txtLabel = this.findQuestion(this.skor, 5)[0].label;
+        const { label: kas } = this.findQuestion(this.skor, 6)[0];
+        const txtLabel = this.findQuestion(this.skor, 4)[0].label;
         const pasarUang = txtLabel
           .split(" ")
           .filter((i) => i.match(/\d+/))
@@ -422,8 +529,6 @@ export default {
           .reduce((acc, crv) => acc - crv);
         const { label: jangkaWaktu } = this.findQuestion(this.skor, 2)[0];
         this.profilRisiko = { kas, pasarUang, jangkaWaktu };
-
-        this.setIDuser();
         const input = this.skor.map((data) => data.value);
         this.calculatorBodyProfilResiko.input = JSON.stringify(input);
         this.calculatorBodyProfilResiko.output = JSON.stringify(
@@ -435,7 +540,7 @@ export default {
     },
 
     numberQuestion: function (newValue) {
-      if (newValue > 8) {
+      if (newValue > 7) {
         this.showNPS = true;
       }
     },

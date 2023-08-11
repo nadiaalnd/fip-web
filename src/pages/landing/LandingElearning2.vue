@@ -18,42 +18,37 @@
         @click="$router.push({ path: '/free/package/e-learning' })" gtm-action="btn_free_get_home" />
       <div class="q-mt-xl q-mb-md row">
         <!-- Sidebar -->
-        <div class="col-12 col-md-4">
-          <section>
-            <SidebarElearning
+        <div class="col-12 col-md q-pa-md">
+          <SidebarElearning
               ref="sidebarElearning"
               :navs="navs"
               :activeMenu="activeMenu"
               :changeFilter="changeFilter"
             />
-          </section>
         </div>
         <!-- Content Video -->
-        <div class="q-pl-md col-12 col-md-8">
-          <section id="start-learning" class="container list-popular-product q-px-md q-pb-md">
-            <SectionProduct :showPrice="false" :id="'dashboard-' + idx" class="q-my-md" v-for="(content, idx) in contents"
+        <div class="col-12 col-md-8">
+          <SectionProductGrid :showPrice="false" :id="'dashboard-' + idx" class="q-my-md" v-for="(content, idx) in contents"
               :key="'content-' + idx" :content="content" />
-          </section>
         </div>
       </div>
     </div>
     <!-- Popular Video -->
     <div class="container q-mb-lg" id="popular">
-      <SectionProductPopular :showPrice="false" :id="'popular-' + idx" class="q-my-md"
-        v-for="(content, idx) in [popularProduct]" :key="'popular-' + idx" :content="content">
-      </SectionProductPopular>
+      <SectionProduct :showPrice="false" :content="popularProduct">
+      </SectionProduct>
     </div>
   </q-page>
 </template>
 
 <script>
+import SectionProductGrid from "components/SectionProductGrid";
 import SectionProduct from "components/SectionProduct";
-import SectionProductPopular from "components/SectionProductPopular";
 import SidebarElearning from "components/SidebarElearning";
 export default {
   components: {
     SectionProduct,
-    SectionProductPopular,
+    SectionProductGrid,
     SidebarElearning,
   },
 

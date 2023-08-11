@@ -183,10 +183,11 @@ export default {
         if(msg === "Captcha Invalid"){
           this.itemsCaptcha.inputCaptcha = "";
           this.itemsCaptcha.err_capthcha = "Harap masukan kode verifikasi dengan benar";
+          return
         }
 
         return this.$q.notify({
-          message: 'Harap lengkapi form',
+          message: 'Harap isi kode verifikasi',
           color: 'negative'
         })
       }, () => {

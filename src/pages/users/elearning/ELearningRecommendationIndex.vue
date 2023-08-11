@@ -63,7 +63,7 @@
   </q-page>
 </template>
 <script>
-import ItemProductLP from "src/components/items/ItemProductLP.vue";
+import ItemProductLP from "src/components/items/ItemProductVideo.vue";
 import ELearningPlayer from "src/components/videos/ELearningPlayer.vue";
 import { defineComponent } from "vue";
 

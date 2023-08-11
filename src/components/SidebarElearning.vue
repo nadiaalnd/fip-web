@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="isMobileView" class="row filter-menu">
-      <div class="col-3 bottom-sheet-btn">
+      <div class="bottom-sheet-btn">
         <q-btn v-if="isMobileView" class="bottom-btn" icon="filter_alt" color="white" text-color="black"
           @click="openDialog()" no-caps no-wrap unelevated rounded>
           Filter
@@ -83,8 +83,8 @@ export default {
       required: true,
     },
     activeMenu: {
-      type: String,
-      required: true,
+      type: Number,
+      required: false,
     },
     changeFilter: {
       type: Function,

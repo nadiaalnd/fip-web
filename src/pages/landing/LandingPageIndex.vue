@@ -1,5 +1,5 @@
 <template>
-  <q-page id="landing-brand">
+  <q-page id="landing-page">
     <div class="bg-package">
       <div class="q-pb-xl">
         <div class="container">
@@ -16,7 +16,7 @@
               </div>
               <div
                 class="q-pa-md q-mb-xl q-px-lg bg-secondary"
-                style="width: fit-content; border-radius: 10px; color: #555555"
+                style="width: fit-content; border-radius: 10px; color: #212121"
               >
                 <div class="text-bold q-mb-sm" style="font-size: 1rem">
                   1st Indonesian learn investment Community
@@ -142,7 +142,7 @@
             <div class="q-px-md how-to-text">
               <div
                 class="text-bold q-mb-lg"
-                style="color: #555555; font-size: 40px"
+                style="color: #212121; font-size: 40px"
               >
                 {{ item.title }}<span class="text-secondary">.</span>
               </div>
@@ -167,7 +167,7 @@
                     max-width: 350px;
                     border-radius: 20px;
                     border: 8px solid #f7f7f7;
-                    box-shadow: -40px 40px 50px 0px #55555524;
+                    box-shadow: -40px 40px 50px 0px #21212124;
                   "
                 >
                   <div
@@ -193,7 +193,7 @@
                     max-width: 350px;
                     border-radius: 20px;
                     border: 8px solid #f7f7f7;
-                    box-shadow: -40px 40px 50px 0px #55555524;
+                    box-shadow: -40px 40px 50px 0px #21212124;
                   "
                 >
                   <div
@@ -221,13 +221,13 @@
       <div class="container q-px-md bg-ellipse-pattern">
         <div class="bg-vector-half">
           <div
-            class="text-bold q-px-lg q-mb-md text-grey"
+            class="text-bold q-px-lg q-mb-md text-dark"
             style="font-size: 40px"
           >
             Terima Kasih Telah <span class="text-blue">Mempercayai</span>
           </div>
           <div
-            class="text-h3 text-bold text-grey q-px-lg q-pb-xl"
+            class="text-h3 text-bold text-dark q-px-lg q-pb-xl"
             style="font-size: 40px"
           >
             <span class="text-blue">Kami</span>.
@@ -245,7 +245,7 @@
                 height: 200px;
                 background-color: #fffbfb;
                 border-radius: 16px;
-                box-shadow: 50px 50px 60px 0px #55555514;
+                box-shadow: 50px 50px 60px 0px #21212114;
               "
             >
               <div class="q-mx-auto q-mb-md q-mt-md">
@@ -294,12 +294,12 @@
     <section class="q-py-xl q-mb-lg">
       <div class="container">
         <div
-          class="bg-ellipse-pattern-testi q-px-md q-mb-lg q-mt-xl text-grey text-bold text-center"
+          class="bg-ellipse-pattern-testi q-px-md q-mb-lg q-mt-xl text-dark text-bold text-center"
           style="font-size: 40px"
         >
           Apa Kata Pengguna <span class="text-secondary">Finplan</span> ?
           <div
-            class="text-body1 text-center text-weight-medium text-grey q-mb-lg q-px-md"
+            class="text-body1 text-center text-weight-medium text-dark q-mb-lg q-px-md"
           >
             Kita akan berlari ditemani para pengguna lain di Finplan.id. Akan
             banyak ilmu baru dan inspiratif.
@@ -322,7 +322,7 @@
               />
             </div>
             <div
-              class="text-subtitle1 text-bold Text-grey text-left q-mb-sm text-bold"
+              class="text-subtitle1 text-bold Text-dark text-left q-mb-sm text-bold"
             >
               {{ item.name }}
             </div>
@@ -339,7 +339,7 @@
     <section class="q-py-lg" id="section-partner">
       <div class="container text-center">
         <div
-          class="q-mb-sm q-mt-xl text-grey text-bold"
+          class="q-mb-sm q-mt-xl text-dark text-bold"
           style="font-size: 40px"
         >
           Collaborated Partners
@@ -461,7 +461,7 @@
 </template>
 
 <script>
-import ItemProductLP from "src/components/items/ItemProductLP.vue";
+import ItemProductLP from "src/components/items/ItemProductVideo.vue";
 import { defineComponent } from "vue";
 // import ItemProduct from 'components/items/ItemProduct';
 import DialogNPS from "src/components/dialogs/DialogNPS.vue";

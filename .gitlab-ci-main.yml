@@ -7,7 +7,7 @@
 stages:
 - deploy
 
-build-job:
+deploy:
   stage: deploy
   script:
     - echo 'START'

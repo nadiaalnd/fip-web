@@ -2,21 +2,21 @@ export default {
   user: {
     default: {
       title: "Finplan.id - Teman Investasimu",
-        description:
-          "Investment Learning Community. Bahas saham, reksadana, emas, properti, NFT",
-        image: "/favicon.png",
+      description:
+        "Investment Learning Community. Bahas saham, reksadana, emas, properti, NFT",
+      image: "/favicon.png",
     },
     profile: {
       title: "Profil | Finplan",
-        description:
-          "Investment Learning Community. Bahas saham, reksadana, emas, properti, NFT",
-        image: "/favicon.png",
+      description:
+        "Investment Learning Community. Bahas saham, reksadana, emas, properti, NFT",
+      image: "/favicon.png",
     },
     profile: {
       title: "Kamus | Finplan",
-        description:
-          "Investment Learning Community. Bahas saham, reksadana, emas, properti, NFT",
-        image: "/favicon.png",
+      description:
+        "Investment Learning Community. Bahas saham, reksadana, emas, properti, NFT",
+      image: "/favicon.png",
     },
     academy: {
       title: "Akademi | Finplan",
@@ -65,6 +65,12 @@ export default {
       image: "/favicon.png",
     },
 
+    "kalkulator-investasi": {
+      title: "Kalkulator Investasi | Finplan",
+      description: "Investasi",
+      image: "/favicon.png",
+    },
+
     home: {
       title: "Finplan.id – Teman Investasimu",
       description:
@@ -77,7 +83,7 @@ export default {
       description:
         "Investment Learning Community. Bahas saham, reksadana, emas, properti, NFT",
       image: "/favicon.png",
-      package: 'student-package'
-    }
+      package: "student-package",
+    },
   },
 };
