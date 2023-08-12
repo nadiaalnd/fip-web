@@ -40,6 +40,51 @@
       </div>
 
       <div class="q-pa-xs --question-answers">
+        <div v-if="data.no === 1">
+          <q-input
+            outlined
+            dense
+            class="q-mb-md col-4"
+            style="max-width: 200px; font-size: 16px; min-width: 170px"
+            v-model="data.inputValue"
+            @input="(val) => handleInput(val, data)"
+            ><template v-slot:prepend> Rp </template>
+          </q-input>
+          <div class="q-mb-lg q-gutter-sm">
+            <q-btn
+              unelevated
+              no-caps
+              label="10 Juta"
+              size="sm"
+              style="border-radius: 4px; background: #f2f6f8; color: #3469a7"
+              @click="fillTargetMoney(10000000)"
+            />
+            <q-btn
+              unelevated
+              no-caps
+              label="50 Juta"
+              size="sm"
+              style="border-radius: 4px; background: #f2f6f8; color: #3469a7"
+              @click="fillTargetMoney(50000000)"
+            />
+            <q-btn
+              unelevated
+              no-caps
+              label="100 Juta"
+              size="sm"
+              style="border-radius: 4px; background: #f2f6f8; color: #3469a7"
+              @click="fillTargetMoney(100000000)"
+            />
+            <q-btn
+              unelevated
+              no-caps
+              label="1 Milyar"
+              size="sm"
+              style="border-radius: 4px; background: #f2f6f8; color: #3469a7"
+              @click="fillTargetMoney(1000000000)"
+            />
+          </div>
+        </div>
         <div class="row justify-start" v-if="data.no === 2">
           <q-input
             class="q-mb-md col-4 text-center"
@@ -60,7 +105,7 @@
         >
           <q-radio
             size="xs"
-            v-model="inputValue"
+            v-model="data.inputValue"
             val="monthly"
             label="Perbulan"
             style="margin-left: 0px"
@@ -126,6 +171,10 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   methods: {
+    fillTargetMoney(amount) {
+      this.input[0].inputValue = amount;
+    },
+
     resetQuestion() {
       this.skor = [];
       this.numberQuestion = 1;
@@ -136,7 +185,11 @@ export default defineComponent({
 
     handleInput(value, data) {
       this.selectAnswer(value, data);
-      this.nextQuestion();
+      if (data.no < this.input.length) {
+        this.nextQuestion();
+      } else {
+        this.calculateAndSaveResult();
+      }
     },
 
     nextQuestion() {
