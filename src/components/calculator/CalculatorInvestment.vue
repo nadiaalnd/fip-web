@@ -90,7 +90,7 @@
             class="q-mb-md col-4 text-center"
             style="max-width: 60px; font-size: 20px; min-width: 30px"
             v-model="data.inputValue"
-            @input="(val) => handleInput(val, data)"
+            @input="(val) => handleInputDebounced(val, data)"
           >
           </q-input>
           <span
@@ -109,12 +109,14 @@
             val="monthly"
             label="Perbulan"
             style="margin-left: 0px"
+            @input="(val) => handleInputDebounced(val, data)"
           />
           <q-radio
             size="xs"
             v-model="data.inputValue"
             val="annually"
             label="Pertahun"
+            @input="(val) => handleInputDebounced(val, data)"
           />
         </div>
         <div class="row justify-start" v-else-if="data.no === 6">
@@ -122,7 +124,7 @@
             class="q-mb-md col-4 text-center"
             style="max-width: 60px; font-size: 20px; min-width: 30px"
             v-model="data.inputValue"
-            @input="(val) => handleInput(val, data)"
+            @input="(val) => handleInputDebounced(val, data)"
           >
           </q-input>
           <span
@@ -138,7 +140,7 @@
           class="q-mb-md col-4"
           style="max-width: 200px; font-size: 16px; min-width: 170px"
           v-model="data.inputValue"
-          @input="(val) => handleInput(val, data)"
+          @input="(val) => handleInputDebounced(val, data)"
           ><template v-slot:prepend> Rp </template>
         </q-input>
       </div>
@@ -168,9 +170,14 @@
 
 <script>
 import { defineComponent } from "vue";
+import { debounce } from "quasar";
 
 export default defineComponent({
   methods: {
+    handleInputDebounced: debounce(function (value, data) {
+      this.handleInput(value, data);
+    }, 300),
+
     fillTargetMoney(amount) {
       this.input[0].inputValue = amount;
     },
