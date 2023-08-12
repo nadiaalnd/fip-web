@@ -45,7 +45,7 @@
             class="q-mb-md col-4 text-center"
             style="max-width: 60px; font-size: 20px; min-width: 30px"
             v-model="data.inputValue"
-            @input="(val) => selectAnswer(val, data)"
+            @input="(val) => handleInput(val, data)"
           >
           </q-input>
           <span
@@ -54,7 +54,7 @@
             >Tahun</span
           >
         </div>
-                <div
+        <div
           class="q-gutter-sm q-py-xs text-weight-bold"
           v-else-if="data.no === 5"
         >
@@ -77,7 +77,7 @@
             class="q-mb-md col-4 text-center"
             style="max-width: 60px; font-size: 20px; min-width: 30px"
             v-model="data.inputValue"
-            @input="(val) => selectAnswer(val, data)"
+            @input="(val) => handleInput(val, data)"
           >
           </q-input>
           <span
@@ -93,7 +93,7 @@
           class="q-mb-md col-4"
           style="max-width: 200px; font-size: 16px; min-width: 170px"
           v-model="data.inputValue"
-          @input="(val) => selectAnswer(val, data)"
+          @input="(val) => handleInput(val, data)"
           ><template v-slot:prepend> Rp </template>
         </q-input>
       </div>
@@ -132,6 +132,20 @@ export default defineComponent({
       this.input.forEach((data, idx) => {
         data.inputValue = "";
       });
+    },
+
+    handleInput(value, data) {
+      this.selectAnswer(value, data);
+      this.nextQuestion();
+    },
+
+    nextQuestion() {
+      const nextIndex = this.input.findIndex(
+        (item) => item.no === this.numberQuestion
+      );
+      if (nextIndex !== -1) {
+        this.numberQuestion = this.input[nextIndex].no;
+      }
     },
 
     selectAnswer(value, data) {
