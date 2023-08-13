@@ -64,8 +64,29 @@
           </div>
         </div>
       </div>
+
+      <!-- Recommendation -->
+      <div v-if="isShowRecommendation">
+        <div class="q-mb-md">
+          <div class="f-text">INI REKOMENDASI -_- </div>
+          <div class="row justify-start">
+            <div class="f-text-highlighted">{{}}</div>
+          </div>
+        </div>
+      </div>
+
       <q-btn
-        class="text-bold q-py-sm full-width q-my-md"
+        class="recom-btn text-bold q-py-sm full-width q-my-sm"
+        outline
+        rounded
+        no-caps
+        text-color="dark"
+        @click="showRecommendation"
+      >
+        Lihat Rekomendasi
+      </q-btn>
+      <q-btn
+        class="text-bold q-py-sm full-width q-mb-md"
         outline
         rounded
         no-caps
@@ -243,12 +264,17 @@ export default {
       });
     },
 
+    showRecommendation() {
+      this.isShowRecommendation = true;
+    },
+
     resetQuestion() {
       this.input.forEach((data, idx) => {
         data.inputValue = "";
       });
       this.numberQuestion = 0;
       this.isShowResult = false;
+      this.showRecommendation = false;
       this.showButton = false;
       this.calculatorBody.input = [];
     },
@@ -319,6 +345,7 @@ export default {
     return {
       showButton: false,
       isShowResult: false,
+      isShowRecommendation: false,
       calculatorBody: {
         input: [],
         output: "",
@@ -410,5 +437,9 @@ export default {
   width: 2px;
   height: calc(73%);
   background-color: #ccc;
+}
+
+.recom-btn {
+  background-color: #ffde59 !important;
 }
 </style>
