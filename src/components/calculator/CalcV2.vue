@@ -250,6 +250,7 @@ export default {
       this.numberQuestion = 0;
       this.isShowResult = false;
       this.showButton = false;
+      this.calculatorBody.input = [];
     },
 
     handleInput: debounce(function (index) {
@@ -308,6 +309,7 @@ export default {
       this.input[0].inputValue = amount;
     },
   },
+
   computed: {
     visibleQuestions() {
       return this.input.slice(0, this.numberQuestion + 1);
@@ -341,7 +343,7 @@ export default {
         {
           no: 3,
           inputValue: "",
-          intial_money: 0,
+          initial_money: 0,
           addClass: "add-effect-fade",
           question: "Uang yang Anda miliki sekarang",
         },
