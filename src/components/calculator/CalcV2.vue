@@ -318,7 +318,7 @@ export default {
       showButton: false,
       isShowResult: false,
       calculatorBody: {
-        input: "",
+        input: [],
         output: "",
         type: "calculator_investment",
         id_user: 1,
