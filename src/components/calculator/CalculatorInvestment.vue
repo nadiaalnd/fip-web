@@ -32,6 +32,7 @@
       :class="data.addClass"
       class="q-mt-lg"
       :key="idx"
+      v-show="data.no === numberQuestion || data.no === numberQuestion - 1"
     >
       <div class="--question-content">
         <div class="--question-title text-weight-bold">
@@ -40,14 +41,14 @@
       </div>
 
       <div class="q-pa-xs --question-answers">
-        <div v-if="data.no === 1">
+        <div class="row justify-between" v-if="data.no >= 1">
           <q-input
             outlined
             dense
             class="q-mb-md col-4"
             style="max-width: 200px; font-size: 16px; min-width: 170px"
-            v-model="data.inputValue"
-            @input="(val) => handleInput(val, data)"
+            v-model="calculatorBody.input[0]"
+            @update:modelValue="(val) => handleDebounce(val, data)"
             ><template v-slot:prepend> Rp </template>
           </q-input>
           <div class="q-mb-lg q-gutter-sm">
@@ -85,12 +86,12 @@
             />
           </div>
         </div>
-        <div class="row justify-start" v-if="data.no === 2">
+        <div class="row justify-start" v-if="data.no >= 2">
           <q-input
             class="q-mb-md col-4 text-center"
             style="max-width: 60px; font-size: 20px; min-width: 30px"
-            v-model="data.inputValue"
-            @input="(val) => handleInputDebounced(val, data)"
+            v-model="calculatorBody.input[1]"
+            @update:modelValue="(val) => handleDebounce(val, data)"
           >
           </q-input>
           <span
@@ -99,6 +100,23 @@
             >Tahun</span
           >
         </div>
+        <div class="row justify-start" v-if="data.no >= 3">
+          <q-input
+            outlined
+            dense
+            class="q-mb-md col-4"
+            style="max-width: 200px; font-size: 16px; min-width: 170px"
+            v-model="calculatorBody.input[3]"
+            @update:modelValue="(val) => handleDebounce(val, data)"
+            ><template v-slot:prepend> Rp </template>
+          </q-input>
+          <span
+            class="self-end q-mb-md q-ml-sm"
+            style="font-size: 20px; font-weight: normal"
+            >Juta</span
+          >
+        </div>
+
         <div
           class="q-gutter-sm q-py-xs text-weight-bold"
           v-else-if="data.no === 5"
@@ -133,16 +151,6 @@
             >%</span
           >
         </div>
-        <q-input
-          v-else
-          outlined
-          dense
-          class="q-mb-md col-4"
-          style="max-width: 200px; font-size: 16px; min-width: 170px"
-          v-model="data.inputValue"
-          @input="(val) => handleInputDebounced(val, data)"
-          ><template v-slot:prepend> Rp </template>
-        </q-input>
       </div>
     </div>
     <hr />
@@ -174,13 +182,13 @@ import { debounce } from "quasar";
 
 export default defineComponent({
   methods: {
-    handleInputDebounced: debounce(function (value, data) {
-      this.handleInput(value, data);
-    }, 300),
-
     fillTargetMoney(amount) {
-      this.input[0].inputValue = amount;
+      this.calculatorBody.input[0] = amount;
     },
+
+    handleDebounce: debounce(function (val, data) {
+      this.numberQuestion++;
+    }, 1000),
 
     resetQuestion() {
       this.skor = [];
@@ -279,6 +287,8 @@ export default defineComponent({
     },
   },
 
+  created() {},
+
   computed: {
     inputQuestions() {
       const filterQuestion = this.findQuestion(this.input, this.numberQuestion);
@@ -303,6 +313,7 @@ export default defineComponent({
 
   data() {
     return {
+      cobain: null,
       calculatorBody: {
         input: [],
         output: "",
