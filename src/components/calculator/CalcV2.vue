@@ -10,29 +10,37 @@
         <div class="q-mb-md f-text-highlighted">Strategi Investasi Anda</div>
         <div class="q-my-sm">
           <div class="f-text">NOMINAL UANG RENCANA ANDA</div>
-          <div class="f-text-highlighted">Rp {{}}</div>
+          <div class="f-text-highlighted">
+            Rp {{ formatCurrency(calculatorBody.input[0]) }}
+          </div>
         </div>
         <div class="q-my-sm">
           <div class="f-text">UANG ANDA SAAT INI</div>
-          <div class="f-text-highlighted">Rp {{}}</div>
+          <div class="f-text-highlighted">
+            Rp {{ formatCurrency(calculatorBody.input[2]) }}
+          </div>
         </div>
         <div class="q-my-sm">
           <div class="f-text">JUMLAH INVESTASI / BULAN</div>
-          <div class="f-text-highlighted">Rp {{}}</div>
+          <div class="f-text-highlighted">
+            Rp {{ formatCurrency(calculatorBody.input[3]) }}
+          </div>
         </div>
         <div class="q-my-sm">
           <div class="f-text">RETURN PRODUK INVESTASI / TAHUN</div>
-          <div class="f-text-highlighted">{{}} %</div>
+          <div class="f-text-highlighted">{{ calculatorBody.input[5] }} %</div>
         </div>
         <div class="q-my-sm">
           <div class="f-text">JANGKA WAKTU INVESTASI</div>
-          <div class="f-text-highlighted">{{}} tahun</div>
+          <div class="f-text-highlighted">
+            {{ calculatorBody.input[1] }} Tahun
+          </div>
         </div>
         <div class="q-my-sm">
           <div class="f-text">HASIL INVESTASI</div>
           <div class="row q-gutter-sm justify-start">
             <i class="material-icons arrow-drop-ic">arrow_drop_down_circle</i>
-            <div class="f-text-highlighted">Rp {{}}</div>
+            <div class="f-text-highlighted">Rp {{ result.invest_total }}</div>
           </div>
         </div>
         <div class="q-my-sm invest-result">
@@ -46,12 +54,18 @@
               color="primary"
               text-color="white"
             >
-              {{}} %
+              {{
+                ((result.invest_primary / result.invest_total) * 100).toFixed(
+                  2
+                )
+              }}%
             </q-chip>
           </div>
           <div class="f-text">BUNGA INVESTASI</div>
           <div class="row justify-start">
-            <div class="point-circle f-text-highlighted">Rp {{}}</div>
+            <div class="point-circle f-text-highlighted">
+              Rp {{ result.invest_interest }}
+            </div>
             <q-chip
               class="text-bold"
               square
@@ -59,7 +73,11 @@
               color="green"
               text-color="white"
             >
-              {{}} %
+              {{
+                ((result.invest_interest / result.invest_total) * 100).toFixed(
+                  2
+                )
+              }}%
             </q-chip>
           </div>
         </div>
@@ -68,7 +86,7 @@
       <!-- Recommendation -->
       <div v-if="isShowRecommendation">
         <div class="q-mb-md">
-          <div class="f-text">INI REKOMENDASI -_- </div>
+          <div class="f-text">INI REKOMENDASI -_-</div>
           <div class="row justify-start">
             <div class="f-text-highlighted">{{}}</div>
           </div>
@@ -293,26 +311,35 @@ export default {
         this.showButton = true;
       }
     }, 1000),
+    formatCurrency(value) {
+      return value.toLocaleString("id-ID", {
+        style: "currency",
+        currency: "IDR",
+      });
+    },
     calculateResult() {
-      const {
-        target_money,
-        target_year,
-        interest,
-        initial_money,
-        investment_periode,
-        investment,
-      } = this.calculatorBody.input;
+      const target_money = this.calculatorBody.input[0];
+      const target_year = this.calculatorBody.input[1];
+      const initial_money = this.calculatorBody.input[2];
+      const investment = this.calculatorBody.input[3];
+      const investment_periode = this.calculatorBody.input[4];
+      const interest = this.calculatorBody.input[5];
 
       const interestDecimal = interest / 100;
       let invest_total = 0;
 
       if (investment_periode === "annually") {
         for (let year = 1; year <= target_year; year++) {
-          invest_total += (investment * 12 + initial_money) * interestDecimal;
+          // invest_total += (investment * 12 + initial_money) * interestDecimal;
+          invest_total += investment * 12 * Math.pow(1 + interestDecimal, year);
         }
       } else if (investment_periode === "monthly") {
-        invest_total =
-          (investment * 12 + initial_money) * interestDecimal * target_year;
+        // invest_total =
+        //   (investment * 12 + initial_money) * interestDecimal * target_year;
+        const months = target_year * 12;
+        for (let month = 1; month <= months; month++) {
+          invest_total += investment * Math.pow(1 + interestDecimal, month);
+        }
       }
 
       const invest_primary = initial_money + investment * target_year;
@@ -328,11 +355,12 @@ export default {
         recommendation_primary: invest_primary,
         recommendation_interest: invest_interest,
       };
-
+      console.log("result", this.result);
       this.isShowResult = true;
     },
     fillMoney(amount) {
       this.input[0].inputValue = amount;
+      this.handleInput(0);
     },
   },
 
@@ -346,6 +374,7 @@ export default {
       showButton: false,
       isShowResult: false,
       isShowRecommendation: false,
+      result: {},
       calculatorBody: {
         input: [],
         output: "",
