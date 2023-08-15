@@ -51,7 +51,7 @@
           sudah tercapai atau belum, dan jika belum tercapai investor akan
           mendapat rekomendasi agar tetap bisa mencapai tujuan investasinya.
         </p>
-        <CalcV2
+        <CalculatorInvestment
           @calculated="
             () => {
               showNPS = true;
@@ -62,7 +62,7 @@
       </div>
 
       <div class="q-px-md q-mb-lg content-card col-0 col-md-6">
-        <CalcV2
+        <CalculatorInvestment
           @calculated="
             () => {
               showNPS = true;
@@ -115,7 +115,7 @@
 
 <script>
 import ItemProductLP from "src/components/items/ItemProductVideo.vue";
-import CalcV2 from "src/components/calculator/CalcV2.vue";
+import CalculatorInvestment from "src/components/calculator/CalculatorInvestment.vue";
 import DialogNPS from "src/components/dialogs/DialogNPS.vue";
 
 import { defineComponent } from "vue";
@@ -124,7 +124,7 @@ export default defineComponent({
   components: {
     ItemProductLP,
     "dialog-nps": DialogNPS,
-    CalcV2,
+    CalculatorInvestment
   },
 
   data() {

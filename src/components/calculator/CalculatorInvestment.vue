@@ -5,60 +5,229 @@
         Kalkulator Investasi
       </h1>
     </div>
-
-    <!-- SKOR / Result -->
-    <div class="add-effect-fade" v-if="skor.length > 6">
-      <div class="q-my-sm text-weight-regular">Strategi Investasi Anda</div>
-      <div class="text-weight-medium q-mb-md">
-        {{ calculateSkor }}
+    <!-- Recommendation -->
+    <div v-if="isShowRecommendation">
+      <div>
+        <div class="q-mb-md f-text-highlighted">Strategi Investasi Anda</div>
+        <div class="q-my-sm">
+          <div class="f-text">NOMINAL UANG RENCANA ANDA</div>
+          <div class="f-text-highlighted">
+            {{ formatCurrency(calculatorBody.input[0]) }}
+          </div>
+        </div>
+        <div class="q-my-sm">
+          <div class="f-text">UANG ANDA SAAT INI</div>
+          <div class="f-text-highlighted">
+            Rp {{ formatCurrency(calculatorBody.input[2]) }}
+          </div>
+        </div>
+        <div class="q-my-sm">
+          <div class="f-text">JUMLAH INVESTASI / BULAN</div>
+          <div class="f-text-highlighted">
+            Rp {{ formatCurrency(calculatorBody.input[3]) }}
+          </div>
+        </div>
+        <div class="q-my-sm">
+          <div class="f-text">RETURN PRODUK INVESTASI / TAHUN</div>
+          <div class="f-text-highlighted">{{ calculatorBody.input[5] }} %</div>
+        </div>
+        <div class="q-my-sm">
+          <div class="f-text">JANGKA WAKTU INVESTASI</div>
+          <div class="row">
+            <div
+              class="f-text-highlighted"
+              style="color: red; text-decoration: line-through"
+            >
+              {{ calculatorBody.input[1] }} Tahun
+            </div>
+            <i class="material-icons arrow-right-ic">arrow_right</i>
+            <div class="f-text-highlighted" style="color: green">
+              {{ calculatorBody.input[1] }} Tahun
+            </div>
+          </div>
+        </div>
+        <div class="q-my-sm">
+          <div class="f-text">HASIL INVESTASI</div>
+          <div class="row q-gutter-sm justify-start">
+            <i class="material-icons arrow-drop-ic">arrow_drop_down_circle</i>
+            <div class="f-text-highlighted">Rp {{ result.invest_total }}</div>
+          </div>
+        </div>
+        <div class="q-my-sm invest-result">
+          <div class="f-text point-circle">POKOK INVESTASI</div>
+          <div class="row justify-start">
+            <div class="f-text-highlighted">Rp {{ result.invest_primary }}</div>
+            <q-chip
+              class="text-bold"
+              square
+              size="sm"
+              color="primary"
+              text-color="white"
+            >
+              {{
+                ((result.invest_primary / result.invest_total) * 100).toFixed(
+                  2
+                )
+              }}%
+            </q-chip>
+          </div>
+          <div class="f-text">BUNGA INVESTASI</div>
+          <div class="row justify-start">
+            <div class="point-circle f-text-highlighted">
+              Rp {{ result.invest_interest }}
+            </div>
+            <q-chip
+              class="text-bold"
+              square
+              size="sm"
+              color="green"
+              text-color="white"
+            >
+              {{
+                ((result.invest_interest / result.invest_total) * 100).toFixed(
+                  2
+                )
+              }}%
+            </q-chip>
+          </div>
+        </div>
+        <img src="/images/illustration/ill-invest-failed.png" alt="Invest Failed" style="max-width:540px;">
       </div>
-
       <q-btn
-        class="text-bold q-py-sm full-width q-my-md"
+        class="text-bold q-py-sm full-width q-mb-md"
         outline
         rounded
+        no-caps
         @click="resetQuestion"
         text-color="dark"
       >
-        Ulangi Pertanyaan
+        Hitung Ulang
       </q-btn>
     </div>
-
-    <!-- Question -->
-    <div
-      v-else
-      ref="content_question"
-      v-for="(data, idx) in inputQuestions"
-      :class="data.addClass"
-      class="q-mt-lg"
-      :key="idx"
-      v-show="data.no === numberQuestion || data.no === numberQuestion - 1"
-    >
-      <div class="--question-content">
-        <div class="--question-title text-weight-bold">
-          {{ data.question }}
+    <div v-if="isShowResult">
+      <div>
+        <div class="q-mb-md f-text-highlighted">Strategi Investasi Anda</div>
+        <div class="q-my-sm">
+          <div class="f-text">NOMINAL UANG RENCANA ANDA</div>
+          <div class="f-text-highlighted">
+            {{ formatCurrency(calculatorBody.input[0]) }}
+          </div>
         </div>
+        <div class="q-my-sm">
+          <div class="f-text">UANG ANDA SAAT INI</div>
+          <div class="f-text-highlighted">
+            Rp {{ formatCurrency(calculatorBody.input[2]) }}
+          </div>
+        </div>
+        <div class="q-my-sm">
+          <div class="f-text">JUMLAH INVESTASI / BULAN</div>
+          <div class="f-text-highlighted">
+            Rp {{ formatCurrency(calculatorBody.input[3]) }}
+          </div>
+        </div>
+        <div class="q-my-sm">
+          <div class="f-text">RETURN PRODUK INVESTASI / TAHUN</div>
+          <div class="f-text-highlighted">{{ calculatorBody.input[5] }} %</div>
+        </div>
+        <div class="q-my-sm">
+          <div class="f-text">JANGKA WAKTU INVESTASI</div>
+          <div class="f-text-highlighted">
+            {{ calculatorBody.input[1] }} Tahun
+          </div>
+        </div>
+        <div class="q-my-sm">
+          <div class="f-text">HASIL INVESTASI</div>
+          <div class="row q-gutter-sm justify-start">
+            <i class="material-icons arrow-drop-ic">arrow_drop_down_circle</i>
+            <div class="f-text-highlighted">Rp {{ result.invest_total }}</div>
+          </div>
+        </div>
+        <div class="q-my-sm invest-result">
+          <div class="f-text point-circle">POKOK INVESTASI</div>
+          <div class="row justify-start">
+            <div class="f-text-highlighted">Rp {{ result.invest_primary }}</div>
+            <q-chip
+              class="text-bold"
+              square
+              size="sm"
+              color="primary"
+              text-color="white"
+            >
+              {{
+                ((result.invest_primary / result.invest_total) * 100).toFixed(
+                  2
+                )
+              }}%
+            </q-chip>
+          </div>
+          <div class="f-text">BUNGA INVESTASI</div>
+          <div class="row justify-start">
+            <div class="point-circle f-text-highlighted">
+              Rp {{ result.invest_interest }}
+            </div>
+            <q-chip
+              class="text-bold"
+              square
+              size="sm"
+              color="green"
+              text-color="white"
+            >
+              {{
+                ((result.invest_interest / result.invest_total) * 100).toFixed(
+                  2
+                )
+              }}%
+            </q-chip>
+          </div>
+        </div>
+        <img src="/images/illustration/ill-invest-success.png" alt="Invest Success" style="max-width:540px;">
       </div>
-
-      <div class="q-pa-xs --question-answers">
-        <div class="row justify-between" v-if="data.no >= 1">
+      <q-btn
+        class="recom-btn text-bold q-py-sm full-width q-my-sm"
+        outline
+        rounded
+        no-caps
+        text-color="dark"
+        @click="showRecommendation"
+      >
+        Lihat Rekomendasi
+      </q-btn>
+      <q-btn
+        class="text-bold q-py-sm full-width q-mb-md"
+        outline
+        rounded
+        no-caps
+        @click="resetQuestion"
+        text-color="dark"
+      >
+        Hitung Ulang
+      </q-btn>
+    </div>
+    <div v-if="!isShowResult && !isShowRecommendation">
+      <div
+        class="q-mb-md"
+        v-for="(question, index) in visibleQuestions"
+        :key="index"
+      >
+        <div class="q-mb-lg text-bold justify-start" v-if="index == 0">
+          {{ question.question }}
           <q-input
             outlined
             dense
-            class="q-mb-md col-4"
+            class="q-my-sm col-4"
             style="max-width: 200px; font-size: 16px; min-width: 170px"
-            v-model="calculatorBody.input[0]"
-            @update:modelValue="(val) => handleDebounce(val, data)"
+            v-model="question.inputValue"
+            @update:modelValue="handleInput(index)"
             ><template v-slot:prepend> Rp </template>
           </q-input>
-          <div class="q-mb-lg q-gutter-sm">
+          <div class="q-gutter-sm">
             <q-btn
               unelevated
               no-caps
               label="10 Juta"
               size="sm"
               style="border-radius: 4px; background: #f2f6f8; color: #3469a7"
-              @click="fillTargetMoney(10000000)"
+              @click="fillMoney(10000000)"
             />
             <q-btn
               unelevated
@@ -66,7 +235,7 @@
               label="50 Juta"
               size="sm"
               style="border-radius: 4px; background: #f2f6f8; color: #3469a7"
-              @click="fillTargetMoney(50000000)"
+              @click="fillMoney(50000000)"
             />
             <q-btn
               unelevated
@@ -74,7 +243,7 @@
               label="100 Juta"
               size="sm"
               style="border-radius: 4px; background: #f2f6f8; color: #3469a7"
-              @click="fillTargetMoney(100000000)"
+              @click="fillMoney(100000000)"
             />
             <q-btn
               unelevated
@@ -82,79 +251,95 @@
               label="1 Milyar"
               size="sm"
               style="border-radius: 4px; background: #f2f6f8; color: #3469a7"
-              @click="fillTargetMoney(1000000000)"
+              @click="fillMoney(1000000000)"
             />
           </div>
         </div>
-        <div class="row justify-start" v-if="data.no >= 2">
-          <q-input
-            class="q-mb-md col-4 text-center"
-            style="max-width: 60px; font-size: 20px; min-width: 30px"
-            v-model="calculatorBody.input[1]"
-            @update:modelValue="(val) => handleDebounce(val, data)"
-          >
-          </q-input>
-          <span
-            class="self-end q-mb-md q-ml-sm"
-            style="font-size: 20px; font-weight: normal"
-            >Tahun</span
-          >
+        <div class="q-mt-md text-bold" v-if="index == 1">
+          {{ question.question }}
+          <div class="row justify-start">
+            <q-input
+              class="col-4 text-center"
+              style="max-width: 60px; font-size: 20px; min-width: 30px"
+              v-model="question.inputValue"
+              @update:modelValue="handleInput(index)"
+            >
+            </q-input>
+            <span
+              class="self-end q-mb-md q-ml-sm"
+              style="font-size: 20px; font-weight: bold; margin-top: 30px"
+              >Tahun</span
+            >
+          </div>
         </div>
-        <div class="row justify-start" v-if="data.no >= 3">
+        <div class="q-mt-md text-bold" v-if="index == 2 || index == 3">
+          {{ question.question }}
           <q-input
             outlined
             dense
-            class="q-mb-md col-4"
+            class="q-my-sm col-4"
             style="max-width: 200px; font-size: 16px; min-width: 170px"
-            v-model="calculatorBody.input[3]"
-            @update:modelValue="(val) => handleDebounce(val, data)"
+            v-model="question.inputValue"
+            @update:modelValue="handleInput(index)"
+            @input="formatInputValue"
             ><template v-slot:prepend> Rp </template>
           </q-input>
-          <span
-            class="self-end q-mb-md q-ml-sm"
-            style="font-size: 20px; font-weight: normal"
-            >Juta</span
-          >
         </div>
-
         <div
-          class="q-gutter-sm q-py-xs text-weight-bold"
-          v-else-if="data.no === 5"
+          class="q-mt-md text-bold q-gutter-sm q-py-xs"
+          v-else-if="index == 4"
         >
-          <q-radio
-            size="xs"
-            v-model="data.inputValue"
-            val="monthly"
-            label="Perbulan"
-            style="margin-left: 0px"
-            @input="(val) => handleInputDebounced(val, data)"
-          />
-          <q-radio
-            size="xs"
-            v-model="data.inputValue"
-            val="annually"
-            label="Pertahun"
-            @input="(val) => handleInputDebounced(val, data)"
-          />
+          {{ question.question }}
+          <div class="row justify-start">
+            <q-radio
+              size="xs"
+              v-model="question.inputValue"
+              val="monthly"
+              label="Perbulan"
+              style="margin-left: -15px"
+              @update:modelValue="handleInput(index)"
+            />
+            <q-radio
+              size="xs"
+              v-model="question.inputValue"
+              val="annually"
+              label="Pertahun"
+              @update:modelValue="handleInput(index)"
+            />
+          </div>
         </div>
-        <div class="row justify-start" v-else-if="data.no === 6">
-          <q-input
-            class="q-mb-md col-4 text-center"
-            style="max-width: 60px; font-size: 20px; min-width: 30px"
-            v-model="data.inputValue"
-            @input="(val) => handleInputDebounced(val, data)"
-          >
-          </q-input>
-          <span
-            class="self-end q-ml-sm"
-            style="font-size: 30px; font-weight: normal"
-            >%</span
-          >
+        <div class="q-mt-md text-bold" v-else-if="index == 5">
+          {{ question.question }}
+          <div class="row justify-start">
+            <q-input
+              class="q-mb-md col-4 text-center"
+              style="max-width: 60px; font-size: 20px; min-width: 30px"
+              v-model="question.inputValue"
+              @update:modelValue="handleInput(index)"
+            >
+            </q-input>
+            <span
+              class="q-ml-sm text-bold"
+              style="font-size: 25px; margin-top: 30px"
+              >%</span
+            >
+          </div>
         </div>
+      </div>
+      <div v-if="showButton">
+        <q-btn
+          push
+          no-caps
+          class="btn-sm gtm-track q-mb-md"
+          label="Lihat hasil rencana Anda"
+          color="primary"
+          gtm-action="btn_calculator_investment"
+          @click="calculateResult"
+        />
       </div>
     </div>
     <hr />
-    <div class="q-py-md">
+    <section class="q-py-md">
       <h1 class="text-primary q-mt-none q-mb-md text-bold">
         Ayo Belajar Keuangan Gratis
       </h1>
@@ -172,158 +357,25 @@
         @click="getFreePackage"
         gtm-action="btn_free_get_calculator_investment"
       />
-    </div>
+    </section>
   </q-card>
 </template>
 
 <script>
-import { defineComponent } from "vue";
 import { debounce } from "quasar";
-
+import { defineComponent } from "vue";
 export default defineComponent({
-  methods: {
-    fillTargetMoney(amount) {
-      this.calculatorBody.input[0] = amount;
-    },
-
-    handleDebounce: debounce(function (val, data) {
-      this.numberQuestion++;
-    }, 1000),
-
-    resetQuestion() {
-      this.skor = [];
-      this.numberQuestion = 1;
-      this.input.forEach((data, idx) => {
-        data.inputValue = "";
-      });
-    },
-
-    handleInput(value, data) {
-      this.selectAnswer(value, data);
-      if (data.no < this.input.length) {
-        this.nextQuestion();
-      } else {
-        this.calculateAndSaveResult();
-      }
-    },
-
-    nextQuestion() {
-      const nextIndex = this.input.findIndex(
-        (item) => item.no === this.numberQuestion
-      );
-      if (nextIndex !== -1) {
-        this.numberQuestion = this.input[nextIndex].no;
-      }
-    },
-
-    selectAnswer(value, data) {
-      this.skor.push({ value, no: data.no });
-      if (data.no < 5) {
-        this.numberQuestion = data.no + 1;
-      } else {
-        this.calculateAndSaveResult();
-      }
-    },
-
-    previous() {
-      this.skor.pop();
-      let numberCurrent = this.numberQuestion - 1;
-      const indexQustionCurrent = this.input.findIndex(
-        (data) => data.no === numberCurrent
-      );
-      this.input[indexQustionCurrent].inputValue = "";
-      return this.numberQuestion--;
-    },
-
-    nextPrevious(select, no) {
-      this.skor.push({ value: select, no });
-      return this.numberQuestion++;
-    },
-
-    findQuestion(datas, id) {
-      const result = datas.filter((data) => data.no === id);
-      return result;
-    },
-
-    calculateAndSaveResult: function () {
-      const targetMoney = parseFloat(this.input[0].inputValue);
-      const targetYear = parseFloat(this.input[1].inputValue);
-      const initialMoney = parseFloat(this.input[2].inputValue);
-      const investment = parseFloat(this.input[3].inputValue);
-      const interest = parseFloat(this.input[4].inputValue);
-      const investmentPeriod = this.input[5].investment_periode;
-
-      const investInterest = investment * interest;
-      const investTotal = initialMoney + investInterest;
-      const recommendationTotal = targetMoney - investTotal;
-
-      const output = {
-        invest_total: investTotal,
-        invest_primary: initialMoney,
-        invest_interest: investInterest,
-        success: recommendationTotal >= 0 ? 1 : 0,
-        recommendation_year: targetYear,
-        recommendation_total: recommendationTotal,
-        recommendation_primary: recommendationTotal,
-        recommendation_interest: 0,
-        investment_period: investmentPeriod,
-      };
-
-      this.calculatorBody.output = JSON.stringify(output);
-      this.calculateAndSaveResultToAPI();
-    },
-
-    setIDuser: function () {
-      const user = this.$utils.getUser();
-      if (user) {
-        this.calculatorBody.id_user = user.id;
-      } else this.calculatorBody.id_user = 1;
-    },
-
-    getFreePackage: function () {
-      this.$router.push({
-        path: "/free/package/e-learning",
-      });
-    },
-  },
-
-  created() {},
-
-  computed: {
-    inputQuestions() {
-      const filterQuestion = this.findQuestion(this.input, this.numberQuestion);
-      return filterQuestion;
-    },
-
-    calculateSkor() {
-      const targetMoney = parseFloat(this.input[0].inputValue);
-      const recommendationTotal = parseFloat(
-        this.calculateAndSaveResult().recommendation_total
-      );
-
-      const investmentPeriod = this.input[5].investment_periode;
-
-      if (targetMoney < recommendationTotal && recommendationTotal >= 0) {
-        return `Hasil sesuai dengan rencana. Tempo investasi: ${investmentPeriod}.`;
-      } else {
-        return `Hasil rencana Anda tidak sesuai. Tempo investasi: ${investmentPeriod}.`;
-      }
-    },
-  },
-
   data() {
     return {
-      cobain: null,
+      showButton: false,
+      isShowResult: false,
+      isShowRecommendation: false,
+      result: {},
       calculatorBody: {
         input: [],
         output: "",
         type: "calculator_investment",
-        id_user: 1,
       },
-      skor: [],
-      invesment: {},
-      numberQuestion: 1,
-      showNPS: false,
       input: [
         {
           no: 1,
@@ -342,7 +394,7 @@ export default defineComponent({
         {
           no: 3,
           inputValue: "",
-          intial_money: 0,
+          initial_money: 0,
           addClass: "add-effect-fade",
           question: "Uang yang Anda miliki sekarang",
         },
@@ -356,44 +408,186 @@ export default defineComponent({
         {
           no: 5,
           inputValue: "",
-          interest: null,
-          addClass: "add-effect-fade",
-          question: "Imbal hasil yang diharapkan / tahun?",
-        },
-        {
-          no: 6,
-          inputValue: "",
           investment_periode: "monthly",
           addClass: "add-effect-fade",
           question: "Tempo waktu Anda dalam investasi",
         },
+        {
+          no: 6,
+          inputValue: "",
+          interest: null,
+          addClass: "add-effect-fade",
+          question: "Imbal hasil yang diharapkan / tahun?",
+        },
       ],
+      numberQuestion: 0,
     };
   },
 
-  watch: {
-    "skor.length"(newSkor, oldSkor) {
-      if (this.skor.length <= 6) {
-        if (this.$refs.content_question.length !== 0) {
-          if (
-            this.$refs.content_question[0].classList.contains("add-effect-fade")
-          ) {
-            this.$refs.content_question[0].classList.remove("add-effect-fade");
-            setTimeout(() => {
-              this.$refs.content_question[0].classList.add("add-effect-fade");
-            }, 10);
-          }
-        }
-      } else {
-        this.calculateAndSaveResult();
-      }
+  created() {
+    console.log(this.numberQuestion);
+  },
+
+  methods: {
+    getFreePackage: function () {
+      this.$router.push({
+        path: "/free/package/e-learning",
+      });
     },
 
-    numberQuestion: function (newValue) {
-      if (newValue > 6) {
-        this.showNPS = true;
+    showRecommendation() {
+      this.isShowResult = false;
+      this.isShowRecommendation = true;
+    },
+
+    resetQuestion() {
+      this.input.forEach((data, idx) => {
+        data.inputValue = "";
+      });
+      this.numberQuestion = 0;
+      this.isShowResult = false;
+      this.isShowRecommendation = false;
+      this.showButton = false;
+      this.calculatorBody.input = [];
+    },
+
+    handleInput: debounce(function (index) {
+      console.log("index : ", index);
+      console.log("calculation", this.calculatorBody.input);
+      if (index === this.numberQuestion) {
+        this.calculatorBody.input.push(this.input[index].inputValue);
+        this.numberQuestion++;
+      } else {
+        this.calculatorBody.input[index] = this.input[index].inputValue;
       }
+      if (index === this.input.length - 1) {
+        console.log("data", this.calculatorBody);
+        this.showButton = true;
+      }
+    }, 1000),
+
+    formatCurrency(value) {
+      return value.toLocaleString("id-ID", {
+        style: "currency",
+        currency: "IDR",
+      });
+    },
+
+    formatInputValue() {
+      const value = this.question.inputValue.replace(/[^\d]/g, ''); // Hapus karakter non-angka
+      const formattedValue = parseInt(value, 10).toLocaleString('id-ID');
+      this.question.inputValue = formattedValue;
+    },
+
+    calculateAndSaveResult: function () {
+      this.showResult = true;
+      this.calculatorBody.input = JSON.stringify(this.form);
+      this.calculatorBody.output = JSON.stringify(this.result);
+      this.$services.calculator.add(
+        this.calculatorBody,
+        (data) => { },
+        () => { },
+        () => { }
+      );
+    },
+
+    calculateResult() {
+      const target_money = this.calculatorBody.input[0];
+      const target_year = this.calculatorBody.input[1];
+      const initial_money = this.calculatorBody.input[2];
+      const investment = this.calculatorBody.input[3];
+      const investment_periode = this.calculatorBody.input[4];
+      const interest = this.calculatorBody.input[5];
+      const interestDecimal = interest / 100;
+
+      let invest_total = initial_money;
+
+      if (investment_periode === "annually") {
+        for (let year = 1; year <= target_year; year++) {
+          // invest_total += (investment * 12 + initial_money) * interestDecimal;
+          invest_total += investment * 12 * Math.pow(1 + interestDecimal, year);
+        }
+      } else if (investment_periode === "monthly") {
+        // invest_total =
+        //   (investment * 12 + initial_money) * interestDecimal * target_year;
+        const months = target_year * 12;
+        for (let month = 1; month <= months; month++) {
+          invest_total += investment * Math.pow(1 + interestDecimal, month);
+        }
+      }
+
+      const invest_primary = investment * target_year + initial_money;
+      const invest_interest = invest_total - invest_primary;
+
+      this.result = {
+        invest_total,
+        invest_primary,
+        invest_interest,
+        success: invest_total >= 0 ? 1 : 0,
+        reccomendation_year: target_year,
+        recommendation_total: target_money,
+        recommendation_primary: invest_primary,
+        recommendation_interest: invest_interest,
+      };
+      console.log("result", this.result);
+      this.isShowResult = true;
+    },
+    fillMoney(amount) {
+      this.input[0].inputValue = amount;
+      this.handleInput(0);
+    },
+  },
+
+  computed: {
+    visibleQuestions() {
+      return this.input.slice(0, this.numberQuestion + 1);
     },
   },
 });
 </script>
+
+<style class="scope">
+.arrow-drop-ic {
+  transform: rotate(180deg);
+  color: green;
+  font-size: 24px;
+}
+.arrow-right-ic {
+  color: green;
+  font-size: 24px;
+}
+.invest-result {
+  margin-left: 75px;
+  position: relative;
+}
+.point-circle {
+  position: relative;
+}
+.point-circle::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  margin-left: -34px;
+  border-radius: 50%;
+  background-color: #999999;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.invest-result::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  margin-left: -29px;
+  left: 0;
+  transform: translateX(-50%);
+  width: 2px;
+  height: calc(73%);
+  background-color: #ccc;
+}
+
+.recom-btn {
+  background-color: #ffde59 !important;
+}
+</style>
