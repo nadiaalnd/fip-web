@@ -55,12 +55,13 @@ function calculateResult(input) {
       invest_total_tmp = initial_money;
       interest_total = 0;
 
-      for (let i = 1; i <= years_needed; i++) {
+      for (let i = 0; i <= years_needed; i++) {
         invest_total_tmp +=
           investment_periode === "annually" ? investment * 12 : investment;
         let interest_tmp = invest_total_tmp * (interest / 100);
         invest_total_tmp += interest_tmp;
         interest_total += interest_tmp;
+        console.log(invest_total_tmp);
       }
 
       recommendation_primary = Math.round(
@@ -69,10 +70,9 @@ function calculateResult(input) {
       recommendation_interest = Math.round(
         recommendation_primary * (interest / 100)
       );
-      recommendation_total = recommendation_primary + recommendation_interest;
+      recommendation_total = invest_total_tmp;
 
-      recommendation_year =
-        investment_periode === "monthly" ? years_needed * 12 : years_needed;
+      recommendation_year = years_needed;
 
       if (recommendation_total > target_money) {
         break;
