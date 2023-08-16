@@ -1,5 +1,5 @@
 <template>
-  <q-card class="q-px-lg q-py-sm full-width q-mb-lg">
+  <q-card id="" class="q-px-lg q-py-sm full-width q-mb-lg">
     <div class="content-header">
       <h1 class="text-primary q-mt-none q-mb-md text-bold">
         Kalkulator Investasi
@@ -91,7 +91,11 @@
             </q-chip>
           </div>
         </div>
-        <img src="/images/illustration/ill-invest-failed.png" alt="Invest Failed" style="max-width:540px;">
+        <img
+          src="/images/illustration/ill-invest-failed.png"
+          alt="Invest Failed"
+          style="max-width: 540px"
+        />
       </div>
       <q-btn
         class="text-bold q-py-sm full-width q-mb-md"
@@ -180,7 +184,11 @@
             </q-chip>
           </div>
         </div>
-        <img src="/images/illustration/ill-invest-success.png" alt="Invest Success" style="max-width:540px;">
+        <img
+          src="/images/illustration/ill-invest-success.png"
+          alt="Invest Success"
+          style="max-width: 540px"
+        />
       </div>
       <q-btn
         class="recom-btn text-bold q-py-sm full-width q-my-sm"
@@ -281,7 +289,6 @@
             style="max-width: 200px; font-size: 16px; min-width: 170px"
             v-model="question.inputValue"
             @update:modelValue="handleInput(index)"
-            @input="formatInputValue"
             ><template v-slot:prepend> Rp </template>
           </q-input>
         </div>
@@ -474,8 +481,8 @@ export default defineComponent({
     },
 
     formatInputValue() {
-      const value = this.question.inputValue.replace(/[^\d]/g, ''); // Hapus karakter non-angka
-      const formattedValue = parseInt(value, 10).toLocaleString('id-ID');
+      const value = this.question.inputValue.replace(/[^\d]/g, "");
+      const formattedValue = parseInt(value, 10).toLocaleString("id-ID");
       this.question.inputValue = formattedValue;
     },
 
@@ -485,9 +492,9 @@ export default defineComponent({
       this.calculatorBody.output = JSON.stringify(this.result);
       this.$services.calculator.add(
         this.calculatorBody,
-        (data) => { },
-        () => { },
-        () => { }
+        (data) => {},
+        () => {},
+        () => {}
       );
     },
 
@@ -498,24 +505,30 @@ export default defineComponent({
       const investment = this.calculatorBody.input[3];
       const investment_periode = this.calculatorBody.input[4];
       const interest = this.calculatorBody.input[5];
-      const interestDecimal = interest / 100;
 
-      let invest_total = initial_money;
+      let invest_total_sementara = initial_money;
+      let interest_total = 0;
+      let year = 1;
+      let target_month = target_year * 12;
 
       if (investment_periode === "annually") {
-        for (let year = 1; year <= target_year; year++) {
-          // invest_total += (investment * 12 + initial_money) * interestDecimal;
-          invest_total += investment * 12 * Math.pow(1 + interestDecimal, year);
+        while (year <= target_year) {
+          invest_total_sementara += investment * 12;
+          let interest_sementara = invest_total_sementara * (interest / 100);
+          invest_total_sementara += interest_sementara;
+          interest_total += interest_sementara;
+          year++;
         }
       } else if (investment_periode === "monthly") {
-        // invest_total =
-        //   (investment * 12 + initial_money) * interestDecimal * target_year;
-        const months = target_year * 12;
-        for (let month = 1; month <= months; month++) {
-          invest_total += investment * Math.pow(1 + interestDecimal, month);
+        while (year <= target_month) {
+          invest_total_sementara += investment;
+          let interest_sementara = invest_total_sementara * (interest / 100);
+          invest_total_sementara += interest_sementara;
+          interest_total += interest_sementara;
+          year++;
         }
       }
-
+      
       const invest_primary = investment * target_year + initial_money;
       const invest_interest = invest_total - invest_primary;
 
