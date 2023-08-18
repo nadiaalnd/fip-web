@@ -12,7 +12,7 @@
         <div class="q-my-sm">
           <div class="f-text">NOMINAL UANG RENCANA ANDA</div>
           <div class="f-text-highlighted">
-            {{ formatCurrency(calculatorBody.input[0]) }}
+            {{ calculatorBody.input[0] }}
           </div>
         </div>
         <div class="q-my-sm">
@@ -42,7 +42,7 @@
             </div>
             <i class="material-icons arrow-right-ic">arrow_right</i>
             <div class="f-text-highlighted" style="color: green">
-              {{ result.recommendation_year }} Tahun
+              {{ result.recomendation_year }} Tahun
             </div>
           </div>
         </div>
@@ -419,7 +419,7 @@ export default defineComponent({
         invest_primary: "",
         invest_interst: "",
         success: "",
-        reccomendation_year: "",
+        recomendation_year: "",
         recommendation_total: "",
         recommendation_primary: "",
         recommendation_interest: "",
@@ -509,18 +509,24 @@ export default defineComponent({
     }, 1000),
 
     formatCurrency(value) {
-      return value.toLocaleString("id-ID", {
-        style: "currency",
-        currency: "IDR",
-      });
+      return "Rp " + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
 
     calculateAndSaveResult: function () {
       this.calculateResult();
-      this.calculatorBody.input = JSON.stringify(this.input);
-      this.calculatorBody.output = JSON.stringify(this.result);
+      this.isShowResult = true;
+      this.sendToAPI();
+    },
+
+    sendToAPI: function () {
+      var dataSendAPI = {
+        input: JSON.stringify(this.input),
+        output: JSON.stringify(this.result),
+        type: this.calculatorBody.type,
+      };
+      console.log("toJson : ", dataSendAPI);
       this.$services.calculator.add(
-        this.calculatorBody,
+        dataSendAPI,
         (data) => {},
         () => {},
         () => {}
@@ -535,7 +541,7 @@ export default defineComponent({
       const investment = parseFloat(this.calculatorBody.input[3]);
       const investment_periode = this.calculatorBody.input[4];
       const interest = parseFloat(this.calculatorBody.input[5]);
-
+      console.log("calculatorBody result : ", this.calculatorBody);
       let temp_money = initial_money;
       let isSuccess = false;
       let invest_total = 0;
@@ -573,7 +579,7 @@ export default defineComponent({
         );
         results = {
           ...results,
-          reccomendation_year: recommendation.recommendation_year,
+          recomendation_year: recommendation.recommendation_year,
           recommendation_total: Math.round(recommendation.invest_total),
           recommendation_primary: Math.round(recommendation.invest_primary),
           recommendation_interest: Math.round(recommendation.invest_interest),
@@ -640,6 +646,12 @@ export default defineComponent({
   computed: {
     visibleQuestions() {
       return this.input.slice(0, this.numberQuestion + 1);
+    },
+    autoCommaseparator(input) {
+      return input.toLocaleString("id-ID", {
+        style: "currency",
+        currency: "IDR",
+      });
     },
   },
 });
