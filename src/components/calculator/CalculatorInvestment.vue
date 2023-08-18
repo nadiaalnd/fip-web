@@ -499,15 +499,13 @@ export default defineComponent({
       );
     },
 
-    calculateInvestment() {
-      const {
-        target_money,
-        target_year,
-        initial_money,
-        investment_periode,
-        investment,
-        interest,
-      } = this.calculatorBody.input;
+    calculateResult() {
+      const target_money = parseFloat(this.calculatorBody.input[0]);
+      const target_year = parseInt(this.calculatorBody.input[1]);
+      const initial_money = parseFloat(this.calculatorBody.input[2]);
+      const investment = parseFloat(this.calculatorBody.input[3]);
+      const investment_periode = this.calculatorBody.input[4];
+      const interest = parseFloat(this.calculatorBody.input[5]);
 
       let temp_money = initial_money;
       let isSuccess = false;
@@ -530,41 +528,50 @@ export default defineComponent({
 
       isSuccess = temp_money >= target_money ?? false;
       let results = {
-        success: isSuccess,
         invest_total: temp_money,
-        invest_interest: invest_total,
         invest_primary: temp_money - invest_total,
+        invest_interest: invest_total,
+        success: isSuccess,
       };
 
       if (!isSuccess) {
-        const recommendation = this.gettingRecommendationYearInvestment();
+        const recommendation = this.gettingRecommendationYearInvestment(
+          target_money,
+          initial_money,
+          investment_periode,
+          investment,
+          interest
+        );
         results = {
           ...results,
-          recommendation,
+          reccomendation_year: recommendation.recommendation_year,
+          recommendation_total: recommendation.invest_total,
+          recommendation_primary: recommendation.invest_primary,
+          recommendation_interest: recommendation.invest_interest,
         };
       }
-
-      return results;
+      this.result = results;
+      this.isShowResult = true;
     },
 
-    gettingRecommendationYearInvestment() {
-      const {
-        target_money,
-        initial_money,
-        investment_periode,
-        investment,
-        interest,
-      } = this.input;
-
+    gettingRecommendationYearInvestment(
+      target_money,
+      initial_money,
+      investment_periode,
+      investment,
+      interest
+    ) {
       let temp_money = initial_money;
       let isSuccess = false;
       let invest_total = 0;
       let year = 0;
+
       while (!isSuccess) {
         temp_money =
-          investment_periode == "annually"
+          investment_periode === "annually"
             ? this.calculateMoneyByYear(temp_money, investment)
             : this.calculateMoneyByMonth(temp_money, investment);
+
         let tmp = this.getReturnOnInvestment(temp_money, interest);
         temp_money += tmp;
         invest_total += tmp;
@@ -580,43 +587,6 @@ export default defineComponent({
       };
     },
 
-    calculateResult() {
-      // const target_money = parseFloat(this.calculatorBody.input[0]);
-      // const target_year = parseInt(this.calculatorBody.input[1]);
-      // const initial_money = parseFloat(this.calculatorBody.input[2]);
-      // const investment = parseFloat(this.calculatorBody.input[3]);
-      // const investment_periode = this.calculatorBody.input[4];
-      // const interest = parseFloat(this.calculatorBody.input[5]);
-      const input = {
-        target_money: parseFloat(this.calculatorBody.input[0]),
-        target_year: parseInt(this.calculatorBody.input[1]),
-        initial_money: parseFloat(this.calculatorBody.input[2]),
-        investment: parseFloat(this.calculatorBody.input[3]),
-        investment_periode: this.calculatorBody.input[4],
-        interest: parseFloat(this.calculatorBody.input[5]),
-      };
-      const result = this.calculateInvestment({
-        target_money,
-        target_year,
-        initial_money,
-        investment_periode,
-        investment,
-        interest,
-      });
-
-      this.result = {
-        invest_total: result.invest_total,
-        invest_primary: result.invest_primary,
-        invest_interest: result.invest_interest,
-        success: result.success,
-        reccomendation_year: target_year,
-        recommendation_total: target_money,
-        recommendation_primary: result.recommendation.invest_primary,
-        recommendation_interest: result.recommendation.invest_interest,
-      };
-      console.log("result", this.result);
-      this.isShowResult = true;
-    },
     fillMoney(amount) {
       this.input[0].inputValue = amount;
       this.handleInput(0);
