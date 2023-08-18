@@ -18,13 +18,13 @@
         <div class="q-my-sm">
           <div class="f-text">UANG ANDA SAAT INI</div>
           <div class="f-text-highlighted">
-            Rp {{ formatCurrency(calculatorBody.input[2]) }}
+            {{ formatCurrency(calculatorBody.input[2]) }}
           </div>
         </div>
         <div class="q-my-sm">
           <div class="f-text">JUMLAH INVESTASI / BULAN</div>
           <div class="f-text-highlighted">
-            Rp {{ formatCurrency(calculatorBody.input[3]) }}
+            {{ formatCurrency(calculatorBody.input[3]) }}
           </div>
         </div>
         <div class="q-my-sm">
@@ -42,7 +42,7 @@
             </div>
             <i class="material-icons arrow-right-ic">arrow_right</i>
             <div class="f-text-highlighted" style="color: green">
-              {{ calculatorBody.input[1] }} Tahun
+              {{ result.recommendation_year }} Tahun
             </div>
           </div>
         </div>
@@ -50,13 +50,17 @@
           <div class="f-text">HASIL INVESTASI</div>
           <div class="row q-gutter-sm justify-start">
             <i class="material-icons arrow-drop-ic">arrow_drop_down_circle</i>
-            <div class="f-text-highlighted">Rp {{ result.invest_total }}</div>
+            <div class="f-text-highlighted">
+              {{ formatCurrency(result.recommendation_total) }}
+            </div>
           </div>
         </div>
         <div class="q-my-sm invest-result">
           <div class="f-text point-circle">POKOK INVESTASI</div>
           <div class="row justify-start">
-            <div class="f-text-highlighted">Rp {{ result.invest_primary }}</div>
+            <div class="f-text-highlighted">
+              {{ formatCurrency(result.recommendation_primary) }}
+            </div>
             <q-chip
               class="text-bold"
               square
@@ -65,16 +69,18 @@
               text-color="white"
             >
               {{
-                ((result.invest_primary / result.invest_total) * 100).toFixed(
-                  2
-                )
+                (
+                  (result.recommendation_primary /
+                    result.recommendation_total) *
+                  100
+                ).toFixed(2)
               }}%
             </q-chip>
           </div>
           <div class="f-text">BUNGA INVESTASI</div>
           <div class="row justify-start">
             <div class="point-circle f-text-highlighted">
-              Rp {{ result.invest_interest }}
+              {{ formatCurrency(result.recommendation_interest) }}
             </div>
             <q-chip
               class="text-bold"
@@ -84,9 +90,11 @@
               text-color="white"
             >
               {{
-                ((result.invest_interest / result.invest_total) * 100).toFixed(
-                  2
-                )
+                (
+                  (result.recommendation_interest /
+                    result.recommendation_total) *
+                  100
+                ).toFixed(2)
               }}%
             </q-chip>
           </div>
@@ -94,7 +102,7 @@
         <img
           src="/images/illustration/ill-invest-failed.png"
           alt="Invest Failed"
-          style="max-width: 540px"
+          style="max-width: 600px"
         />
       </div>
       <q-btn
@@ -120,13 +128,13 @@
         <div class="q-my-sm">
           <div class="f-text">UANG ANDA SAAT INI</div>
           <div class="f-text-highlighted">
-            Rp {{ formatCurrency(calculatorBody.input[2]) }}
+            {{ formatCurrency(calculatorBody.input[2]) }}
           </div>
         </div>
         <div class="q-my-sm">
           <div class="f-text">JUMLAH INVESTASI / BULAN</div>
           <div class="f-text-highlighted">
-            Rp {{ formatCurrency(calculatorBody.input[3]) }}
+            {{ formatCurrency(calculatorBody.input[3]) }}
           </div>
         </div>
         <div class="q-my-sm">
@@ -143,13 +151,17 @@
           <div class="f-text">HASIL INVESTASI</div>
           <div class="row q-gutter-sm justify-start">
             <i class="material-icons arrow-drop-ic">arrow_drop_down_circle</i>
-            <div class="f-text-highlighted">Rp {{ result.invest_total }}</div>
+            <div class="f-text-highlighted">
+              {{ formatCurrency(result.invest_total) }}
+            </div>
           </div>
         </div>
         <div class="q-my-sm invest-result">
           <div class="f-text point-circle">POKOK INVESTASI</div>
           <div class="row justify-start">
-            <div class="f-text-highlighted">Rp {{ result.invest_primary }}</div>
+            <div class="f-text-highlighted">
+              {{ formatCurrency(result.invest_primary) }}
+            </div>
             <q-chip
               class="text-bold"
               square
@@ -167,7 +179,7 @@
           <div class="f-text">BUNGA INVESTASI</div>
           <div class="row justify-start">
             <div class="point-circle f-text-highlighted">
-              Rp {{ result.invest_interest }}
+              {{ formatCurrency(result.invest_interest) }}
             </div>
             <q-chip
               class="text-bold"
@@ -185,12 +197,20 @@
           </div>
         </div>
         <img
+          v-if="result.invest_total >= calculatorBody.input[0]"
           src="/images/illustration/ill-invest-success.png"
           alt="Invest Success"
-          style="max-width: 540px"
+          style="max-width: 600px"
+        />
+        <img
+          v-else
+          src="/images/illustration/ill-invest-failed.png"
+          alt="Invest Failed"
+          style="max-width: 600px"
         />
       </div>
       <q-btn
+        v-if="result.invest_total <= calculatorBody.input[0]"
         class="recom-btn text-bold q-py-sm full-width q-my-sm"
         outline
         rounded
