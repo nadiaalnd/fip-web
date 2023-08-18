@@ -1,5 +1,5 @@
 <template>
-  <q-card class="q-px-lg q-py-sm full-width q-mb-lg">
+  <q-card id="invest-calculator" class="q-px-lg q-py-sm full-width q-mb-lg">
     <div class="content-header">
       <h1 class="text-primary q-mt-none q-mb-md text-bold">
         Kalkulator Investasi
@@ -545,11 +545,14 @@ export default defineComponent({
         results = {
           ...results,
           reccomendation_year: recommendation.recommendation_year,
-          recommendation_total: recommendation.invest_total,
-          recommendation_primary: recommendation.invest_primary,
-          recommendation_interest: recommendation.invest_interest,
+          recommendation_total: Math.round(recommendation.invest_total),
+          recommendation_primary: Math.round(recommendation.invest_primary),
+          recommendation_interest: Math.round(recommendation.invest_interest),
         };
       }
+      results.invest_total = Math.round(results.invest_total);
+      results.invest_interest = Math.round(results.invest_interest);
+      results.invest_primary = Math.round(results.invest_primary);
       this.result = results;
       this.isShowResult = true;
     },
