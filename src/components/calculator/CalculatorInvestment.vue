@@ -238,7 +238,7 @@
         :key="index"
       >
         <div class="q-mb-lg text-bold justify-start" v-if="index == 0">
-          {{ question.question }}
+          Jumlah uang yang ingin Anda capai
           <q-input
             outlined
             dense
@@ -284,7 +284,7 @@
           </div>
         </div>
         <div class="q-mt-md text-bold" v-if="index == 1">
-          {{ question.question }}
+          Berapa lama uang yang ingin Anda capai terkumpul
           <div class="row justify-start">
             <q-input
               class="col-4 text-center"
@@ -300,8 +300,20 @@
             >
           </div>
         </div>
-        <div class="q-mt-md text-bold" v-if="index == 2 || index == 3">
-          {{ question.question }}
+        <div class="q-mt-md text-bold" v-if="index == 2">
+          Uang yang Anda miliki sekarang
+          <q-input
+            outlined
+            dense
+            class="q-my-sm col-4"
+            style="max-width: 200px; font-size: 16px; min-width: 170px"
+            v-model="question.inputValue"
+            @update:modelValue="handleInput(index)"
+            ><template v-slot:prepend> Rp </template>
+          </q-input>
+        </div>
+        <div class="q-mt-md text-bold" v-if="index == 3">
+          Jumlah investasi Anda setiap bulan
           <q-input
             outlined
             dense
@@ -316,7 +328,7 @@
           class="q-mt-md text-bold q-gutter-sm q-py-xs"
           v-else-if="index == 4"
         >
-          {{ question.question }}
+          Tempo waktu Anda dalam investasi
           <div class="row justify-start">
             <q-radio
               size="xs"
@@ -336,7 +348,7 @@
           </div>
         </div>
         <div class="q-mt-md text-bold" v-else-if="index == 5">
-          {{ question.question }}
+          Imbal hasil yang diharapkan / tahun?
           <div class="row justify-start">
             <q-input
               class="q-mb-md col-4 text-center"
@@ -418,42 +430,36 @@ export default defineComponent({
           inputValue: "0",
           target_money: 0,
           addClass: "add-effect-fade",
-          question: "Jumlah uang yang ingin Anda capai",
         },
         {
           no: 2,
           inputValue: "",
           target_year: null,
           addClass: "add-effect-fade",
-          question: "Berapa lama uang yang ingin Anda capai terkumpul",
         },
         {
           no: 3,
           inputValue: "0",
           initial_money: 0,
           addClass: "add-effect-fade",
-          question: "Uang yang Anda miliki sekarang",
         },
         {
           no: 4,
           inputValue: "0",
           investment: 0,
           addClass: "add-effect-fade",
-          question: "Jumlah investasi Anda setiap bulan",
         },
         {
           no: 5,
           inputValue: "monthly",
           investment_periode: "monthly",
           addClass: "add-effect-fade",
-          question: "Tempo waktu Anda dalam investasi",
         },
         {
           no: 6,
           inputValue: "",
           interest: null,
           addClass: "add-effect-fade",
-          question: "Imbal hasil yang diharapkan / tahun?",
         },
       ],
       numberQuestion: 0,
@@ -507,12 +513,6 @@ export default defineComponent({
         style: "currency",
         currency: "IDR",
       });
-    },
-
-    formatInputValue() {
-      const value = this.question.inputValue.replace(/[^\d]/g, "");
-      const formattedValue = parseInt(value, 10).toLocaleString("id-ID");
-      this.question.inputValue = formattedValue;
     },
 
     calculateAndSaveResult: function () {
