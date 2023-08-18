@@ -309,7 +309,6 @@
             style="max-width: 200px; font-size: 16px; min-width: 170px"
             v-model="question.inputValue"
             @update:modelValue="handleInput(index)"
-            @input="formatInputValue"
             ><template v-slot:prepend> Rp </template>
           </q-input>
         </div>
@@ -362,7 +361,7 @@
           label="Lihat hasil rencana Anda"
           color="primary"
           gtm-action="btn_calculator_investment"
-          @click="calculateResult"
+          @click="calculateAndSaveResult"
         />
       </div>
     </div>
@@ -398,16 +397,25 @@ export default defineComponent({
       showButton: false,
       isShowResult: false,
       isShowRecommendation: false,
-      result: {},
       calculatorBody: {
         input: [],
         output: "",
         type: "calculator_investment",
       },
+      result: {
+        invest_total: "",
+        invest_primary: "",
+        invest_interst: "",
+        success: "",
+        reccomendation_year: "",
+        recommendation_total: "",
+        recommendation_primary: "",
+        recommendation_interest: "",
+      },
       input: [
         {
           no: 1,
-          inputValue: "",
+          inputValue: "0",
           target_money: 0,
           addClass: "add-effect-fade",
           question: "Jumlah uang yang ingin Anda capai",
@@ -421,21 +429,21 @@ export default defineComponent({
         },
         {
           no: 3,
-          inputValue: "",
+          inputValue: "0",
           initial_money: 0,
           addClass: "add-effect-fade",
           question: "Uang yang Anda miliki sekarang",
         },
         {
           no: 4,
-          inputValue: "",
+          inputValue: "0",
           investment: 0,
           addClass: "add-effect-fade",
           question: "Jumlah investasi Anda setiap bulan",
         },
         {
           no: 5,
-          inputValue: "",
+          inputValue: "monthly",
           investment_periode: "monthly",
           addClass: "add-effect-fade",
           question: "Tempo waktu Anda dalam investasi",
@@ -508,8 +516,8 @@ export default defineComponent({
     },
 
     calculateAndSaveResult: function () {
-      this.showResult = true;
-      this.calculatorBody.input = JSON.stringify(this.form);
+      this.calculateResult();
+      this.calculatorBody.input = JSON.stringify(this.input);
       this.calculatorBody.output = JSON.stringify(this.result);
       this.$services.calculator.add(
         this.calculatorBody,
@@ -517,6 +525,7 @@ export default defineComponent({
         () => {},
         () => {}
       );
+      this.isShowResult = true;
     },
 
     calculateResult() {
