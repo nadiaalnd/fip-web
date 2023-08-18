@@ -9,7 +9,7 @@
     -webkit-hyphens: auto
     hyphens: auto
   @media (min-width: $md-breakpoint)
-    .card-aturan-mobile  
+    .card-aturan-mobile
       display: none
 
 .content-card
@@ -38,7 +38,7 @@
       text-decoration: none
       color: black
       flex: 0 0 auto
-      
+
       img
         margin-right: 12px
         height: 40px
@@ -58,13 +58,13 @@
   .container
     .subTitle-profil
       font-size: 2.5em
-    
+
     .add-effect-fade
       position: relative
       // margin-bottom: 200px
       .keterangan
-        font-size: 4em 
-    
+        font-size: 4em
+
     .statistik-profil
       display: grid
       grid-template-columns: 2fr 2fr 2fr 1fr
@@ -93,7 +93,7 @@
 
         div:nth-child(2)
           font-size: 2.5em
-          
+
   @media (max-width: $sm-breakpoint)
     margin-bottom: 5rem
 
@@ -116,7 +116,7 @@
           flex-direction: column
           gap: 15px
 
-        .btn-reset 
+        .btn-reset
           float: none
           margin: auto
           border-radius: 40px
@@ -130,9 +130,9 @@
           font-size: 2.5em
           margin: 0.3rem 0
 
-      .statistik-profil 
+      .statistik-profil
         grid-template-columns: 1fr 1fr
-        
+
         row-gap: 40px
         column-gap: 30px
         margin-bottom: 4rem
@@ -163,7 +163,7 @@
           div:nth-child(2)
             font-size: 1.3em
 
-      
+
 
     .container-circle
       margin-bottom: 2.5rem
@@ -179,10 +179,10 @@
     .--question-content
       gap: 8px
 
-  @media only screen and (min-width: 768px) 
+  @media only screen and (min-width: 768px)
     .container
       .add-effect-fade
-        .btn-reset 
+        .btn-reset
           float: right
           border-radius: 20px
           width: 272px
@@ -190,7 +190,7 @@
 
 
   @media (max-width: $md-breakpoint)
-    margin-bottom: 15rem 
+    margin-bottom: 15rem
 
     .container
       .content-profil-resiko
@@ -203,8 +203,8 @@
         font-size: 1.8em
 
       .add-effect-fade
-        .btn-reset 
-          float: none 
+        .btn-reset
+          float: none
           margin: auto
           border-radius: 40px
           width: 95%
@@ -212,14 +212,14 @@
 
           div
             font-size: 1.3em
-          
+
         .keterangan
           font-size: 3em
           margin: 0.3rem 0
 
-      .statistik-profil 
+      .statistik-profil
         grid-template-columns: 1fr 1fr
-        
+
         row-gap: 40px
         column-gap: 30px
         margin-bottom: 4rem
@@ -269,7 +269,7 @@
         .keterangan
           font-size: 3.5em
 
-      .statistik-profil 
+      .statistik-profil
         grid-template-columns: 2fr 2fr 2fr 1fr
         row-gap: 40px
         column-gap: 30px
@@ -298,7 +298,7 @@
 
           div:nth-child(2)
             font-size: 2em
-          
+
 
   .--question-content ~ div
     @media (max-width: $sm-breakpoint)
@@ -309,14 +309,14 @@
       padding: 15px
       margin: 20px 0
 
-        
-  
-  .--question-status 
+
+
+  .--question-status
     font-size: 20px
     margin-bottom: 16px
     span:nth-child(1)
       color : $neutral-grey
-    
+
     span:nth-child(2)
       color: $blue
       font-weight: bold
@@ -328,7 +328,7 @@
     border-top: 1px #A1A1A1
     box-shadow: '0px 2px 2px rgba(0, 0, 0, 0.25)'
 
-  .btn-reset 
+  .btn-reset
     cursor: pointer
     float: right
     border-radius: 20px
@@ -356,10 +356,46 @@
     animation-iteration-count: 1
     animation-fill-mode: forwards
 
-
-  @keyframes fadeInAnimation 
-    0% 
+  @keyframes fadeInAnimation
+    0%
       opacity: 0
-    
-    100% 
+
+    100%
       opacity: 1
+
+#invest-calculator
+  .arrow-drop-ic
+    transform: rotate(180deg)
+    color: green
+    font-size: 24px
+  .arrow-right-ic
+    color: green
+    font-size: 24px
+  .invest-result
+    margin-left: 75px
+    position: relative
+  .point-circle
+    position: relative
+  .point-circle::before
+    content: ""
+    position: absolute
+    width: 10px
+    height: 10px
+    margin-left: -34px
+    border-radius: 50%
+    background-color: #999999
+    left: 0
+    top: 50%
+    transform: translateY(-50%)
+  .invest-result::before
+    content: ""
+    position: absolute
+    top: 10px
+    margin-left: -29px
+    left: 0
+    transform: translateX(-50%)
+    width: 2px
+    height: calc(73%)
+    background-color: #ccc
+  .recom-btn
+    background-color: #ffde59 !important

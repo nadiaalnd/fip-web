@@ -1,5 +1,5 @@
 <template>
-  <q-card id="" class="q-px-lg q-py-sm full-width q-mb-lg">
+  <q-card class="q-px-lg q-py-sm full-width q-mb-lg">
     <div class="content-header">
       <h1 class="text-primary q-mt-none q-mb-md text-bold">
         Kalkulator Investasi
@@ -289,6 +289,7 @@
             style="max-width: 200px; font-size: 16px; min-width: 170px"
             v-model="question.inputValue"
             @update:modelValue="handleInput(index)"
+            @input="formatInputValue"
             ><template v-slot:prepend> Rp </template>
           </q-input>
         </div>
@@ -498,49 +499,120 @@ export default defineComponent({
       );
     },
 
-    calculateResult() {
-      const target_money = this.calculatorBody.input[0];
-      const target_year = this.calculatorBody.input[1];
-      const initial_money = this.calculatorBody.input[2];
-      const investment = this.calculatorBody.input[3];
-      const investment_periode = this.calculatorBody.input[4];
-      const interest = this.calculatorBody.input[5];
+    calculateInvestment() {
+      const {
+        target_money,
+        target_year,
+        initial_money,
+        investment_periode,
+        investment,
+        interest,
+      } = this.calculatorBody.input;
 
-      let invest_total_sementara = initial_money;
-      let interest_total = 0;
-      let year = 1;
-      let target_month = target_year * 12;
+      let temp_money = initial_money;
+      let isSuccess = false;
+      let invest_total = 0;
 
-      if (investment_periode === "annually") {
-        while (year <= target_year) {
-          invest_total_sementara += investment * 12;
-          let interest_sementara = invest_total_sementara * (interest / 100);
-          invest_total_sementara += interest_sementara;
-          interest_total += interest_sementara;
-          year++;
-        }
-      } else if (investment_periode === "monthly") {
-        while (year <= target_month) {
-          invest_total_sementara += investment;
-          let interest_sementara = invest_total_sementara * (interest / 100);
-          invest_total_sementara += interest_sementara;
-          interest_total += interest_sementara;
-          year++;
-        }
+      for (
+        let i = 0;
+        i < (investment_periode === "monthly" ? target_year * 12 : target_year);
+        i++
+      ) {
+        temp_money =
+          investment_periode === "annually"
+            ? this.calculateMoneyByYear(temp_money, investment)
+            : this.calculateMoneyByMonth(temp_money, investment);
+
+        let tmp = this.getReturnOnInvestment(temp_money, interest);
+        temp_money += tmp;
+        invest_total += tmp;
       }
-      
-      const invest_primary = investment * target_year + initial_money;
-      const invest_interest = invest_total - invest_primary;
+
+      isSuccess = temp_money >= target_money ?? false;
+      let results = {
+        success: isSuccess,
+        invest_total: temp_money,
+        invest_interest: invest_total,
+        invest_primary: temp_money - invest_total,
+      };
+
+      if (!isSuccess) {
+        const recommendation = this.gettingRecommendationYearInvestment();
+        results = {
+          ...results,
+          recommendation,
+        };
+      }
+
+      return results;
+    },
+
+    gettingRecommendationYearInvestment() {
+      const {
+        target_money,
+        initial_money,
+        investment_periode,
+        investment,
+        interest,
+      } = this.input;
+
+      let temp_money = initial_money;
+      let isSuccess = false;
+      let invest_total = 0;
+      let year = 0;
+      while (!isSuccess) {
+        temp_money =
+          investment_periode == "annually"
+            ? this.calculateMoneyByYear(temp_money, investment)
+            : this.calculateMoneyByMonth(temp_money, investment);
+        let tmp = this.getReturnOnInvestment(temp_money, interest);
+        temp_money += tmp;
+        invest_total += tmp;
+        year++;
+        isSuccess = temp_money >= target_money ?? false;
+      }
+
+      return {
+        recommendation_year: this.monthToYear(year, investment_periode),
+        invest_total: temp_money,
+        invest_interest: invest_total,
+        invest_primary: temp_money - invest_total,
+      };
+    },
+
+    calculateResult() {
+      // const target_money = parseFloat(this.calculatorBody.input[0]);
+      // const target_year = parseInt(this.calculatorBody.input[1]);
+      // const initial_money = parseFloat(this.calculatorBody.input[2]);
+      // const investment = parseFloat(this.calculatorBody.input[3]);
+      // const investment_periode = this.calculatorBody.input[4];
+      // const interest = parseFloat(this.calculatorBody.input[5]);
+      const input = {
+        target_money: parseFloat(this.calculatorBody.input[0]),
+        target_year: parseInt(this.calculatorBody.input[1]),
+        initial_money: parseFloat(this.calculatorBody.input[2]),
+        investment: parseFloat(this.calculatorBody.input[3]),
+        investment_periode: this.calculatorBody.input[4],
+        interest: parseFloat(this.calculatorBody.input[5]),
+      };
+      const result = this.calculateInvestment({
+        target_money,
+        target_year,
+        initial_money,
+        investment_periode,
+        investment,
+        interest,
+      });
 
       this.result = {
-        invest_total,
-        invest_primary,
-        invest_interest,
-        success: invest_total >= 0 ? 1 : 0,
+        invest_total: result.invest_total,
+        invest_primary: result.invest_primary,
+        invest_interest: result.invest_interest,
+        success: result.success,
         reccomendation_year: target_year,
         recommendation_total: target_money,
-        recommendation_primary: invest_primary,
-        recommendation_interest: invest_interest,
+        recommendation_primary: result.recommendation.invest_primary,
+        recommendation_interest: result.recommendation.invest_interest,
       };
       console.log("result", this.result);
       this.isShowResult = true;
@@ -548,6 +620,18 @@ export default defineComponent({
     fillMoney(amount) {
       this.input[0].inputValue = amount;
       this.handleInput(0);
+    },
+    monthToYear(month, type = "annually") {
+      return type === "monthly" ? month / 12 : month;
+    },
+    calculateMoneyByYear(init_money, investment) {
+      return investment * 12 + init_money;
+    },
+    calculateMoneyByMonth(init_money, investment) {
+      return investment + init_money;
+    },
+    getReturnOnInvestment(init_money, interest) {
+      return init_money * (interest / 100);
     },
   },
 
@@ -558,49 +642,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style class="scope">
-.arrow-drop-ic {
-  transform: rotate(180deg);
-  color: green;
-  font-size: 24px;
-}
-.arrow-right-ic {
-  color: green;
-  font-size: 24px;
-}
-.invest-result {
-  margin-left: 75px;
-  position: relative;
-}
-.point-circle {
-  position: relative;
-}
-.point-circle::before {
-  content: "";
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  margin-left: -34px;
-  border-radius: 50%;
-  background-color: #999999;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.invest-result::before {
-  content: "";
-  position: absolute;
-  top: 10px;
-  margin-left: -29px;
-  left: 0;
-  transform: translateX(-50%);
-  width: 2px;
-  height: calc(73%);
-  background-color: #ccc;
-}
-
-.recom-btn {
-  background-color: #ffde59 !important;
-}
-</style>
