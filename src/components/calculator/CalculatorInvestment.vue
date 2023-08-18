@@ -244,7 +244,7 @@
             dense
             class="q-my-sm col-4"
             style="max-width: 200px; font-size: 16px; min-width: 170px"
-            v-model="question.inputValue"
+            v-model="input[0].inputValue"
             @update:modelValue="handleInput(index)"
             ><template v-slot:prepend> Rp </template>
           </q-input>
@@ -289,7 +289,7 @@
             <q-input
               class="col-4 text-center"
               style="max-width: 60px; font-size: 20px; min-width: 30px"
-              v-model="question.inputValue"
+              v-model="input[1].inputValue"
               @update:modelValue="handleInput(index)"
             >
             </q-input>
@@ -307,7 +307,7 @@
             dense
             class="q-my-sm col-4"
             style="max-width: 200px; font-size: 16px; min-width: 170px"
-            v-model="question.inputValue"
+            v-model="input[2].inputValue"
             @update:modelValue="handleInput(index)"
             ><template v-slot:prepend> Rp </template>
           </q-input>
@@ -319,7 +319,7 @@
             dense
             class="q-my-sm col-4"
             style="max-width: 200px; font-size: 16px; min-width: 170px"
-            v-model="question.inputValue"
+            v-model="input[3].inputValue"
             @update:modelValue="handleInput(index)"
             ><template v-slot:prepend> Rp </template>
           </q-input>
@@ -332,7 +332,7 @@
           <div class="row justify-start">
             <q-radio
               size="xs"
-              v-model="question.inputValue"
+              v-model="input[4].inputValue"
               val="monthly"
               label="Perbulan"
               style="margin-left: -15px"
@@ -340,7 +340,7 @@
             />
             <q-radio
               size="xs"
-              v-model="question.inputValue"
+              v-model="input[4].inputValue"
               val="annually"
               label="Pertahun"
               @update:modelValue="handleInput(index)"
@@ -353,7 +353,7 @@
             <q-input
               class="q-mb-md col-4 text-center"
               style="max-width: 60px; font-size: 20px; min-width: 30px"
-              v-model="question.inputValue"
+              v-model="input[5].inputValue"
               @update:modelValue="handleInput(index)"
             >
             </q-input>
