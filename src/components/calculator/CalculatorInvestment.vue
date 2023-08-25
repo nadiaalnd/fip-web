@@ -12,7 +12,7 @@
         <div class="q-my-sm">
           <div class="f-text">NOMINAL UANG RENCANA ANDA</div>
           <div class="f-text-highlighted">
-            {{ calculatorBody.input[0] }}
+            {{ formatCurrency(calculatorBody.input[0]) }}
           </div>
         </div>
         <div class="q-my-sm">
@@ -41,7 +41,7 @@
               {{ calculatorBody.input[1] }} Tahun
             </div>
             <i class="material-icons arrow-right-ic">arrow_right</i>
-            <div class="f-text-highlighted" style="color: green">
+            <div class="f-text-highlighted" style="color: #00a167">
               {{ result.recomendation_year }} Tahun
             </div>
           </div>
@@ -99,11 +99,25 @@
             </q-chip>
           </div>
         </div>
-        <img
-          src="/images/illustration/ill-invest-failed.png"
-          alt="Invest Failed"
-          style="max-width: 600px"
-        />
+        <div class="ill-failed q-my-lg">
+          <div class="content-wrapper">
+            <div class="text-content">
+              <h2 class="text-title" style="color: white">
+                Bedah Hasil Rencana Kamu
+              </h2>
+              <p class="text-detail" style="color: white">
+                Yahh, hasil rencana kamu belum cocok untuk mencapai tujuanmu.
+                Silakan lihat rekomendasi dari kami.
+              </p>
+            </div>
+            <div class="image-content">
+              <img
+                src="/images/illustration/ill-invest-failed.png"
+                alt="Invest Failed"
+              />
+            </div>
+          </div>
+        </div>
       </div>
       <q-btn
         class="text-bold q-py-sm full-width q-mb-md"
@@ -196,18 +210,44 @@
             </q-chip>
           </div>
         </div>
-        <img
+        <div
           v-if="result.invest_total >= calculatorBody.input[0]"
-          src="/images/illustration/ill-invest-success.png"
-          alt="Invest Success"
-          style="max-width: 600px"
-        />
-        <img
-          v-else
-          src="/images/illustration/ill-invest-failed.png"
-          alt="Invest Failed"
-          style="max-width: 600px"
-        />
+          class="ill-success q-my-lg"
+        >
+          <div class="content-wrapper">
+            <div class="text-content">
+              <h2 class="text-title">Bedah Hasil Rencana Kamu</h2>
+              <p class="text-detail">
+                Yeayy, hasil rencana kamu cocok untuk mencapai tujuanmu
+              </p>
+            </div>
+            <div class="image-content">
+              <img
+                src="/images/illustration/ill-invest-success.png"
+                alt="Invest Success"
+              />
+            </div>
+          </div>
+        </div>
+        <div v-else class="ill-failed q-my-lg">
+          <div class="content-wrapper">
+            <div class="text-content">
+              <h2 class="text-title" style="color: white">
+                Bedah Hasil Rencana Kamu
+              </h2>
+              <p class="text-detail" style="color: white">
+                Yahh, hasil rencana kamu belum cocok untuk mencapai tujuanmu.
+                Silakan lihat rekomendasi dari kami.
+              </p>
+            </div>
+            <div class="image-content">
+              <img
+                src="/images/illustration/ill-invest-failed.png"
+                alt="Invest Failed"
+              />
+            </div>
+          </div>
+        </div>
       </div>
       <q-btn
         v-if="result.invest_total <= calculatorBody.input[0]"
@@ -245,6 +285,7 @@
             class="q-my-sm col-4"
             style="max-width: 200px; font-size: 16px; min-width: 170px"
             v-model="input[0].inputValue"
+            :value="format(input[0].inputValue)"
             @update:modelValue="handleInput(index)"
             ><template v-slot:prepend> Rp </template>
           </q-input>
@@ -290,6 +331,7 @@
               class="col-4 text-center"
               style="max-width: 60px; font-size: 20px; min-width: 30px"
               v-model="input[1].inputValue"
+              :value="format(input[1].inputValue)"
               @update:modelValue="handleInput(index)"
             >
             </q-input>
@@ -308,6 +350,7 @@
             class="q-my-sm col-4"
             style="max-width: 200px; font-size: 16px; min-width: 170px"
             v-model="input[2].inputValue"
+            :value="format(input[2].inputValue)"
             @update:modelValue="handleInput(index)"
             ><template v-slot:prepend> Rp </template>
           </q-input>
@@ -320,6 +363,7 @@
             class="q-my-sm col-4"
             style="max-width: 200px; font-size: 16px; min-width: 170px"
             v-model="input[3].inputValue"
+            :value="format(input[3].inputValue)"
             @update:modelValue="handleInput(index)"
             ><template v-slot:prepend> Rp </template>
           </q-input>
@@ -428,37 +472,31 @@ export default defineComponent({
         {
           no: 1,
           inputValue: "0",
-          target_money: 0,
           addClass: "add-effect-fade",
         },
         {
           no: 2,
           inputValue: "",
-          target_year: null,
           addClass: "add-effect-fade",
         },
         {
           no: 3,
           inputValue: "0",
-          initial_money: 0,
           addClass: "add-effect-fade",
         },
         {
           no: 4,
           inputValue: "0",
-          investment: 0,
           addClass: "add-effect-fade",
         },
         {
           no: 5,
-          inputValue: "monthly",
-          investment_periode: "monthly",
+          inputValue: "",
           addClass: "add-effect-fade",
         },
         {
           no: 6,
           inputValue: "",
-          interest: null,
           addClass: "add-effect-fade",
         },
       ],
@@ -496,6 +534,7 @@ export default defineComponent({
     handleInput: debounce(function (index) {
       console.log("index : ", index);
       console.log("calculation", this.calculatorBody.input);
+      this.input[index].inputValue = this.formatCurrency(this.input[index].inputValue);
       if (index === this.numberQuestion) {
         this.calculatorBody.input.push(this.input[index].inputValue);
         this.numberQuestion++;
@@ -507,7 +546,7 @@ export default defineComponent({
         this.showButton = true;
       }
     }, 1000),
-
+    
     formatCurrency(value) {
       return "Rp " + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },

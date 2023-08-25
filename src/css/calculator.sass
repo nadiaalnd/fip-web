@@ -163,8 +163,6 @@
           div:nth-child(2)
             font-size: 1.3em
 
-
-
     .container-circle
       margin-bottom: 2.5rem
       gap: 10px
@@ -188,7 +186,6 @@
           width: 272px
           padding: 16px 20px
 
-
   @media (max-width: $md-breakpoint)
     margin-bottom: 15rem
 
@@ -197,7 +194,6 @@
         h1
           font-size: 2.5em
           font-weight: 500
-
 
       .subTitle-profil
         font-size: 1.8em
@@ -299,7 +295,6 @@
           div:nth-child(2)
             font-size: 2em
 
-
   .--question-content ~ div
     @media (max-width: $sm-breakpoint)
       padding: 10px
@@ -309,13 +304,11 @@
       padding: 15px
       margin: 20px 0
 
-
-
   .--question-status
     font-size: 20px
     margin-bottom: 16px
     span:nth-child(1)
-      color : $neutral-grey
+      color: $neutral-grey
 
     span:nth-child(2)
       color: $blue
@@ -366,10 +359,10 @@
 #invest-calculator
   .arrow-drop-ic
     transform: rotate(180deg)
-    color: green
+    color: #00A167
     font-size: 24px
   .arrow-right-ic
-    color: green
+    color: #00A167
     font-size: 24px
   .invest-result
     margin-left: 75px
@@ -379,9 +372,9 @@
   .point-circle::before
     content: ""
     position: absolute
-    width: 10px
-    height: 10px
-    margin-left: -34px
+    width: 16px
+    height: 16px
+    margin-left: -37px
     border-radius: 50%
     background-color: #999999
     left: 0
@@ -399,3 +392,78 @@
     background-color: #ccc
   .recom-btn
     background-color: #ffde59 !important
+  .img-responsive
+    width: 100%
+    height: auto
+  .ill-failed
+    height: 110px
+    padding: 8px 32px
+    justify-content: center
+    align-items: center
+    gap: 10px
+    align-self: stretch
+    border-radius: 8px
+    border-bottom: 1px solid #BAB9B9
+    background: #F00
+    overflow: hidden
+    display: flex
+    justify-content: flex-start
+    @media (min-width: $xs-breakpoint)
+      padding: 8px 16px
+    @media (min-width: $sm-breakpoint)
+      padding: 8px 32px
+  .ill-success
+    height: 110px
+    padding: 8px 32px
+    justify-content: center
+    align-items: center
+    gap: 10px
+    align-self: stretch
+    border-radius: 8px
+    border-bottom: 1px solid #BAB9B9
+    background: #FFDE59
+    overflow: hidden
+    display: flex
+    justify-content: flex-start
+    @media (min-width: $xs-breakpoint)
+      padding: 8px 16px
+    @media (min-width: $sm-breakpoint)
+      padding: 8px 30px
+  .content-wrapper
+    display: flex
+    align-items: center
+    flex: 1
+  .text-content
+    flex: 1
+  .image-content
+    flex-shrink: 0
+    margin-top: 20px
+    @media (min-width: $xs-breakpoint)
+      margin-top: 53px
+    @media (min-width: $sm-breakpoint)
+      margin-top: 35px
+    @media (min-width: $md-breakpoint)
+      margin-top: 35px
+  .image-content img
+    @media (min-width: $xs-breakpoint)
+      max-width: 80px
+      margin-right: -10px
+      padding-left: 5px
+    @media (min-width: $sm-breakpoint)
+      max-width: 100px
+    @media (min-width: $md-breakpoint)
+      max-width: 100px
+  .text-title
+    @media (min-width: $xs-breakpoint)
+      font-size: 14px
+      margin-top: 20px
+      margin-bottom: 6px
+    @media (min-width: $sm-breakpoint)
+      font-size: 16px
+    @media (min-width: $md-breakpoint)
+      font-size: 24px
+  .text-detail
+    @media (min-width: $xs-breakpoint)
+      font-size: 10px
+    @media (min-width: $sm-breakpoint)
+      font-size: 14px

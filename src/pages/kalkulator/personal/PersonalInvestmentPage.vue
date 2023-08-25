@@ -77,34 +77,29 @@
 
       <div class="container-article text-center">
         <div class="q-px-md q-py-sm q-mb-md">
-          <h1 class="q-mb-md" style="font-weight: normal">
-            Belajar Bersama Kami
-          </h1>
+          <h1 class="q-mb-md" style="font-weight: normal;">Belajar Bersama Kami</h1>
           <p class="q-mb-md">
             Kamu bisa pelajari berbagai hal tentang finansial, mulai dari
             perencanaan keuangan sampai investasi dengan detail mendasar oleh
             para pemateri terbaik secara asyik dan menarik.
           </p>
-          <q-btn
-            outline
-            color="primary"
-            href="/e-learning"
-            class="f-text-5 center"
-            label="Lihat Selengkapnya"
-            no-caps
-            style="font-weight: bold; border-radius: 8px"
-          >
-            <q-icon name="arrow_forward_ios" class="float-right" size="14px" />
+          <q-btn outline color="primary" href="/e-learning" class="f-text-5 center"
+          label="Lihat Selengkapnya" no-caps
+          style="font-weight: bold; border-radius: 8px;">
+            <q-icon
+              name="arrow_forward_ios"
+              class="float-right"
+              size="14px"
+            />
           </q-btn>
-        </div>
+          </div>
         <div class="q-px-md q-py-md">
           <div class="row justify-between items-stretch">
             <ItemProductLP
-              class="col-12 col-sm-6 col-md-4 q-px-md q-py-md"
-              v-for="(product, idx) in products"
-              :key="idx"
-              :product="product"
-            />
+            class="col-12 col-sm-6 col-md-4 q-px-md q-py-md"
+            v-for="(product, idx) in products"
+            :key="idx"
+            :product="product"/>
           </div>
         </div>
       </div>
@@ -124,7 +119,7 @@ export default defineComponent({
   components: {
     ItemProductLP,
     "dialog-nps": DialogNPS,
-    CalculatorInvestment
+    CalculatorInvestment,
   },
 
   data() {
