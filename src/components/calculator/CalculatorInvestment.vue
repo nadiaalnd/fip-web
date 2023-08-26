@@ -285,8 +285,8 @@
             class="q-my-sm col-4"
             style="max-width: 200px; font-size: 16px; min-width: 170px"
             v-model="input[0].inputValue"
-            :value="format(input[0].inputValue)"
-            @update:modelValue="handleInput(index)"
+            :value="input[0].inputValue"
+            @update:modelValue="handleInput(index), autoCommaRp(index)"
             ><template v-slot:prepend> Rp </template>
           </q-input>
           <div class="q-gutter-sm">
@@ -331,7 +331,7 @@
               class="col-4 text-center"
               style="max-width: 60px; font-size: 20px; min-width: 30px"
               v-model="input[1].inputValue"
-              :value="format(input[1].inputValue)"
+              :value="input[1].inputValue"
               @update:modelValue="handleInput(index)"
             >
             </q-input>
@@ -350,8 +350,8 @@
             class="q-my-sm col-4"
             style="max-width: 200px; font-size: 16px; min-width: 170px"
             v-model="input[2].inputValue"
-            :value="format(input[2].inputValue)"
-            @update:modelValue="handleInput(index)"
+            :value="input[2].inputValue"
+            @update:modelValue="handleInput(index), autoCommaRp(index)"
             ><template v-slot:prepend> Rp </template>
           </q-input>
         </div>
@@ -363,8 +363,8 @@
             class="q-my-sm col-4"
             style="max-width: 200px; font-size: 16px; min-width: 170px"
             v-model="input[3].inputValue"
-            :value="format(input[3].inputValue)"
-            @update:modelValue="handleInput(index)"
+            :value="input[3].inputValue"
+            @update:modelValue="handleInput(index), autoCommaRp(index)"
             ><template v-slot:prepend> Rp </template>
           </q-input>
         </div>
@@ -398,7 +398,7 @@
               class="q-mb-md col-4 text-center"
               style="max-width: 60px; font-size: 20px; min-width: 30px"
               v-model="input[5].inputValue"
-              @update:modelValue="handleInput(index)"
+              @update:modelValue="handleInput(index), autoCommaRp(index)"
             >
             </q-input>
             <span
@@ -530,11 +530,17 @@ export default defineComponent({
       this.showButton = false;
       this.calculatorBody.input = [];
     },
+    autoCommaRp(index) {
+        this.input[index].inputValue = this.input[index].inputValue
+        .toString()
+        .replace(/\D/g, "")
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    },
 
     handleInput: debounce(function (index) {
       console.log("index : ", index);
       console.log("calculation", this.calculatorBody.input);
-      this.input[index].inputValue = this.formatCurrency(this.input[index].inputValue);
+      this.input[index].inputValue = this.input[index].inputValue;
       if (index === this.numberQuestion) {
         this.calculatorBody.input.push(this.input[index].inputValue);
         this.numberQuestion++;
@@ -680,6 +686,14 @@ export default defineComponent({
     getReturnOnInvestment(init_money, interest) {
       return init_money * (interest / 100);
     },
+    formatRupiah : (money) => {
+        return new Intl.NumberFormat("id-ID", {
+          currency: "IDR",
+          minimumFractionDigits: 0,
+        })
+        .format(money)
+        .toString();
+    },
   },
 
   computed: {
@@ -692,6 +706,14 @@ export default defineComponent({
         currency: "IDR",
       });
     },
+
   },
+  watch:{
+    autoCommaSeparator() {
+      return this.input.forEach((data, idx) => {
+        data.inputValue = this.formatRupiah(data.inputValue);
+      });
+    },
+  }
 });
 </script>
