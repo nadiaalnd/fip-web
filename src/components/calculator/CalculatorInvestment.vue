@@ -287,7 +287,7 @@
             class="q-my-sm col-4"
             style="max-width: 200px; font-size: 16px; min-width: 170px"
             v-model="input[0].inputValue"
-            @update:modelValue="handleInput(index)"
+            @update:modelValue="handleInput(index), commasSeparator(index)"
           >
             <template v-slot:prepend> Rp</template>
           </q-input>
@@ -351,7 +351,7 @@
             class="q-my-sm col-4"
             style="max-width: 200px; font-size: 16px; min-width: 170px"
             v-model="input[2].inputValue"
-            @update:modelValue="handleInput(index)"
+            @update:modelValue="handleInput(index),commasSeparator(index)"
           >
             <template v-slot:prepend> Rp</template>
           </q-input>
@@ -364,7 +364,7 @@
             class="q-my-sm col-4"
             style="max-width: 200px; font-size: 16px; min-width: 170px"
             v-model="input[3].inputValue"
-            @update:modelValue="handleInput(index)"
+            @update:modelValue="handleInput(index),commasSeparator(index)"
           >
             <template v-slot:prepend> Rp</template>
           </q-input>
@@ -473,7 +473,7 @@ export default defineComponent({
       input: [
         {
           no: 1,
-          inputValue: "0",
+          inputValue: "",
           addClass: "add-effect-fade",
         },
         {
@@ -516,6 +516,15 @@ export default defineComponent({
         path: "/free/package/e-learning",
       });
     },
+    commasSeparator(index) {
+      const inputValue = parseInt(this.input[index].inputValue.replaceAll('.', '').replaceAll(',', ''));
+      if (typeof inputValue === 'number' && !isNaN(inputValue)) {
+        this.input[index].inputValue = Intl.NumberFormat('en-US').format(inputValue);
+      } else {
+        console.error('Nilai yang diberikan bukan merupakan nilai numerik yang valid.');
+      }
+    },
+
     showRecommendation() {
       this.isShowResult = false;
       this.isShowRecommendation = true;
@@ -571,10 +580,10 @@ export default defineComponent({
       this.isShowResult = true;
     },
     calculateResult() {
-      const target_money = parseFloat(this.calculatorBody.input[0]);
+      const target_money = parseFloat(this.calculatorBody.input[0].replaceAll('.', '').replaceAll(',', ''));
       const target_year = parseInt(this.calculatorBody.input[1]);
-      const initial_money = parseFloat(this.calculatorBody.input[2]);
-      const investment = parseFloat(this.calculatorBody.input[3]);
+      const initial_money = parseFloat(this.calculatorBody.input[2].replaceAll('.', '').replaceAll(',', ''));
+      const investment = parseFloat(this.calculatorBody.input[3].replaceAll('.', '').replaceAll(',', ''));
       const investment_periode = this.calculatorBody.input[4];
       const interest = parseFloat(this.calculatorBody.input[5]);
       console.log("calculatorBody result : ", this.calculatorBody);
@@ -662,7 +671,7 @@ export default defineComponent({
     },
 
     fillMoney(amount) {
-      this.input[0].inputValue = amount;
+      this.input[0].inputValue = Intl.NumberFormat('en-US').format(amount);
       this.handleInput(0);
     },
     monthToYear(month, type = "annually") {
