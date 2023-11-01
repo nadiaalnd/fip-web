@@ -12,7 +12,7 @@
         <div class="q-my-sm">
           <div class="f-text">NOMINAL UANG RENCANA ANDA</div>
           <div class="f-text-highlighted">
-            {{ formatCurrency(calculatorBody.input[0]) }}
+            {{ calculatorBody.input[0] }}
           </div>
         </div>
         <div class="q-my-sm">
@@ -216,7 +216,9 @@
         >
           <div class="content-wrapper">
             <div class="text-content">
-              <h2 class="text-title">Bedah Hasil Rencana Kamu</h2>
+              <h2 class="text-title">
+                Bedah Hasil Rencana Kamu
+              </h2>
               <p class="text-detail">
                 Yeayy, hasil rencana kamu cocok untuk mencapai tujuanmu
               </p>
@@ -285,9 +287,9 @@
             class="q-my-sm col-4"
             style="max-width: 200px; font-size: 16px; min-width: 170px"
             v-model="input[0].inputValue"
-            :value="input[0].inputValue"
-            @update:modelValue="handleInput(index), autoCommaRp(index)"
-            ><template v-slot:prepend> Rp </template>
+            @update:modelValue="handleInput(index)"
+          >
+            <template v-slot:prepend> Rp</template>
           </q-input>
           <div class="q-gutter-sm">
             <q-btn
@@ -331,14 +333,13 @@
               class="col-4 text-center"
               style="max-width: 60px; font-size: 20px; min-width: 30px"
               v-model="input[1].inputValue"
-              :value="input[1].inputValue"
               @update:modelValue="handleInput(index)"
             >
             </q-input>
             <span
               class="self-end q-mb-md q-ml-sm"
               style="font-size: 20px; font-weight: bold; margin-top: 30px"
-              >Tahun</span
+            >Tahun</span
             >
           </div>
         </div>
@@ -350,9 +351,9 @@
             class="q-my-sm col-4"
             style="max-width: 200px; font-size: 16px; min-width: 170px"
             v-model="input[2].inputValue"
-            :value="input[2].inputValue"
-            @update:modelValue="handleInput(index), autoCommaRp(index)"
-            ><template v-slot:prepend> Rp </template>
+            @update:modelValue="handleInput(index)"
+          >
+            <template v-slot:prepend> Rp</template>
           </q-input>
         </div>
         <div class="q-mt-md text-bold" v-if="index == 3">
@@ -363,9 +364,9 @@
             class="q-my-sm col-4"
             style="max-width: 200px; font-size: 16px; min-width: 170px"
             v-model="input[3].inputValue"
-            :value="input[3].inputValue"
-            @update:modelValue="handleInput(index), autoCommaRp(index)"
-            ><template v-slot:prepend> Rp </template>
+            @update:modelValue="handleInput(index)"
+          >
+            <template v-slot:prepend> Rp</template>
           </q-input>
         </div>
         <div
@@ -398,13 +399,13 @@
               class="q-mb-md col-4 text-center"
               style="max-width: 60px; font-size: 20px; min-width: 30px"
               v-model="input[5].inputValue"
-              @update:modelValue="handleInput(index), autoCommaRp(index)"
+              @update:modelValue="handleInput(index)"
             >
             </q-input>
             <span
               class="q-ml-sm text-bold"
               style="font-size: 25px; margin-top: 30px"
-              >%</span
+            >%</span
             >
           </div>
         </div>
@@ -421,7 +422,7 @@
         />
       </div>
     </div>
-    <hr />
+    <hr/>
     <section class="q-py-md">
       <h1 class="text-primary q-mt-none q-mb-md text-bold">
         Ayo Belajar Keuangan Gratis
@@ -445,8 +446,9 @@
 </template>
 
 <script>
-import { debounce } from "quasar";
-import { defineComponent } from "vue";
+import {debounce} from "quasar";
+import {defineComponent} from "vue";
+
 export default defineComponent({
   data() {
     return {
@@ -514,12 +516,10 @@ export default defineComponent({
         path: "/free/package/e-learning",
       });
     },
-
     showRecommendation() {
       this.isShowResult = false;
       this.isShowRecommendation = true;
     },
-
     resetQuestion() {
       this.input.forEach((data, idx) => {
         data.inputValue = "";
@@ -530,17 +530,9 @@ export default defineComponent({
       this.showButton = false;
       this.calculatorBody.input = [];
     },
-    autoCommaRp(index) {
-        this.input[index].inputValue = this.input[index].inputValue
-        .toString()
-        .replace(/\D/g, "")
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    },
-
     handleInput: debounce(function (index) {
       console.log("index : ", index);
       console.log("calculation", this.calculatorBody.input);
-      this.input[index].inputValue = this.input[index].inputValue;
       if (index === this.numberQuestion) {
         this.calculatorBody.input.push(this.input[index].inputValue);
         this.numberQuestion++;
@@ -552,17 +544,14 @@ export default defineComponent({
         this.showButton = true;
       }
     }, 1000),
-    
     formatCurrency(value) {
       return "Rp " + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
-
     calculateAndSaveResult: function () {
       this.calculateResult();
       this.isShowResult = true;
       this.sendToAPI();
     },
-
     sendToAPI: function () {
       var dataSendAPI = {
         input: JSON.stringify(this.input),
@@ -572,13 +561,15 @@ export default defineComponent({
       console.log("toJson : ", dataSendAPI);
       this.$services.calculator.add(
         dataSendAPI,
-        (data) => {},
-        () => {},
-        () => {}
+        (data) => {
+        },
+        () => {
+        },
+        () => {
+        }
       );
       this.isShowResult = true;
     },
-
     calculateResult() {
       const target_money = parseFloat(this.calculatorBody.input[0]);
       const target_year = parseInt(this.calculatorBody.input[1]);
@@ -686,14 +677,6 @@ export default defineComponent({
     getReturnOnInvestment(init_money, interest) {
       return init_money * (interest / 100);
     },
-    formatRupiah : (money) => {
-        return new Intl.NumberFormat("id-ID", {
-          currency: "IDR",
-          minimumFractionDigits: 0,
-        })
-        .format(money)
-        .toString();
-    },
   },
 
   computed: {
@@ -706,14 +689,10 @@ export default defineComponent({
         currency: "IDR",
       });
     },
-
   },
-  watch:{
-    autoCommaSeparator() {
-      return this.input.forEach((data, idx) => {
-        data.inputValue = this.formatRupiah(data.inputValue);
-      });
-    },
+
+  watch: {
+
   }
 });
 </script>
