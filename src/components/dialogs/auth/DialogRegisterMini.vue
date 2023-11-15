@@ -99,7 +99,7 @@
 
           <div class="flex justify-center q-mb-md">
             <q-btn
-              @click="doRegister"
+              @click.prevent="doRegister"
               :loading="loading"
               :disable="loading"
               dense no-caps push
