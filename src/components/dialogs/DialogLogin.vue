@@ -95,6 +95,7 @@
               label="Masuk"
               gtm-action="btn_login_submit"
               style="width: 200px;"
+              type="submit"
             />
           </div>
         </form>
@@ -236,7 +237,8 @@ export default {
       )
     },
 
-    doLogin() {
+    doLogin(event) {
+      event.preventDefault()
       const {passwd, username, captcha} = this.form;
       if(!passwd || !username){
         return this.$q.notify({

@@ -234,6 +234,16 @@ export default {
               val: "/kalkulator/personal/investasi",
               target: "",
             },
+            {
+              label: "Dana Darurat",
+              val: "/kalkulator/personal/dana-darurat",
+              target:"",
+            },
+            {
+              label: "Properti",
+              val: "/kalkulator/personal/properti",
+              target:"",
+            }
           ],
         },
         { label: "Media", val: "/media", target: "" },
@@ -270,6 +280,16 @@ export default {
               val: "/kalkulator/personal/investasi",
               target: "",
             },
+            {
+              label: "Dana Darurat",
+              val: "/kalkulator/personal/dana-darurat",
+              target:"",
+            },
+            {
+              label: "Properti",
+              val: "/kalkulator/personal/properti",
+              target:"",
+            }
           ],
         },
         { label: "Kamus", val: "/kamus", target: "" },

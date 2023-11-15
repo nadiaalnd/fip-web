@@ -122,7 +122,6 @@ export default defineComponent({
         if (money > 0) {
           this.form.salary = value;
           this.form.salaryInt = money;
-          this.setIDuser();
           this.calculatorBody.input = JSON.stringify({ pemasukan: +money });
           this.calculatorBody.output = JSON.stringify({
             pokok: Math.round((money * 50) / 100),

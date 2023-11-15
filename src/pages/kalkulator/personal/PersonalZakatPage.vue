@@ -1,9 +1,9 @@
 <template>
   <section class="container row wrap q-pt-lg relative-position">
-    <div class="absolute-bottom-right" style="background-image: url(/images/bg-keunggulan.svg); 
+    <div class="absolute-bottom-right" style="background-image: url(/images/bg-keunggulan.svg);
       background-repeat: no-repeat; background-size: cover; width: 487px; height: 458px; bottom: -10%;"></div>
     <div class="q-px-md  col-12 col-md-6 ">
-      <div class="absolute-top" style="background-image: url(/images/bg-achiev.svg); 
+      <div class="absolute-top" style="background-image: url(/images/bg-achiev.svg);
       transform: rotate(180deg) translate(-50%, 10%); right: 50%; background-repeat: no-repeat; background-size: cover; width: 369px; height: 366.15px;"></div>
       <h2 class="f-text-title">
         Ketentuan Zakat Mal
@@ -119,7 +119,7 @@
                     :style="result.countValue ? 'color: black;' : 'color: red;'">
                 </label>
                 <div class="text-weight-bold" style="position:  absolute; top: 5px; font-size: smaller;">
-                  Wajib Bayar 
+                  Wajib Bayar
                 </div>
               </div>
 
@@ -137,8 +137,11 @@
               </div>
 
               <div class="q-my-lg" :class="($q.platform.is.mobile ? 'text-center' : 'text-left')">
-                <h5 class="text-weight-bold">
+                <h5 v-if="result.countValue" class="text-weight-bold">
                   Total Zakat Mal dalam 1 {{formType.type }}
+                </h5>
+                <h5 v-else class="text-weight-bold">
+                  Total
                 </h5>
                 <h2 class="q-mb-md">
                   {{ result.calculate ? result.calculate : "Rp. - " }}
@@ -288,7 +291,7 @@ import ItemProductLP from 'src/components/items/ItemProductVideo.vue';
           .toString();
       },
 
-      
+
       getPercentage: function (percentage) {
           return Math.round(this.form.salaryInt * percentage / 100).toLocaleString()
       },
@@ -340,9 +343,9 @@ import ItemProductLP from 'src/components/items/ItemProductVideo.vue';
 
           if (money > 0) {
             this.result.incomeBonus = (money / 40);
-            this.form.incomeBonus = value            
+            this.form.incomeBonus = value
             return
-          
+
           }else{
             this.form.incomeBonus = 0
           }
@@ -352,7 +355,7 @@ import ItemProductLP from 'src/components/items/ItemProductVideo.vue';
           this.form.incomeBonus = 0
         }
 
-          
+
       },
 
       'form.expenditure': function (newVal){
@@ -364,11 +367,11 @@ import ItemProductLP from 'src/components/items/ItemProductVideo.vue';
             this.result.expenditure = (money / 40);
             this.form.expenditure = value;
             return
-          
+
           }else{
             this.form.expenditure = 0;
           }
-        
+
         }else{
           this.result.expenditure = 0;
           this.form.expenditure = 0;
@@ -382,19 +385,19 @@ import ItemProductLP from 'src/components/items/ItemProductVideo.vue';
             const {resultIncome, resultBonusIncome, resultExpenditure, resultFormRadio} = val;
             let count = Math.floor((resultIncome + resultBonusIncome) - resultExpenditure);
             let pureCount = (resultIncome * 40) + (resultBonusIncome * 40) - (resultExpenditure * 40);
-            
+
             this.result.calculate = count <= 0 ? "" :  `Rp. ${this.formatRupiah(count).toString()}`;
 
             if(resultFormRadio === "perbulan"){
               this.formType.type = "Bulan";
               this.formType.month = this.formType.gold_nishab * this.formType.gold_per_gram / 12;
-              this.result.countValue = this.formType.month >= pureCount ? false : true; 
+              this.result.countValue = this.formType.month >= pureCount ? false : true;
             } else if(resultFormRadio === "pertahun"){
               this.formType.type = "Tahun";
               this.formType.year = this.formType.gold_nishab * this.formType.gold_per_gram;
-              this.result.countValue = this.formType.year >= pureCount ? false : true; 
+              this.result.countValue = this.formType.year >= pureCount ? false : true;
             }
-          
+
           }
         },
         deep: true,

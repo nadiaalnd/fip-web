@@ -212,6 +212,19 @@ const routes = [
             component: () =>
               import("pages/kalkulator/personal/PersonalInvestmentPage.vue"),
           },
+          {
+            path: "personal/dana-darurat",
+            meta: RouteMeta.user["dana-darurat"],
+            component: () =>
+              import("pages/kalkulator/dana-darurat/DanaDaruratPage.vue")
+          }
+          ,
+          {
+            path: "personal/properti",
+            meta: RouteMeta.user["property"],
+            component: () =>
+              import("pages/kalkulator/properti/PropertyPage.vue")
+          }
         ]
       },
 
@@ -233,7 +246,6 @@ const routes = [
                   id_purchase: to.query.id_purchase,
                 },
               });
-              return;
             }
             return next();
           } else {
@@ -264,7 +276,6 @@ const routes = [
                   id_purchase: to.query.id_purchase,
                 },
               });
-              return;
             }
             return next();
           } else {

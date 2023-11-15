@@ -83,8 +83,8 @@ export default {
       required: true,
     },
     activeMenu: {
-      type: Number,
-      required: false,
+      type: String,
+      required: true,
     },
     changeFilter: {
       type: Function,

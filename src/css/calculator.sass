@@ -1,3 +1,74 @@
+// Global Typograph for Calculator
+
+//Left Side (article)
+.article-title
+  font-size: 24px
+  font-weight: 700
+  margin-bottom: 16px
+
+.article-text
+  font-size: 16px
+  text-align: justify
+  -webkit-hyphens: auto
+  hyphens: auto
+
+//Right Side (calculator card)
+.calculator-title
+  color: $primary
+  font-size: 32px
+  font-weight: bold
+
+.calculator-input-label
+  font-size: 16px
+  font-weight: bold
+
+.calculator-input
+  max-width: 277px
+  font-size: 16px
+  min-width: 170px
+
+.calculator-mini-input
+  max-width: 60px
+  font-size: 24px
+
+.calculator-mini-append
+  font-size: 20px
+  font-weight: normal
+
+.calculator-result-label
+  font-size: 16px
+  font-weight: 600
+  margin-bottom: 8px
+
+.calculator-result
+  font-size: 24px
+  font-weight: 600
+
+.calculator-currency-result
+  display: flex
+  gap: 8px
+
+
+.btn-normal-b-radius
+  border-radius: 4px
+
+
+//Blue Button
+.primary-inactive-button
+  background-color: $bg-unselected-button
+  color: $text-unselected-button
+
+.primary-inactive-button
+  background-color: rgb(242, 246, 248) !important
+
+.primary-active-button
+  background-color: $bg-selected-button
+  color: white
+
+.primary-active-button:hover
+  background-color: rgb(52, 105, 167) !important
+
+//Spesific calculator
 .content-article
   .text-title
     font-size: 24px
@@ -467,3 +538,75 @@
       font-size: 10px
     @media (min-width: $sm-breakpoint)
       font-size: 14px
+
+#capaiDanaDarurat
+  .calculator-assumption
+    font-size:10px
+    font-weight: 700
+    color:#3469A7
+
+  .calculator-duration-result
+    font-size: 24px
+    display: flex
+    gap: 16px
+    margin-bottom: 8px
+
+#calculatorProperty
+  //Timeline
+  .timeline
+    margin: 16px 48px
+
+    .outer
+      display: flex
+      flex-direction: column
+      justify-content: space-between
+      gap: 32px
+      border-left: 1px solid #999999
+
+      //Dot Location
+      :nth-child(2)
+        .title-info::before
+          top: 22.5px
+
+      :nth-child(3)
+        .title-info::before
+          bottom: -47.5px
+
+          @media (max-width: 420px)
+            bottom: -85px
+
+      .timeline-card
+        position: relative
+        padding: 0px 32px
+
+        .info
+          display: flex
+          flex-direction: column
+          gap: 10px
+
+          .title-info
+            font-size: 14px
+            font-weight: 400
+            position: relative
+
+          //Dot
+          .title-info::before
+            background-color: #999999
+            content: ""
+            position: absolute
+            width: 20px
+            height: 20px
+            border-radius: 999px
+            left: -42.5px
+
+          .describe-info
+            font-size: 24px
+            font-weight: 700
+            margin: 0
+
+  .label-result
+    font-size: 14px
+    font-weight: 400
+
+  .result-property
+    font-weight: 700

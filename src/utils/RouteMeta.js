@@ -71,6 +71,18 @@ export default {
       image: "/favicon.png",
     },
 
+    "dana-darurat": {
+      title: "Kalkulator Dana Darurat | Finplan",
+      description: "Dana Darurat",
+      image: "/favicon.png"
+    },
+
+    "property": {
+      title: "Kalkulator Property | Finplan",
+      description: "Property",
+      image: "/favicon.png"
+    },
+
     home: {
       title: "Finplan.id – Teman Investasimu",
       description:

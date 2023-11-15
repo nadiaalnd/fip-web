@@ -107,6 +107,7 @@
               label="Daftar"
               gtm-action="btn_register_submit"
               style="width: 200px;"
+              type="submit"
             />
 
 

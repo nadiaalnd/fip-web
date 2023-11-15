@@ -8,7 +8,7 @@
     <!-- Recommendation -->
     <div v-if="isShowRecommendation">
       <div>
-        <div class="q-mb-md f-text-highlighted">Strategi Investasi Anda</div>
+        <h2 class="q-mb-md f-text-highlighted">Strategi Investasi Anda</h2>
         <div class="q-my-sm">
           <div class="f-text">NOMINAL UANG RENCANA ANDA</div>
           <div class="f-text-highlighted">
@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="q-my-sm">
-          <div class="f-text">JUMLAH INVESTASI / BULAN</div>
+          <div class="f-text">JUMLAH INVESTASI / {{investmentUnit}}</div>
           <div class="f-text-highlighted">
             {{ formatCurrency(calculatorBody.input[3]) }}
           </div>
@@ -105,7 +105,7 @@
               <h2 class="text-title" style="color: white">
                 Bedah Hasil Rencana Kamu
               </h2>
-              <p class="text-detail" style="color: white">
+              <p class="f-text-body" style="color: white">
                 Yahh, hasil rencana kamu belum cocok untuk mencapai tujuanmu.
                 Silakan lihat rekomendasi dari kami.
               </p>
@@ -132,7 +132,7 @@
     </div>
     <div v-if="isShowResult">
       <div>
-        <div class="q-mb-md f-text-highlighted">Strategi Investasi Anda</div>
+        <div class="q-mb-md f-text-title">Strategi Investasi Anda</div>
         <div class="q-my-sm">
           <div class="f-text">NOMINAL UANG RENCANA ANDA</div>
           <div class="f-text-highlighted">
@@ -146,7 +146,7 @@
           </div>
         </div>
         <div class="q-my-sm">
-          <div class="f-text">JUMLAH INVESTASI / BULAN</div>
+          <div class="f-text">JUMLAH INVESTASI / {{ investmentUnit }}</div>
           <div class="f-text-highlighted">
             {{ formatCurrency(calculatorBody.input[3]) }}
           </div>
@@ -179,7 +179,7 @@
             <q-chip
               class="text-bold"
               square
-              size="sm"
+              size="md"
               color="primary"
               text-color="white"
             >
@@ -198,7 +198,7 @@
             <q-chip
               class="text-bold"
               square
-              size="sm"
+              size="md"
               color="green"
               text-color="white"
             >
@@ -326,21 +326,19 @@
             />
           </div>
         </div>
-        <div class="q-mt-md text-bold" v-if="index == 1">
-          Berapa lama uang yang ingin Anda capai terkumpul
+        <div class="q-mt-md" v-if="index == 1">
+          <span class="text-bold">Berapa lama uang yang ingin Anda capai terkumpul</span>
           <div class="row justify-start">
             <q-input
               class="col-4 text-center"
-              style="max-width: 60px; font-size: 20px; min-width: 30px"
+              style="font-size: 20px; max-width: 60px; min-width: 30px"
               v-model="input[1].inputValue"
-              @update:modelValue="handleInput(index)"
-            >
+              @update:modelValue="handleInput(index)">
             </q-input>
             <span
               class="self-end q-mb-md q-ml-sm"
-              style="font-size: 20px; font-weight: bold; margin-top: 30px"
-            >Tahun</span
-            >
+              style="font-size: 20px; margin-top: 30px; font-weight: normal;"
+            >Tahun</span>
           </div>
         </div>
         <div class="q-mt-md text-bold" v-if="index == 2">
@@ -371,8 +369,7 @@
         </div>
         <div
           class="q-mt-md text-bold q-gutter-sm q-py-xs"
-          v-else-if="index == 4"
-        >
+          v-else-if="index == 4">
           Tempo waktu Anda dalam investasi
           <div class="row justify-start">
             <q-radio
@@ -392,21 +389,20 @@
             />
           </div>
         </div>
-        <div class="q-mt-md text-bold" v-else-if="index == 5">
-          Imbal hasil yang diharapkan / tahun?
+        <div class="q-mt-md" v-else-if="index == 5">
+          <span class="text-bold">Imbal hasil yang diharapkan / tahun?</span>
           <div class="row justify-start">
             <q-input
-              class="q-mb-md col-4 text-center"
-              style="max-width: 60px; font-size: 20px; min-width: 30px"
+              class="q-mb-md col-4 text-bold text-center"
+              style="max-width: 60px; font-size: 20px; font-weight:bold; min-width: 30px"
               v-model="input[5].inputValue"
               @update:modelValue="handleInput(index)"
             >
             </q-input>
             <span
-              class="q-ml-sm text-bold"
+              class="q-ml-sm"
               style="font-size: 25px; margin-top: 30px"
-            >%</span
-            >
+            >%</span>
           </div>
         </div>
       </div>
@@ -557,6 +553,9 @@ export default defineComponent({
       return "Rp " + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
     calculateAndSaveResult: function () {
+      this.calculatorBody.input = this.calculatorBody.input.map(value => {
+        return value.replaceAll('.', '').replaceAll(',', '');
+      });
       this.calculateResult();
       this.isShowResult = true;
       this.sendToAPI();
@@ -692,6 +691,9 @@ export default defineComponent({
     visibleQuestions() {
       return this.input.slice(0, this.numberQuestion + 1);
     },
+    investmentUnit() {
+      return this.input[4].inputValue === "monthly" ? "BULAN" : "TAHUN";
+    },
     autoCommaseparator(input) {
       return input.toLocaleString("id-ID", {
         style: "currency",
@@ -699,9 +701,5 @@ export default defineComponent({
       });
     },
   },
-
-  watch: {
-
-  }
 });
 </script>
