@@ -217,14 +217,19 @@ const routes = [
             meta: RouteMeta.user["dana-darurat"],
             component: () =>
               import("pages/kalkulator/dana-darurat/DanaDaruratPage.vue")
-          }
-          ,
+          },
           {
             path: "personal/properti",
             meta: RouteMeta.user["property"],
             component: () =>
               import("pages/kalkulator/properti/PropertyPage.vue")
-          }
+          },
+          {
+            path: "personal/pendidikan",
+            meta: RouteMeta.user["pendidikan"],
+            component: () =>
+              import("pages/kalkulator/pendidikan/CalculatorEducation.vue")
+          },
         ]
       },
 

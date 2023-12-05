@@ -23,8 +23,8 @@ build:
     - cd ~/tmp/
     - if [ ! -d "finplan-base-web" ]; then git clone ssh://git@gitlabfinplan:16022/finplan/web/finplan-base-web.git --branch $CI_COMMIT_BRANCH; fi
     - cd finplan-base-web 
-    - git checkout $CI_COMMIT_BRANCH --force
-    - git pull
+    - git fetch
+    - git checkout origin/$CI_COMMIT_BRANCH --force
     - cp .env.staging .env
     - yarn
     - quasar build

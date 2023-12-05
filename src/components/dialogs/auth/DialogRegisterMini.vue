@@ -74,25 +74,25 @@
           </q-input>
 
           <div :class="itemsCaptcha.imgCaptcha ? 'block' : 'hidden'" class="q-mx-auto q-mb-lg" style="width: 250px;">
-              <div class="flex justify-center items-center" style="gap: 16px;">
-                <q-img :src="itemsCaptcha.imgCaptcha" spinner-color="white" style="width: 159px; height: 60px;"/>
-                <q-icon @click="doGenereteCaptcha" name="img:images/reload.svg" size="sm" class="cursor-pointer"/>
+            <div class="flex justify-center items-center" style="gap: 16px;">
+              <q-img :src="itemsCaptcha.imgCaptcha" spinner-color="white" style="width: 159px; height: 60px;"/>
+              <q-icon @click="doGenereteCaptcha" name="img:images/reload.svg" size="sm" class="cursor-pointer"/>
 
-              </div>
-              <div class="flex justify-center q-my-md">
-                <q-input outlined v-model="itemsCaptcha.inputCaptcha" placeholder="Masukan kode verifikasi." dense style="width: 90%;"
-                  for="input-captcha-register"
-                  :error="errors.captcha != null"
-                  :error-message="errors.captcha"
-                  maxlength="6"
-                />
-              </div>
             </div>
+            <div class="flex justify-center q-my-md">
+              <q-input outlined v-model="itemsCaptcha.inputCaptcha" placeholder="Masukan kode verifikasi." dense style="width: 90%;"
+                       for="input-captcha-register"
+                       :error="errors.captcha != null"
+                       :error-message="errors.captcha"
+                       maxlength="6"
+              />
+            </div>
+          </div>
 
           <div class="q-my-md">
             Dengan mendaftar berarti Anda mematuhi
             <a href="/media/syarat-dan-ketentuan" target="_blank"
-              ><b class="text-primary">Syarat dan Ketentuan</b></a
+            ><b class="text-primary">Syarat dan Ketentuan</b></a
             >
             yang berlaku
           </div>
