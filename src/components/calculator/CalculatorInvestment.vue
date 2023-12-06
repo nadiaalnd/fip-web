@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="q-my-sm">
-          <div class="f-text">JUMLAH INVESTASI / {{investmentUnit}}</div>
+          <div class="f-text">JUMLAH INVESTASI / {{ investmentUnit }}</div>
           <div class="f-text-highlighted">
             {{ formatCurrency(calculatorBody.input[3]) }}
           </div>
@@ -34,10 +34,7 @@
         <div class="q-my-sm">
           <div class="f-text">JANGKA WAKTU INVESTASI</div>
           <div class="row">
-            <div
-              class="f-text-highlighted"
-              style="color: red; text-decoration: line-through"
-            >
+            <div class="f-text-highlighted" style="color: red; text-decoration: line-through">
               {{ calculatorBody.input[1] }} Tahun
             </div>
             <i class="material-icons arrow-right-ic">arrow_right</i>
@@ -61,13 +58,7 @@
             <div class="f-text-highlighted">
               {{ formatCurrency(result.recommendation_primary) }}
             </div>
-            <q-chip
-              class="text-bold"
-              square
-              size="sm"
-              color="primary"
-              text-color="white"
-            >
+            <q-chip class="text-bold" square size="sm" color="primary" text-color="white">
               {{
                 (
                   (result.recommendation_primary /
@@ -82,13 +73,7 @@
             <div class="point-circle f-text-highlighted">
               {{ formatCurrency(result.recommendation_interest) }}
             </div>
-            <q-chip
-              class="text-bold"
-              square
-              size="sm"
-              color="green"
-              text-color="white"
-            >
+            <q-chip class="text-bold" square size="sm" color="green" text-color="white">
               {{
                 (
                   (result.recommendation_interest /
@@ -111,22 +96,13 @@
               </p>
             </div>
             <div class="image-content">
-              <img
-                src="/images/illustration/ill-invest-failed.png"
-                alt="Invest Failed"
-              />
+              <img src="/images/illustration/ill-invest-failed.png" alt="Invest Failed" />
             </div>
           </div>
         </div>
       </div>
-      <q-btn
-        class="text-bold q-py-sm full-width q-mb-md"
-        outline
-        rounded
-        no-caps
-        @click="resetQuestion"
-        text-color="dark"
-      >
+      <q-btn class="text-bold q-py-sm full-width q-mb-md" outline rounded no-caps @click="resetQuestion"
+        text-color="dark">
         Hitung Ulang
       </q-btn>
     </div>
@@ -176,13 +152,7 @@
             <div class="f-text-highlighted">
               {{ formatCurrency(result.invest_primary) }}
             </div>
-            <q-chip
-              class="text-bold"
-              square
-              size="md"
-              color="primary"
-              text-color="white"
-            >
+            <q-chip class="text-bold" square size="md" color="primary" text-color="white">
               {{
                 ((result.invest_primary / result.invest_total) * 100).toFixed(
                   2
@@ -195,13 +165,7 @@
             <div class="point-circle f-text-highlighted">
               {{ formatCurrency(result.invest_interest) }}
             </div>
-            <q-chip
-              class="text-bold"
-              square
-              size="md"
-              color="green"
-              text-color="white"
-            >
+            <q-chip class="text-bold" square size="md" color="green" text-color="white">
               {{
                 ((result.invest_interest / result.invest_total) * 100).toFixed(
                   2
@@ -210,10 +174,7 @@
             </q-chip>
           </div>
         </div>
-        <div
-          v-if="result.invest_total >= calculatorBody.input[0]"
-          class="ill-success q-my-lg"
-        >
+        <div v-if="result.invest_total >= calculatorBody.input[0]" class="ill-success q-my-lg">
           <div class="content-wrapper">
             <div class="text-content">
               <h2 class="text-title">
@@ -224,10 +185,7 @@
               </p>
             </div>
             <div class="image-content">
-              <img
-                src="/images/illustration/ill-invest-success.png"
-                alt="Invest Success"
-              />
+              <img src="/images/illustration/ill-invest-success.png" alt="Invest Success" />
             </div>
           </div>
         </div>
@@ -243,182 +201,89 @@
               </p>
             </div>
             <div class="image-content">
-              <img
-                src="/images/illustration/ill-invest-failed.png"
-                alt="Invest Failed"
-              />
+              <img src="/images/illustration/ill-invest-failed.png" alt="Invest Failed" />
             </div>
           </div>
         </div>
       </div>
-      <q-btn
-        v-if="result.invest_total <= calculatorBody.input[0]"
-        class="recom-btn text-bold q-py-sm full-width q-my-sm"
-        outline
-        rounded
-        no-caps
-        text-color="dark"
-        @click="showRecommendation"
-      >
+      <q-btn v-if="result.invest_total <= calculatorBody.input[0]" class="recom-btn text-bold q-py-sm full-width q-my-sm"
+        outline rounded no-caps text-color="dark" @click="showRecommendation">
         Lihat Rekomendasi
       </q-btn>
-      <q-btn
-        class="text-bold q-py-sm full-width q-mb-md"
-        outline
-        rounded
-        no-caps
-        @click="resetQuestion"
-        text-color="dark"
-      >
+      <q-btn class="text-bold q-py-sm full-width q-mb-md" outline rounded no-caps @click="resetQuestion"
+        text-color="dark">
         Hitung Ulang
       </q-btn>
     </div>
     <div v-if="!isShowResult && !isShowRecommendation">
-      <div
-        class="q-mb-md"
-        v-for="(question, index) in visibleQuestions"
-        :key="index"
-      >
+      <div class="q-mb-md" v-for="(question, index) in visibleQuestions" :key="index">
         <div class="q-mb-lg text-bold justify-start" v-if="index == 0">
           Jumlah uang yang ingin Anda capai
-          <q-input
-            outlined
-            dense
-            class="q-my-sm col-4"
-            style="max-width: 200px; font-size: 16px; min-width: 170px"
-            v-model="input[0].inputValue"
-            @update:modelValue="handleInput(index), commasSeparator(index)"
-          >
+          <q-input outlined dense class="q-my-sm col-4" style="max-width: 200px; font-size: 16px; min-width: 170px"
+            v-model="input[0].inputValue" @update:modelValue="handleInput(index), commasSeparator(index)">
             <template v-slot:prepend> Rp</template>
           </q-input>
           <div class="q-gutter-sm">
-            <q-btn
-              unelevated
-              no-caps
-              label="10 Juta"
-              size="sm"
-              style="border-radius: 4px; background: #f2f6f8; color: #3469a7"
-              @click="fillMoney(10000000)"
-            />
-            <q-btn
-              unelevated
-              no-caps
-              label="50 Juta"
-              size="sm"
-              style="border-radius: 4px; background: #f2f6f8; color: #3469a7"
-              @click="fillMoney(50000000)"
-            />
-            <q-btn
-              unelevated
-              no-caps
-              label="100 Juta"
-              size="sm"
-              style="border-radius: 4px; background: #f2f6f8; color: #3469a7"
-              @click="fillMoney(100000000)"
-            />
-            <q-btn
-              unelevated
-              no-caps
-              label="1 Milyar"
-              size="sm"
-              style="border-radius: 4px; background: #f2f6f8; color: #3469a7"
-              @click="fillMoney(1000000000)"
-            />
+            <q-btn unelevated no-caps label="10 Juta" size="sm"
+              style="border-radius: 4px; background: #f2f6f8; color: #3469a7" @click="fillMoney(10000000)" />
+            <q-btn unelevated no-caps label="50 Juta" size="sm"
+              style="border-radius: 4px; background: #f2f6f8; color: #3469a7" @click="fillMoney(50000000)" />
+            <q-btn unelevated no-caps label="100 Juta" size="sm"
+              style="border-radius: 4px; background: #f2f6f8; color: #3469a7" @click="fillMoney(100000000)" />
+            <q-btn unelevated no-caps label="1 Milyar" size="sm"
+              style="border-radius: 4px; background: #f2f6f8; color: #3469a7" @click="fillMoney(1000000000)" />
           </div>
         </div>
         <div class="q-mt-md" v-if="index == 1">
           <span class="text-bold">Berapa lama uang yang ingin Anda capai terkumpul</span>
           <div class="row justify-start">
-            <q-input
-              class="col-4 text-center"
-              style="font-size: 20px; max-width: 60px; min-width: 30px"
-              v-model="input[1].inputValue"
-              @update:modelValue="handleInput(index)">
+            <q-input class="col-4 text-center" style="font-size: 20px; max-width: 60px; min-width: 30px"
+              v-model="input[1].inputValue" @update:modelValue="handleInput(index)">
             </q-input>
-            <span
-              class="self-end q-mb-md q-ml-sm"
-              style="font-size: 20px; margin-top: 30px; font-weight: normal;"
-            >Tahun</span>
+            <span class="self-end q-mb-md q-ml-sm"
+              style="font-size: 20px; margin-top: 30px; font-weight: normal;">Tahun</span>
           </div>
         </div>
         <div class="q-mt-md text-bold" v-if="index == 2">
           Uang yang Anda miliki sekarang
-          <q-input
-            outlined
-            dense
-            class="q-my-sm col-4"
-            style="max-width: 200px; font-size: 16px; min-width: 170px"
-            v-model="input[2].inputValue"
-            @update:modelValue="handleInput(index),commasSeparator(index)"
-          >
+          <q-input outlined dense class="q-my-sm col-4" style="max-width: 200px; font-size: 16px; min-width: 170px"
+            v-model="input[2].inputValue" @update:modelValue="handleInput(index), commasSeparator(index)">
             <template v-slot:prepend> Rp</template>
           </q-input>
         </div>
         <div class="q-mt-md text-bold" v-if="index == 3">
           Jumlah investasi Anda setiap bulan
-          <q-input
-            outlined
-            dense
-            class="q-my-sm col-4"
-            style="max-width: 200px; font-size: 16px; min-width: 170px"
-            v-model="input[3].inputValue"
-            @update:modelValue="handleInput(index),commasSeparator(index)"
-          >
+          <q-input outlined dense class="q-my-sm col-4" style="max-width: 200px; font-size: 16px; min-width: 170px"
+            v-model="input[3].inputValue" @update:modelValue="handleInput(index), commasSeparator(index)">
             <template v-slot:prepend> Rp</template>
           </q-input>
         </div>
-        <div
-          class="q-mt-md text-bold q-gutter-sm q-py-xs"
-          v-else-if="index == 4">
+        <div class="q-mt-md text-bold q-gutter-sm q-py-xs" v-else-if="index == 4">
           Tempo waktu Anda dalam investasi
           <div class="row justify-start">
-            <q-radio
-              size="xs"
-              v-model="input[4].inputValue"
-              val="monthly"
-              label="Perbulan"
-              style="margin-left: -15px"
-              @update:modelValue="handleInput(index)"
-            />
-            <q-radio
-              size="xs"
-              v-model="input[4].inputValue"
-              val="annually"
-              label="Pertahun"
-              @update:modelValue="handleInput(index)"
-            />
+            <q-radio size="xs" v-model="input[4].inputValue" val="monthly" label="Perbulan" style="margin-left: -15px"
+              @update:modelValue="handleInput(index)" />
+            <q-radio size="xs" v-model="input[4].inputValue" val="annually" label="Pertahun"
+              @update:modelValue="handleInput(index)" />
           </div>
         </div>
         <div class="q-mt-md" v-else-if="index == 5">
           <span class="text-bold">Imbal hasil yang diharapkan / tahun?</span>
           <div class="row justify-start">
-            <q-input
-              class="q-mb-md col-4 text-bold text-center"
-              style="max-width: 60px; font-size: 20px; font-weight:bold; min-width: 30px"
-              v-model="input[5].inputValue"
-              @update:modelValue="handleInput(index)"
-            >
+            <q-input class="q-mb-md col-4 text-bold text-center"
+              style="max-width: 60px; font-size: 20px; font-weight:bold; min-width: 30px" v-model="input[5].inputValue"
+              @update:modelValue="handleInput(index)">
             </q-input>
-            <span
-              class="q-ml-sm"
-              style="font-size: 25px; margin-top: 30px"
-            >%</span>
+            <span class="q-ml-sm" style="font-size: 25px; margin-top: 30px">%</span>
           </div>
         </div>
       </div>
       <div v-if="showButton">
-        <q-btn
-          push
-          no-caps
-          class="btn-sm gtm-track q-mb-md"
-          label="Lihat hasil rencana Anda"
-          color="primary"
-          gtm-action="btn_calculator_investment"
-          @click="calculateAndSaveResult"
-        />
+        <q-btn push no-caps class="btn-sm gtm-track q-mb-md" label="Lihat hasil rencana Anda" color="primary"
+          gtm-action="btn_calculator_investment" @click="calculateAndSaveResult" />
       </div>
     </div>
-    <hr/>
+    <hr />
     <section class="q-py-md">
       <h1 class="text-primary q-mt-none q-mb-md text-bold">
         Ayo Belajar Keuangan Gratis
@@ -428,22 +293,15 @@
         finansial Anda. Jadi, jangan ragu untuk memulai belajar keuangan
         sekarang!
       </p>
-      <q-btn
-        no-caps
-        push
-        color="secondary"
-        class="text-black q-px-md gtm-track btn-medium"
-        label="Mulai Sekarang"
-        @click="getFreePackage"
-        gtm-action="btn_free_get_calculator_investment"
-      />
+      <q-btn no-caps push color="secondary" class="text-black q-px-md gtm-track btn-medium" label="Mulai Sekarang"
+        @click="getFreePackage" gtm-action="btn_free_get_calculator_investment" />
     </section>
   </q-card>
 </template>
 
 <script>
-import {debounce} from "quasar";
-import {defineComponent} from "vue";
+import { debounce } from "quasar";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   data() {
@@ -589,10 +447,10 @@ export default defineComponent({
       let temp_money = initial_money;
       let isSuccess = false;
       let invest_total = 0;
-
+      const totalTimes = investment_periode === "monthly" ? target_year * 12 : target_year;
       for (
         let i = 0;
-        i < (investment_periode === "monthly" ? target_year * 12 : target_year);
+        i < totalTimes && temp_money < target_money;
         i++
       ) {
         temp_money =
@@ -602,7 +460,7 @@ export default defineComponent({
 
         let tmp = this.getReturnOnInvestment(temp_money, interest);
         temp_money += tmp;
-        invest_total += tmp;
+        invest_total = + temp_money;
       }
 
       isSuccess = temp_money >= target_money ?? false;
@@ -677,10 +535,10 @@ export default defineComponent({
       return type === "monthly" ? month / 12 : month;
     },
     calculateMoneyByYear(init_money, investment) {
-      return investment * 12 + init_money;
+      return investment + init_money;
     },
     calculateMoneyByMonth(init_money, investment) {
-      return investment + init_money;
+      return init_money + (investment * 12)
     },
     getReturnOnInvestment(init_money, interest) {
       return init_money * (interest / 100);
