@@ -472,19 +472,13 @@ export default defineComponent({
         this.result.invest_interest = result.investmentResult.investInterest;
         this.result.success = result.investmentResult.isSuccess;
         if(!result.investmentResult.isSuccess || result.recommendation) {
-          // this.result.recommendation_year = parseInt(result.recommendation.time);
-          // console.log("recom time", this.result.recommendation_year)
-          // console.log("recom time : ", result.recommendation.time)
-          // this.result.recommendation_total = result.recommendation.totalMoney;
-          // this.result.recommendation_primary = result.recommendation.majorInvestment;
-          // this.result.recommendation_interest = result.recommendation.investInterest;
+          this.result.recommendation_year = parseInt(result.recommendation.time);
+          console.log("recom time", this.result.recommendation_year)
+          console.log("recom time : ", result.recommendation.time)
+          this.result.recommendation_total = result.recommendation.totalMoney;
+          this.result.recommendation_primary = result.recommendation.majorInvestment;
+          this.result.recommendation_interest = result.recommendation.investInterest;
         }
-        this.result.recommendation_year = parseInt(result.recommendation.time);
-        console.log("recom time", this.result.recommendation_year)
-        console.log("recom time : ", result.recommendation.time)
-        this.result.recommendation_total = result.recommendation.totalMoney;
-        this.result.recommendation_primary = result.recommendation.majorInvestment;
-        this.result.recommendation_interest = result.recommendation.investInterest;
         this.isShowResult = true;
         this.sendToAPI();
         console.log("result of calculation : ", result);
