@@ -228,8 +228,8 @@ const routes = [
             path: "personal/pendidikan",
             meta: RouteMeta.user["pendidikan"],
             component: () =>
-              import("pages/kalkulator/pendidikan/CalculatorEducation.vue")
-          },
+              import("pages/kalkulator/personal/PersonalEducationPage.vue")
+          }
         ]
       },
 

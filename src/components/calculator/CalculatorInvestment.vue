@@ -223,15 +223,24 @@
             v-model="input[0].inputValue" @update:modelValue="handleInput(index), commasSeparator(index)">
             <template v-slot:prepend> Rp</template>
           </q-input>
-          <div class="q-gutter-sm">
+          <div class="q-gutter-sm q-my-xs">
             <q-btn unelevated no-caps label="10 Juta" size="sm"
-              style="border-radius: 4px; background: #f2f6f8; color: #3469a7" @click="fillMoney(10000000)" />
+              style="border-radius: 4px; background: #f2f6f8; color: #3469a7" @click="fillMoney(10000000)"
+              class="text-bold q-pa-xs btn-normal-b-radius"
+            />
             <q-btn unelevated no-caps label="50 Juta" size="sm"
-              style="border-radius: 4px; background: #f2f6f8; color: #3469a7" @click="fillMoney(50000000)" />
+              style="border-radius: 4px; background: #f2f6f8; color: #3469a7" @click="fillMoney(50000000)"
+              :style="{ background: buttonColor }"
+              class="text-bold q-pa-xs btn-normal-b-radius"
+            />
             <q-btn unelevated no-caps label="100 Juta" size="sm"
-              style="border-radius: 4px; background: #f2f6f8; color: #3469a7" @click="fillMoney(100000000)" />
+              style="border-radius: 4px; background: #f2f6f8; color: #3469a7" @click="fillMoney(100000000)"
+              class="text-bold q-pa-xs btn-normal-b-radius"
+            />
             <q-btn unelevated no-caps label="1 Milyar" size="sm"
-              style="border-radius: 4px; background: #f2f6f8; color: #3469a7" @click="fillMoney(1000000000)" />
+              style="border-radius: 4px; background: #f2f6f8; color: #3469a7" @click="fillMoney(1000000000)"
+              class="text-bold q-pa-xs btn-normal-b-radius"
+            />
           </div>
         </div>
         <div class="q-mt-md" v-if="index == 1">
@@ -309,6 +318,7 @@ export default defineComponent({
       showButton: false,
       isShowResult: false,
       isShowRecommendation: false,
+      buttonColor: "#f2f6f8",
       calculatorBody: {
         input: [],
         output: "",
@@ -461,6 +471,7 @@ export default defineComponent({
     fillMoney(amount) {
       this.input[0].inputValue = Intl.NumberFormat('en-US').format(amount);
       this.handleInput(0);
+      this.buttonColor = "#3469a7";
     },
     findTimeInvestment(type, time) { return type === 'monthly' ? time * 12 : time },
     findReturnInvestmentPerPeriod(type, returnInvestment) { return type === 'monthly' ? returnInvestment / 12 : returnInvestment },

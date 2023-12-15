@@ -2,7 +2,7 @@
   <q-card id="invest-calculator" class="q-px-lg q-py-sm full-width q-mb-lg">
     <div class="content-header">
       <h1 class="text-primary q-mt-none q-mb-md text-bold">
-        Kalkulator Investasi
+        Kalkulator Dana Pendidikan
       </h1>
     </div>
     <!-- Recommendation -->
@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="q-my-sm">
-          <div class="f-text">JUMLAH INVESTASI / {{investmentUnit}}</div>
+          <div class="f-text">JUMLAH INVESTASI / {{educationUnit}}</div>
           <div class="f-text-highlighted">
             {{ formatCurrency(calculatorBody.input[3]) }}
           </div>
@@ -146,7 +146,7 @@
           </div>
         </div>
         <div class="q-my-sm">
-          <div class="f-text">JUMLAH INVESTASI / {{ investmentUnit }}</div>
+          <div class="f-text">JUMLAH INVESTASI / {{ educationUnit }}</div>
           <div class="f-text-highlighted">
             {{ formatCurrency(calculatorBody.input[3]) }}
           </div>
@@ -280,7 +280,7 @@
         :key="index"
       >
         <div class="q-mb-lg text-bold justify-start" v-if="index == 0">
-          Jumlah uang yang ingin Anda capai
+          Berapa dana pendidikan yang ingin Anda capai
           <q-input
             outlined
             dense
@@ -291,43 +291,47 @@
           >
             <template v-slot:prepend> Rp</template>
           </q-input>
-          <div class="q-gutter-sm">
+          <div class="q-gutter-sm q-my-xs">
             <q-btn
+              class="text-bold q-pa-xs btn-normal-b-radius"
               unelevated
               no-caps
-              label="10 Juta"
+              label="3,5 Juta = SD"
               size="sm"
               style="border-radius: 4px; background: #f2f6f8; color: #3469a7"
-              @click="fillMoney(10000000)"
+              @click="fillMoney(3500000)"
             />
             <q-btn
+              class="text-bold q-pa-xs btn-normal-b-radius"
               unelevated
               no-caps
-              label="50 Juta"
+              label="6 Juta = SMP"
               size="sm"
               style="border-radius: 4px; background: #f2f6f8; color: #3469a7"
-              @click="fillMoney(50000000)"
+              @click="fillMoney(6000000)"
             />
             <q-btn
+              class="text-bold q-pa-xs btn-normal-b-radius"
               unelevated
               no-caps
-              label="100 Juta"
+              label="8 Juta = SMA"
               size="sm"
               style="border-radius: 4px; background: #f2f6f8; color: #3469a7"
-              @click="fillMoney(100000000)"
+              @click="fillMoney(8000000)"
             />
             <q-btn
+              class="text-bold q-pa-xs btn-normal-b-radius"
               unelevated
               no-caps
-              label="1 Milyar"
+              label="15 Juta = Kuliah"
               size="sm"
               style="border-radius: 4px; background: #f2f6f8; color: #3469a7"
-              @click="fillMoney(1000000000)"
+              @click="fillMoney(15000000)"
             />
           </div>
         </div>
         <div class="q-mt-md" v-if="index == 1">
-          <span class="text-bold">Berapa lama uang yang ingin Anda capai terkumpul</span>
+          <span class="text-bold">Berapa lama Anda ingin mengumpulkan uang ini?</span>
           <div class="row justify-start">
             <q-input
               class="col-4 text-center"
@@ -342,7 +346,7 @@
           </div>
         </div>
         <div class="q-mt-md text-bold" v-if="index == 2">
-          Uang yang Anda miliki sekarang
+          Berapa uang yang Anda miliki saat ini?
           <q-input
             outlined
             dense
@@ -355,7 +359,7 @@
           </q-input>
         </div>
         <div class="q-mt-md text-bold" v-if="index == 3">
-          Jumlah investasi Anda setiap bulan
+          Jumlah investasi Anda setiap bulan/tahun?
           <q-input
             outlined
             dense
@@ -390,7 +394,7 @@
           </div>
         </div>
         <div class="q-mt-md" v-else-if="index == 5">
-          <span class="text-bold">Imbal hasil yang diharapkan / tahun?</span>
+          <span class="text-bold">Berapa target return investasi Anda Per-tahun?</span>
           <div class="row justify-start">
             <q-input
               class="q-mb-md col-4 text-bold text-center"
@@ -413,7 +417,7 @@
           class="btn-sm gtm-track q-mb-md"
           label="Lihat hasil rencana Anda"
           color="primary"
-          gtm-action="btn_calculator_investment"
+          gtm-action="btn_calculator_education"
           @click="calculateAndSaveResult"
         />
       </div>
@@ -435,7 +439,7 @@
         class="text-black q-px-md gtm-track btn-medium"
         label="Mulai Sekarang"
         @click="getFreePackage"
-        gtm-action="btn_free_get_calculator_investment"
+        gtm-action="btn_free_get_calculator_education"
       />
     </section>
   </q-card>
@@ -454,7 +458,7 @@ export default defineComponent({
       calculatorBody: {
         input: [],
         output: "",
-        type: "calculator_investment",
+        type: "calculator_education",
       },
       result: {
         invest_total: "",
@@ -567,23 +571,14 @@ export default defineComponent({
         type: this.calculatorBody.type,
       };
       console.log("toJson : ", dataSendAPI);
-      this.$services.calculator.add(
-        dataSendAPI,
-        (data) => {
-        },
-        () => {
-        },
-        () => {
-        }
-      );
       this.isShowResult = true;
     },
     calculateResult() {
       const target_money = parseFloat(this.calculatorBody.input[0].replaceAll('.', '').replaceAll(',', ''));
       const target_year = parseInt(this.calculatorBody.input[1]);
       const initial_money = parseFloat(this.calculatorBody.input[2].replaceAll('.', '').replaceAll(',', ''));
-      const investment = parseFloat(this.calculatorBody.input[3].replaceAll('.', '').replaceAll(',', ''));
-      const investment_periode = this.calculatorBody.input[4];
+      const education = parseFloat(this.calculatorBody.input[3].replaceAll('.', '').replaceAll(',', ''));
+      const education_periode = this.calculatorBody.input[4];
       const interest = parseFloat(this.calculatorBody.input[5]);
       console.log("calculatorBody result : ", this.calculatorBody);
       let temp_money = initial_money;
@@ -592,15 +587,15 @@ export default defineComponent({
 
       for (
         let i = 0;
-        i < (investment_periode === "monthly" ? target_year * 12 : target_year);
+        i < (education_periode === "monthly" ? target_year * 12 : target_year);
         i++
       ) {
         temp_money =
-          investment_periode === "annually"
-            ? this.calculateMoneyByYear(temp_money, investment)
-            : this.calculateMoneyByMonth(temp_money, investment);
+          education_periode === "annually"
+            ? this.calculateMoneyByYear(temp_money, education)
+            : this.calculateMoneyByMonth(temp_money, education);
 
-        let tmp = this.getReturnOnInvestment(temp_money, interest);
+        let tmp = this.getReturnOneducation(temp_money, interest);
         temp_money += tmp;
         invest_total += tmp;
       }
@@ -614,11 +609,11 @@ export default defineComponent({
       };
 
       if (!isSuccess) {
-        const recommendation = this.gettingRecommendationYearInvestment(
+        const recommendation = this.gettingRecommendationYeareducation(
           target_money,
           initial_money,
-          investment_periode,
-          investment,
+          education_periode,
+          education,
           interest
         );
         results = {
@@ -636,11 +631,11 @@ export default defineComponent({
       this.isShowResult = true;
     },
 
-    gettingRecommendationYearInvestment(
+    gettingRecommendationYeareducation(
       target_money,
       initial_money,
-      investment_periode,
-      investment,
+      education_periode,
+      education,
       interest
     ) {
       let temp_money = initial_money;
@@ -650,11 +645,11 @@ export default defineComponent({
 
       while (!isSuccess) {
         temp_money =
-          investment_periode === "annually"
-            ? this.calculateMoneyByYear(temp_money, investment)
-            : this.calculateMoneyByMonth(temp_money, investment);
+          education_periode === "annually"
+            ? this.calculateMoneyByYear(temp_money, education)
+            : this.calculateMoneyByMonth(temp_money, education);
 
-        let tmp = this.getReturnOnInvestment(temp_money, interest);
+        let tmp = this.getReturnOneducation(temp_money, interest);
         temp_money += tmp;
         invest_total += tmp;
         year++;
@@ -662,7 +657,7 @@ export default defineComponent({
       }
 
       return {
-        recommendation_year: this.monthToYear(year, investment_periode),
+        recommendation_year: this.monthToYear(year, education_periode),
         invest_total: temp_money,
         invest_interest: invest_total,
         invest_primary: temp_money - invest_total,
@@ -676,13 +671,13 @@ export default defineComponent({
     monthToYear(month, type = "annually") {
       return type === "monthly" ? month / 12 : month;
     },
-    calculateMoneyByYear(init_money, investment) {
-      return investment * 12 + init_money;
+    calculateMoneyByYear(init_money, education) {
+      return education * 12 + init_money;
     },
-    calculateMoneyByMonth(init_money, investment) {
-      return investment + init_money;
+    calculateMoneyByMonth(init_money, education) {
+      return education + init_money;
     },
-    getReturnOnInvestment(init_money, interest) {
+    getReturnOneducation(init_money, interest) {
       return init_money * (interest / 100);
     },
   },
@@ -691,7 +686,7 @@ export default defineComponent({
     visibleQuestions() {
       return this.input.slice(0, this.numberQuestion + 1);
     },
-    investmentUnit() {
+    educationUnit() {
       return this.input[4].inputValue === "monthly" ? "BULAN" : "TAHUN";
     },
     autoCommaseparator(input) {
