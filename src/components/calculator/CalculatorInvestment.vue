@@ -39,7 +39,7 @@
             </div>
             <i class="material-icons arrow-right-ic">arrow_right</i>
             <div class="f-text-highlighted" style="color: #00a167">
-              {{ result.recomendation_year }} Tahun
+              {{ result.recommendation_year }} Tahun
             </div>
           </div>
         </div>
@@ -174,7 +174,7 @@
             </q-chip>
           </div>
         </div>
-        <div v-if="result.invest_total >= calculatorBody.input[0]" class="ill-success q-my-lg">
+        <div v-if="result.success" class="ill-success q-my-lg">
           <div class="content-wrapper">
             <div class="text-content">
               <h2 class="text-title">
@@ -206,7 +206,7 @@
           </div>
         </div>
       </div>
-      <q-btn v-if="result.invest_total <= calculatorBody.input[0]" class="recom-btn text-bold q-py-sm full-width q-my-sm"
+      <q-btn v-if="!result.success" class="recom-btn text-bold q-py-sm full-width q-my-sm"
         outline rounded no-caps text-color="dark" @click="showRecommendation">
         Lihat Rekomendasi
       </q-btn>
@@ -327,9 +327,9 @@ export default defineComponent({
       result: {
         invest_total: "",
         invest_primary: "",
-        invest_interst: "",
-        success: "",
-        recomendation_year: "",
+        invest_interest: "",
+        success: false,
+        recommendation_year: 1,
         recommendation_total: "",
         recommendation_primary: "",
         recommendation_interest: "",
@@ -370,12 +370,8 @@ export default defineComponent({
     };
   },
 
-  created() {
-    console.log(this.numberQuestion);
-  },
-
   methods: {
-    getFreePackage: function () {
+    getFreePackage() {
       this.$router.push({
         path: "/free/package/e-learning",
       });
@@ -425,9 +421,25 @@ export default defineComponent({
           },
         };
       }
+
+      return {
+        ...commonData,
+        investmentResult: {
+          isSuccess: result.isSuccess,
+          totalMoney: result.result.totalMoney,
+          majorInvestment: result.result.majorInvestment,
+          investInterest: result.result.investInterest,
+        },
+        recommendation: {
+          time: result.recommendation.time,
+          totalMoney: result.recommendation.totalMoney,
+          majorInvestment: result.recommendation.majorInvestment,
+          investInterest: result.recommendation.investInterest,
+        },
+      };
     },
     handleInput: debounce(function (index) {
-      console.log("index : ", index);
+      console.log(`index: ${index}`);
       console.log("calculation", this.calculatorBody.input);
       if (index === this.numberQuestion) {
         this.calculatorBody.input.push(this.input[index].inputValue);
@@ -443,14 +455,86 @@ export default defineComponent({
     formatCurrency(value) {
       return "Rp " + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
-    calculateAndSaveResult: function () {
-      const result = this.findRecommendation(this.calculatorBody.input);
-      console.log("result : ", result)
-      this.result = this.returningResult(result);
-      this.isShowResult = true;
-      this.sendToAPI();
+    calculateAndSaveResult() {
+      try{
+        const mapData = {
+          targetMoney: typeof this.calculatorBody.input[0] === 'string' ? parseFloat(this.calculatorBody.input[0].replaceAll('.', '').replaceAll(',', '')) : this.calculatorBody.input[0],
+          time: this.calculatorBody.input[1],
+          initialMoney: typeof this.calculatorBody.input[2] === 'string' ? parseFloat(this.calculatorBody.input[2].replaceAll('.', '').replaceAll(',', '')) : this.calculatorBody.input[2],
+          moneyInvestPerPeriod: typeof this.calculatorBody.input[3] === 'string' ? parseFloat(this.calculatorBody.input[3].replaceAll('.', '').replaceAll(',', '')) : this.calculatorBody.input[3],
+          typeInvestment: this.calculatorBody.input[4],
+          returnInvestment: typeof this.calculatorBody.input[5] === 'string' ? parseFloat(this.calculatorBody.input[5]) : this.calculatorBody.input[5],
+        };
+        console.log("data map : ", mapData);
+        const result = this.doCalculation(mapData);
+        this.result.invest_total = result.investmentResult.totalMoney;
+        this.result.invest_primary = result.investmentResult.majorInvestment;
+        this.result.invest_interest = result.investmentResult.investInterest;
+        this.result.success = result.investmentResult.isSuccess;
+        if(!result.investmentResult.isSuccess || result.recommendation) {
+          // this.result.recommendation_year = parseInt(result.recommendation.time);
+          // console.log("recom time", this.result.recommendation_year)
+          // console.log("recom time : ", result.recommendation.time)
+          // this.result.recommendation_total = result.recommendation.totalMoney;
+          // this.result.recommendation_primary = result.recommendation.majorInvestment;
+          // this.result.recommendation_interest = result.recommendation.investInterest;
+        }
+        this.result.recommendation_year = parseInt(result.recommendation.time);
+        console.log("recom time", this.result.recommendation_year)
+        console.log("recom time : ", result.recommendation.time)
+        this.result.recommendation_total = result.recommendation.totalMoney;
+        this.result.recommendation_primary = result.recommendation.majorInvestment;
+        this.result.recommendation_interest = result.recommendation.investInterest;
+        this.isShowResult = true;
+        this.sendToAPI();
+        console.log("result of calculation : ", result);
+      }catch(e) {
+        console.log("error : ", e);
+        alert("something wrong, please try again");
+      }
     },
-    sendToAPI: function () {
+
+    doCalculation(data) {
+      const {
+        targetMoney,
+        time,
+        initialMoney,
+        moneyInvestPerPeriod,
+        typeInvestment,
+        returnInvestment
+      } = data;
+
+      const iteration = this.findTimeInvestment(typeInvestment, time);
+      const returnInvestmentPerPeriod = this.findReturnInvestmentPerPeriod(typeInvestment, returnInvestment);
+      const result = Math.floor(this.calculateInvestment(iteration, returnInvestmentPerPeriod, moneyInvestPerPeriod, initialMoney));
+
+      const isSuccess = result >= targetMoney;
+      console.log("isSuccess : ", isSuccess)
+      const recommendation = isSuccess ? {} : this.findRecommendation(data);
+      console.log("recommendation : ", recommendation)
+
+      const majorInvestment = initialMoney + (moneyInvestPerPeriod * iteration);
+      const investInterest = result - majorInvestment;
+      const investmentProfit = result - initialMoney;
+
+      return this.returningResult({
+        targetMoney,
+        time,
+        initialMoney,
+        moneyInvestPerPeriod,
+        typeInvestment,
+        returnInvestment,
+        isSuccess,
+        result: {
+          totalMoney: result,
+          majorInvestment,
+          investInterest,
+          investmentProfit,
+        },
+        recommendation,
+      });
+    },
+    sendToAPI() {
       var dataSendAPI = {
         input: JSON.stringify(this.input),
         output: JSON.stringify(this.result),
@@ -473,31 +557,35 @@ export default defineComponent({
       this.handleInput(0);
       this.buttonColor = "#3469a7";
     },
-    findTimeInvestment(type, time) { return type === 'monthly' ? time * 12 : time },
-    findReturnInvestmentPerPeriod(type, returnInvestment) { return type === 'monthly' ? returnInvestment / 12 : returnInvestment },
-    findReturnPerPeriod(returnPeriod, moneyInvestment){
-    return moneyInvestment * (returnPeriod / 100)
+    findTimeInvestment(type, time) {
+      return type === 'monthly' ? time * 12 : time;
     },
-    calculateInvestment(iteration, returnInvestmentPerPeriod, moneyInvestPerPeriod, initialMoney){
-      if (iteration === 0) return initialMoney
+    findReturnInvestmentPerPeriod(type, returnInvestment) {
+      return type === 'monthly' ? returnInvestment / 12 : returnInvestment;
+    },
+    findReturnPerPeriod(returnPeriod, moneyInvestment) {
+      return moneyInvestment * (returnPeriod / 100);
+    },
+    calculateInvestment(iteration, returnInvestmentPerPeriod, moneyInvestPerPeriod, initialMoney) {
+      if (iteration === 0) return initialMoney;
       let temp = 0;
       for (let i = 0; i < iteration; i++) {
         if (i === 0) {
-          temp = initialMoney + moneyInvestPerPeriod + this.findReturnPerPeriod(returnInvestmentPerPeriod, initialMoney + moneyInvestPerPeriod)
+          temp = initialMoney + moneyInvestPerPeriod + this.findReturnPerPeriod(returnInvestmentPerPeriod, initialMoney + moneyInvestPerPeriod);
         } else {
-          temp = temp + moneyInvestPerPeriod + this.findReturnPerPeriod(returnInvestmentPerPeriod, temp + moneyInvestPerPeriod)
+          temp = temp + moneyInvestPerPeriod + this.findReturnPerPeriod(returnInvestmentPerPeriod, temp + moneyInvestPerPeriod);
         }
       }
-      return temp
+      return temp;
     },
-    findRecommendation(testCase){
+    findRecommendation(data) {
       const {
         targetMoney,
         initialMoney,
         moneyInvestPerPeriod,
         typeInvestment,
         returnInvestment
-      } = testCase;
+      } = data;
 
       let year = 0;
       let temp = 0;
@@ -513,6 +601,7 @@ export default defineComponent({
         totalMoney = temp;
         majorInvestment = initialMoney + (moneyInvestPerPeriod * this.findTimeInvestment(typeInvestment, year));
         investInterest = totalMoney - majorInvestment;
+        console.log("year : ", year);
       }
 
       return {
@@ -522,7 +611,6 @@ export default defineComponent({
         investInterest: Math.floor(investInterest),
       };
     },
-
   },
 
   computed: {
